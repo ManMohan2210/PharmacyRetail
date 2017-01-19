@@ -138,7 +138,6 @@
             android:layout_toEndOf="@+id/chbSignIn"
             android:layout_toRightOf="@+id/chbSignIn"
             android:clickable="true"
-            android:contextClickable="true"
             android:cursorVisible="true"
             android:text="@string/TnC"
             android:textAppearance="@style/TextAppearance.AppCompat.Small" />
