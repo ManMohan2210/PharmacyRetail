@@ -56,12 +56,12 @@ public class SignUp extends BaseActivty {
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+//        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     private void initView() {
         edtName = (EditText) findViewById(R.id.edtName);
-        edtPassword = (EditText) findViewById(R.id.edtPassword);
+        edtPassword = (EditText) findViewById(R.id.edtNewPassword);
         btnSignUp = (Button) findViewById(R.id.btnSignUp);
         txtViewSignUp = (TextView) findViewById(R.id.txtViewSignUp);
         txtViewTerm = (TextView) findViewById(R.id.txtViewTerm);
@@ -171,25 +171,9 @@ public class SignUp extends BaseActivty {
                 .build();
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        AppIndex.AppIndexApi.start(client, getIndexApiAction());
-    }
 
-    @Override
-    public void onStop() {
-        super.onStop();
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        AppIndex.AppIndexApi.end(client, getIndexApiAction());
-        client.disconnect();
-    }
 }
 
 

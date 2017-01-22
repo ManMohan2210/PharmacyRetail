@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_alignEnd="@+id/textView7"
             android:layout_alignRight="@+id/textView7"
-            android:layout_below="@+id/edtPassword"
+            android:layout_below="@+id/edtNewPassword"
             android:buttonTint="@color/cyan"
             android:checked="false"
             android:text="@string/agree"
@@ -102,7 +102,7 @@
             android:textCursorDrawable="@drawable/color_cursor" />
 
         <EditText
-            android:id="@+id/edtPassword"
+            android:id="@+id/edtNewPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -138,6 +138,7 @@
             android:layout_toEndOf="@+id/chbSignIn"
             android:layout_toRightOf="@+id/chbSignIn"
             android:clickable="true"
+            android:contextClickable="true"
             android:cursorVisible="true"
             android:text="@string/TnC"
             android:textAppearance="@style/TextAppearance.AppCompat.Small" />
