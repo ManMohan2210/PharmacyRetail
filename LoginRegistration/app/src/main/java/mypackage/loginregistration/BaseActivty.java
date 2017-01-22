@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.widget.Toast;
@@ -56,7 +57,7 @@ public class BaseActivty extends AppCompatActivity {
         Toast toast = Toast.makeText(BaseActivty.this,message, Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
-
+        Log.i("tag","check git commit");
 
     }
 
