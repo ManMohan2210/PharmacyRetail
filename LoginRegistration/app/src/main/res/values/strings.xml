@@ -20,4 +20,6 @@
     <string name="confirm">Confirm</string>
     <string name="viaOtp">Via OTP</string>
     <string name="viaEmail">Via E-mail</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
     </resources>

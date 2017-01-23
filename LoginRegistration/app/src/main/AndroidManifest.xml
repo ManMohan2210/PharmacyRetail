@@ -1,27 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="mypackage.loginregistration"
+<manifest package="com.pahrma.medicare"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
-        android:name=".AppFont"
+        android:name="com.pahrma.medicare.AppFont"
         android:allowBackup="true"
         android:icon="@mipmap/med"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
-        <activity android:name=".ListDisplay">
+
+        <activity
+            android:name="com.pahrma.medicare.activity.SplashActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.pahrma.medicare.activity.ListDisplay">
             <!-- <intent-filter>
                  <action android:name="android.intent.action.MAIN" />
                  <category android:name="android.intent.category.LAUNCHER" />
              </intent-filter>-->
         </activity>
 
-        <activity android:name=".LoginPage">
-            <intent-filter>
+        <activity
+            android:name="com.pahrma.medicare.activity.MainActivity"
+            android:label="@string/app_name">
+        </activity>
+        <activity android:name="com.pahrma.medicare.activity.InfoPagerActivity"/>
+
+        <activity android:name="com.pahrma.medicare.activity.LoginPage">
+           <!-- <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+            </intent-filter>-->
         </activity>
         <!-- <activity android:name=".PopupDemoActivity">
             &lt;!&ndash; <intent-filter>
@@ -30,8 +46,8 @@
                  <category android:name="android.intent.category.LAUNCHER" />
              </intent-filter>&ndash;&gt;
          </activity>-->
-        <activity android:name=".SignUp"></activity>
-        <activity android:name=".Success"></activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+        <activity android:name="com.pahrma.medicare.activity.SignUp"></activity>
+        <activity android:name="com.pahrma.medicare.activity.Success"></activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <meta-data
             android:name="com.google.android.gms.version"

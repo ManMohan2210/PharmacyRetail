@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LoginRegistration.iml" filepath="$PROJECT_DIR$/LoginRegistration.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SlidePageIndicator/SlidePageIndicator.iml" filepath="$PROJECT_DIR$/SlidePageIndicator/SlidePageIndicator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SlidePager/SlidePager.iml" filepath="$PROJECT_DIR$/SlidePager/SlidePager.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
