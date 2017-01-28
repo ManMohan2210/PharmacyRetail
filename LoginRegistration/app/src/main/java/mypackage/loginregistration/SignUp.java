@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +29,8 @@ import Util.Constants;
 import Util.Strings;
 import Util.Utility;
 
+import static mypackage.loginregistration.R.id.editViewPassword;
+
 
 public class SignUp extends BaseActivty {
 
@@ -39,6 +44,7 @@ public class SignUp extends BaseActivty {
     private EditText edtMobNum;
     private TextView txtViewTerm;
     private CheckBox chbSignIn;
+    private CheckBox checkBoxShowPwd;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -68,6 +74,7 @@ public class SignUp extends BaseActivty {
         edtEmail = (EditText) findViewById(R.id.edtEmail);
         edtMobNum = (EditText) findViewById(R.id.edtMobNum);
         chbSignIn = (CheckBox) findViewById(R.id.chbSignIn) ;
+        checkBoxShowPwd = (CheckBox) findViewById(R.id.cbShowPwd);
         txtViewTerm.setPaintFlags(txtViewTerm.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
     }
 
@@ -150,7 +157,19 @@ public class SignUp extends BaseActivty {
 
         );
 
+        checkBoxShowPwd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // checkbox status is changed from uncheck to checked.
+                if (!isChecked) {
+                    // show password
+                    edtPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                } else {
+                    // hide password
+                    edtPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }
+            }
+        });
 
     }
 

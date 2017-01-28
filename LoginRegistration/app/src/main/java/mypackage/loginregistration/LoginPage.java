@@ -6,22 +6,28 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import Util.Constants;
 import Util.Strings;
+import butterknife.Bind;
 
 import static mypackage.loginregistration.R.layout.activity_login;
 
@@ -29,6 +35,7 @@ import static mypackage.loginregistration.R.layout.activity_login;
 
 public class LoginPage extends BaseActivty {
     private Toolbar toolbar;
+    //@Bind(R.id.btn_login)
     private Button btnLogin;
     private EditText editViewEmail;
     private EditText editViewPassword;
@@ -42,6 +49,8 @@ public class LoginPage extends BaseActivty {
     private RadioButton rdbOtp;
     private RadioGroup radioGroup;
     private String selection;
+    private CheckBox checkBoxShowPwd;
+    private ImageView imageViewFb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,10 +67,11 @@ public class LoginPage extends BaseActivty {
         editViewPassword = (EditText) findViewById(R.id.editViewPassword);
         txtSignUp = (TextView) findViewById(R.id.txtViewSignUp);
         txtForgotPwd = (TextView) findViewById(R.id.txtForgotPwd);
-
+        checkBoxShowPwd = (CheckBox) findViewById(R.id.cbShowPwd);
         final Intent intent = getIntent();
         editViewEmail.getBackground().setColorFilter(getResources().getColor(R.color.cyan), PorterDuff.Mode.SRC_ATOP);
         editViewPassword.getBackground().setColorFilter(getResources().getColor(R.color.cyan), PorterDuff.Mode.SRC_ATOP);
+        imageViewFb = (ImageView) findViewById(R.id.imgViewFacebook);
     }
 
     private void initListener() {
@@ -108,7 +118,7 @@ public class LoginPage extends BaseActivty {
                 ) {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(LoginPage.this, Success.class);
+                        Intent intent = new Intent(LoginPage.this, HomeScreen.class);
                         startActivity(intent);
                     }
                 });
@@ -125,6 +135,30 @@ public class LoginPage extends BaseActivty {
             }
         });
 
+
+        checkBoxShowPwd.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // checkbox status is changed from uncheck to checked.
+                if (!isChecked) {
+                    // show password
+                    editViewPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                } else {
+                    // hide password
+                    editViewPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }
+            }
+        });
+        imageViewFb.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setClassName("com.google.android.apps.plus",
+                        "com.google.android.apps.plus.phone.UrlGatewayActivity");
+                intent.putExtra("customAppUri", "FAN_PAGE_ID");
+                startActivity(intent);
+            }
+        });
     }
 
 
@@ -149,11 +183,10 @@ public class LoginPage extends BaseActivty {
                     .setOnClickListener(new OnClickListener() {
 
 
-                       // @TargetApi(Build.VERSION_CODES.GINGERBREAD)
+                        // @TargetApi(Build.VERSION_CODES.GINGERBREAD)
                         public void onClick(View arg0) {
-                            if(radioGroup.getCheckedRadioButtonId()!=-1)
-                            {
-                                int id= radioGroup.getCheckedRadioButtonId();
+                            if (radioGroup.getCheckedRadioButtonId() != -1) {
+                                int id = radioGroup.getCheckedRadioButtonId();
                                 View radioButton = radioGroup.findViewById(id);
                                 int radioId = radioGroup.indexOfChild(radioButton);
                                 RadioButton btn = (RadioButton) radioGroup.getChildAt(radioId);
@@ -161,9 +194,9 @@ public class LoginPage extends BaseActivty {
 
                             }
 
-
+                            popupWindow.dismiss();
                             Intent intent = new Intent(getBaseContext(), PasswordChange.class);
-                            intent.putExtra("selection",selection);
+                            intent.putExtra("selection", selection);
                             startActivity(intent);
 
                         }

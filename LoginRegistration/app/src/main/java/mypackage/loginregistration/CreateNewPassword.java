@@ -2,10 +2,14 @@ package mypackage.loginregistration;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -16,6 +20,8 @@ import Util.Constants;
 import Util.Strings;
 import Util.Utility;
 
+import static mypackage.loginregistration.R.id.editViewPassword;
+
 /**
  * Created by satveer on 14-01-2017.
  */
@@ -25,7 +31,8 @@ public class CreateNewPassword extends Fragment implements View.OnClickListener 
     private EditText edtCreatePassword;
     private Button btnResetPwd;
     private EditText edtConfirmPassword;
-
+    private CheckBox checkBoxShowPwdNew;
+    private CheckBox checkBoxShowPwdCnf;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,7 +50,8 @@ public class CreateNewPassword extends Fragment implements View.OnClickListener 
         edtCreatePassword = (EditText) rootView.findViewById(R.id.edtNewPassword);
         edtConfirmPassword = (EditText) rootView.findViewById(R.id.edtCnfPassword);
         btnResetPwd = (Button) rootView.findViewById(R.id.btn_reset);
-
+        checkBoxShowPwdNew = (CheckBox) rootView.findViewById(R.id.cbShowPwdNew);
+        checkBoxShowPwdCnf = (CheckBox) rootView.findViewById(R.id.cbShowCnfPwd);
         btnResetPwd.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -67,12 +75,38 @@ public class CreateNewPassword extends Fragment implements View.OnClickListener 
                 if (!etCnfPassword.matches(etPassword))
                 {
                     Toast.makeText(getActivity(), Strings.PASSWORD_NOT_MATCHED, Toast.LENGTH_LONG).show();
+                    return;
                 }
                 Toast.makeText(getActivity(), "Password changed successfully.", Toast.LENGTH_LONG).show();
             }
 
         });
+        checkBoxShowPwdNew.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // checkbox status is changed from uncheck to checked.
+                if (!isChecked) {
+                    // show password
+                    edtCreatePassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                } else {
+                    // hide password
+                    edtCreatePassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }
+            }
+        });
+        checkBoxShowPwdCnf.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // checkbox status is changed from uncheck to checked.
+                if (!isChecked) {
+                    // show password
+                    edtConfirmPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                } else {
+                    // hide password
+                    edtConfirmPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }
+            }
+        });
         return rootView;
     }
 

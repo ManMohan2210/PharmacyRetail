@@ -37,6 +37,14 @@
              </intent-filter>&ndash;&gt;
          </activity>-->
         <activity android:name=".SignUp"></activity>
+        <activity android:name=".Paracetamol"></activity>
+        <activity android:name=".Crocin"></activity>
+        <activity android:name=".HomeScreen"><!-- <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>-->
+        </activity>
         <activity android:name=".NoNetwork"></activity>
         <activity android:name=".PasswordChange"></activity>
         <activity android:name=".Success"></activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for

@@ -27,7 +27,7 @@
     <string name="creatPassword">Reset your Password!</string>
     <string name="newPassword">Enter new password</string>
     <string name="confirmPassword">Confirm new password</string>
-    <string name="resetPassword">Reset Password!</string>
+    <string name="resetPassword">Reset Password</string>
     <string name="textForLocation">We will need your location data to show your services available in your area.</string>
     <string name="topCity">Top Cities</string>
     <string name="autoDetect">Auto-detect Current Location</string>
@@ -36,5 +36,7 @@
     <string name="existing">EXISTING</string>
     <string name="camera">CAMERA</string>
     <string name="gallery">GALLERY</string>
+    <string name="searchMedicine">Search your medicine here !</string>
 
     </resources>
+

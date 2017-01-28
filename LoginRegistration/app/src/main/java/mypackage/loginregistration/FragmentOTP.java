@@ -1,12 +1,12 @@
 package mypackage.loginregistration;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -33,10 +33,12 @@ public class FragmentOTP extends Fragment implements OnClickListener {
 
     private Button btnRegMob;
     private EditText edtRegMob;
+    private Activity mActivity;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mActivity = getActivity();
 
     }
 
@@ -46,6 +48,7 @@ public class FragmentOTP extends Fragment implements OnClickListener {
         View view = inflater.inflate(R.layout.password_otp, container, false);
         btnRegMob = (Button) view.findViewById(R.id.btn_otp);
         edtRegMob = (EditText) view.findViewById(R.id.edtRegMob);
+
         btnRegMob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,7 +58,7 @@ public class FragmentOTP extends Fragment implements OnClickListener {
                 Matcher m = p.matcher(edtReg);
                 final boolean b = m.matches();
                 if (edtReg == null) {
-                    Toast.makeText(getActivity(), Strings.ENTER_MOBILE, Toast.LENGTH_LONG).show();
+                    ((BaseActivty)mActivity).showToast(Constants.strings.ENTER_MOBILE);
                     return;
                 } else if (Utility.isNullOrEmpty(edtReg.toString())) {
                     Toast.makeText(getActivity(), Strings.ENTER_MOBILE, Toast.LENGTH_LONG).show();

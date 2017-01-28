@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="mypackage.loginregistration.LoginPage">
+
+
+    <ImageView
+        android:id="@+id/imageViewPic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:foregroundGravity="center"
+        app:srcCompat="@drawable/crocin"
+
+        />
+
+    <TextView
+        android:id="@+id/tv_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageViewPic"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="Overview: Crocin Advance is India’s first paracetamol tablet with Optizorb technology.
+
+It starts releasing its medicine in as little as 5 minutes. It gets absorbed 25% faster than standard paracetamol.1
+It provides fast and effective relief from pain. The pain reliever in Crocin Advance is recommended as first line therapy for pain relief by back specialists. It is even suitable for people with CVD/Heart conditions, high blood pressure, sensitive stomach and for diabetics and elderly." />
+</RelativeLayout>
