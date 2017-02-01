@@ -1,23 +1,17 @@
 package mypackage.loginregistration;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -28,139 +22,140 @@ import java.util.regex.Pattern;
 import Util.Constants;
 import Util.Strings;
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
-import static mypackage.loginregistration.R.layout.activity_login;
 
-;
 
 public class LoginPage extends BaseActivty {
     private Toolbar toolbar;
     //@Bind(R.id.btn_login)
-    private Button btnLogin;
-    private EditText editViewEmail;
-    private EditText editViewPassword;
-    private TextView txtSignUp;
+    // private Button btnLogin;
+    //private EditText editViewEmail;
+    //private EditText editViewPassword;
+    //private TextView txtSignUp;
     private TextView txtWelcome;
     private boolean isLogin = false;
-    private TextView txtForgotPwd;
+    //private TextView txtForgotPwd;
     private Button btnClosePopup;
     private PopupWindow pwindo;
     private RadioButton rdbEmail;
     private RadioButton rdbOtp;
     private RadioGroup radioGroup;
     private String selection;
-    private CheckBox checkBoxShowPwd;
-    private ImageView imageViewFb;
+    @Bind(R.id.txtForgotPwd)
+    TextView txtForgotPwd;
+    @Bind(R.id.editViewEmail)
+    EditText mEmailText;
+    @Bind(R.id.editViewPassword)
+    EditText mPasswordText;
+    @Bind(R.id.btn_login)
+    Button mLoginButton;
+    @Bind(R.id.txtViewSignUp)
+    TextView mSignupLink;
+    @Bind(R.id.loginLinearLayout)
+    LinearLayout loginLinearLayout;
+
+    private static final int REQUEST_SIGNUP = 0;
+
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+        ButterKnife.bind(this);
+
+        //  initView();
+        initListener();
+    }
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(activity_login);
-        initView();
-        initListener();
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_SIGNUP) {
+            if (resultCode == RESULT_OK) {
 
+                // TODO: Implement successful signup logic here
+                // By default we just finish the Activity and log them in automatically
+                this.finish();
+            }
+        }
     }
 
-    private void initView() {
-        btnLogin = (Button) findViewById(R.id.btn_login);
-        editViewEmail = (EditText) findViewById(R.id.editViewEmail);
-        editViewPassword = (EditText) findViewById(R.id.editViewPassword);
-        txtSignUp = (TextView) findViewById(R.id.txtViewSignUp);
-        txtForgotPwd = (TextView) findViewById(R.id.txtForgotPwd);
-        checkBoxShowPwd = (CheckBox) findViewById(R.id.cbShowPwd);
-        final Intent intent = getIntent();
-        editViewEmail.getBackground().setColorFilter(getResources().getColor(R.color.cyan), PorterDuff.Mode.SRC_ATOP);
-        editViewPassword.getBackground().setColorFilter(getResources().getColor(R.color.cyan), PorterDuff.Mode.SRC_ATOP);
-        imageViewFb = (ImageView) findViewById(R.id.imgViewFacebook);
+
+    public void onLoginSuccess() {
+        mLoginButton.setEnabled(true);
+        finish();
     }
+
+    public void onLoginFailed() {
+//        showToast("Login Failed!");
+
+        mLoginButton.setEnabled(true);
+    }
+
+
+
 
     private void initListener() {
-        txtSignUp.setOnClickListener(new View.OnClickListener() {
+        mLoginButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String email = mEmailText.getText().toString();
+                String password = mPasswordText.getText().toString();
+                Pattern pwd = Pattern.compile(Constants.REGEX_PASSWORD_VALIDATION);
+                if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    mEmailText.setError(Strings.ENTER_EMAIL);
+                   return;
+                } else {
+                    mEmailText.setError(null);
+                }
+
+                if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
+                    mPasswordText.setError(Strings.PASSWORD_NOT_VALID);
+                    return;
+
+                } else if (Pattern.matches(pwd.pattern(), password) == false) {
+                    mPasswordText.setError(Strings.ENTER_PASSWORD);
+                    return;
+
+                } else {
+                    mPasswordText.setError(null);
+                }
 
 
+                mLoginButton.setEnabled(false);
+                final ProgressDialog progressDialog = new ProgressDialog(LoginPage.this,
+                        R.style.AppTheme_Dark_Dialog);
+                progressDialog.setIndeterminate(true);
+                progressDialog.setMessage(Strings.AUTHENTICATING);
+                progressDialog.show();
+                Intent intent = new Intent(LoginPage.this, HomeScreen.class);
+                startActivity(intent);
+
+            }
+        });
+
+        mSignupLink.setOnClickListener(new View.OnClickListener() {
+
+            public void onBackPressed() {
+                // Disable going back to the MainActivity
+                moveTaskToBack(true);
+            }
             public void onClick(View v) {
                 Intent intent = new Intent(LoginPage.this, SignUp.class);
                 startActivity(intent);
             }
         });
-
-
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View v) {
-                Editable etPassword = editViewPassword.getText();
-                Editable etEmail = editViewEmail.getText();
-                Pattern p = Pattern.compile(Constants.REGEX_EMAIL_VALIDATION);
-                Pattern pwd = Pattern.compile(Constants.REGEX_PASSWORD_VALIDATION);
-                if (etEmail != null && etEmail.equals("")) {
-                    showToast(Strings.ENTER_EMAIL);
-                    return;
-                } else if (etEmail == null) {
-                    showToast(Strings.ENTER_EMAIL);
-                    return;
-                } else if (Pattern.matches(p.pattern(), etEmail.toString()) == false) {
-                    showToast(Strings.ENTER_EMAIL);
-                    return;
-                }
-                if (etPassword != null && etPassword.equals("")) {
-                    showToast(Strings.ENTER_PASSWORD);
-                    return;
-                } else if (etPassword == null) {
-                    showToast(Strings.ENTER_PASSWORD);
-                    return;
-                } else if (Pattern.matches(pwd.pattern(), etPassword.toString()) == false) {
-                    showToast(Strings.ENTER_PASSWORD);
-                    return;
-                }
-
-
-                btnLogin.setOnClickListener(new View.OnClickListener(
-                ) {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(LoginPage.this, HomeScreen.class);
-                        startActivity(intent);
-                    }
-                });
-            }
-
-        });
-
         txtForgotPwd.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
-
+                //loginLinearLayout.setAlpha(100);
                 initiatePopupWindow();
+
             }
         });
 
-
-        checkBoxShowPwd.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // checkbox status is changed from uncheck to checked.
-                if (!isChecked) {
-                    // show password
-                    editViewPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                } else {
-                    // hide password
-                    editViewPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                }
-            }
-        });
-        imageViewFb.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setClassName("com.google.android.apps.plus",
-                        "com.google.android.apps.plus.phone.UrlGatewayActivity");
-                intent.putExtra("customAppUri", "FAN_PAGE_ID");
-                startActivity(intent);
-            }
-        });
     }
-
 
     private void initiatePopupWindow() {
         try {
@@ -168,10 +163,9 @@ public class LoginPage extends BaseActivty {
 
             LayoutInflater inflater = (LayoutInflater) LoginPage.this
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
             View popupView = inflater.inflate(R.layout.popup, null);
-
-            final PopupWindow popupWindow = new PopupWindow(popupView, 800, 600, true);
-
+           final PopupWindow popupWindow = new PopupWindow(popupView, 800, 600, true);
             popupWindow.setTouchable(true);
             popupWindow.setFocusable(true);
             popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
@@ -208,6 +202,7 @@ public class LoginPage extends BaseActivty {
             e.printStackTrace();
         }
     }
+
 }
 
 

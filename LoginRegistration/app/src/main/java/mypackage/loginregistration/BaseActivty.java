@@ -1,13 +1,21 @@
 package mypackage.loginregistration;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.Menu;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import Util.QuickDialogs;
 import Util.Utility;
 
 /**
@@ -29,7 +37,13 @@ public class BaseActivty extends AppCompatActivity {
 //
 //        super.setContentView(layoutResID);
 //    }
-
+private FrameLayout mMainContainer;
+    private FrameLayout mErrorContainer;
+    private ViewGroup mMainContent;
+    private ViewGroup mErrorContent;
+    private ProgressDialog mLoadingDialog;
+    private Button mRetryButton;
+    private int showDialogCount = 0;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +77,144 @@ public class BaseActivty extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return super.onCreateOptionsMenu(menu);
+    }
+//--
+
+
+
+
+
+
+    @Override
+    public void setContentView(int layoutResID) {
+
+
+        super.setContentView(R.layout.activity_app_base);
+
+        mMainContainer = (FrameLayout) findViewById(R.id.main_container);
+        mErrorContainer = (FrameLayout) findViewById(R.id.error_container);
+        mErrorContent =  (ViewGroup) findViewById(R.id.error_content);
+        // add layout of BaseActivities inside framelayout.i.e. frame_container
+        mMainContent = (ViewGroup) getLayoutInflater().inflate(layoutResID, mMainContainer, true);
+        if (Utility.isNetworkAvailable()) {
+            //loadActivity();
+        } else {
+            mErrorContainer.setVisibility(View.VISIBLE);
+            mMainContainer.setVisibility(View.GONE);
+        }
+
+        mRetryButton = (Button) mErrorContent.findViewById(R.id.btn_retry);
+        mRetryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Utility.isNetworkAvailable()) {
+                    mErrorContainer.setVisibility(View.GONE);
+                    mMainContainer.setVisibility(View.VISIBLE);
+              //      loadActivity();
+                }
+
+            }
+        });
+    }
+
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+       // String screenName = getScreenName();
+    }
+/*
+* Derive class will provide screen name to be used by TagManager
+* */
+
+
+
+    public void setTitle(String title) {
+        ActionBar actionBar = getSupportActionBar();
+        if (getSupportActionBar() != null) {
+            actionBar.setTitle(title);
+        }
+
+    }
+
+    /**
+     * Sets display home enabled.
+     */
+    public void setDisplayHomeEnabled() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    /**
+     * Show loading dialog.
+     */
+    public void showLoadingDialog() {
+        if (mLoadingDialog == null) {
+            mLoadingDialog = QuickDialogs.showLoadingDialog(this, null, null);
+            mLoadingDialog.show();
+        } else if (!mLoadingDialog.isShowing()) {
+            mLoadingDialog.show();
+        }
+        showDialogCount++;
+    }
+
+    /**
+     * Dismiss dialog.
+     */
+    public void dismissDialog() {
+        if (mLoadingDialog != null)
+            mLoadingDialog.dismiss();
+    }
+
+    /**
+     * Soft dismiss dialog.
+     */
+    public void softDismissDialog() {
+        showDialogCount --;
+        if(showDialogCount <= 0) {
+            dismissDialog();
+        }
+    }
+
+    /**
+     * Show snack bar.
+     *
+     * @param msg      the msg
+     * @param duration the duration
+     */
+    protected void showSnackBar(String msg, int duration) {
+        Snackbar snackbar = Snackbar
+                .make(mMainContainer, msg, duration);
+        snackbar.show();
+    }
+
+
+    /**
+     * Show toast.
+     *
+     * @param msg      the msg
+     * @param duration the duration
+     */
+    protected void showToast(String msg, int duration) {
+        Toast.makeText(this,msg,duration).show();
+    }
+
+    /**
+     * Show snack bar with action button which give callback on click of action button.
+     *
+     * @param msg              the msg
+     * @param callBackAction   the call back action
+     * @param callBackListener the call back listener
+     */
+    protected void showSnackBar(String msg, String
+            callBackAction, View.OnClickListener callBackListener) {
+        Snackbar snackbar = Snackbar
+                .make(mMainContainer, msg, Snackbar.LENGTH_LONG)
+                .setAction(callBackAction, callBackListener);
+        snackbar.show();
     }
 
 }

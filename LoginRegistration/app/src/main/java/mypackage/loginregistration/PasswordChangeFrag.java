@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import  android.view.View.OnClickListener;import android.view.View;
+
+import butterknife.ButterKnife;
+
 public class PasswordChangeFrag extends BaseActivty {
 
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimaryDark">#303f9f</color>
     <color name="colorAccent">#ff40ac</color>
     <color name="white">#FFFFFF</color>
     <color name="cyan">#00bcd4</color>
@@ -12,9 +12,9 @@
     <color name="silverGrey">#c0c0c0</color>
     <color name="green500">#4CAF50</color>
     <color name="amber500">#FFC107</color>
-    <color name="cyan500">#00bcd4</color>
+    <color name="cyan500">#b200bcd4</color>
     <color name="primary">#C8E6C9</color>
-    <color name="primary_light">#E9F4EA</color>
+    <color name="primary_light">#e9f4ea</color>
     <color name="primary_dark">#B9F6CA</color>
     <color name="primary_darker">#00C853</color>
     <color name="accent">#000000</color>
@@ -27,5 +27,6 @@
     <color name="aluminum">#999999</color>
     <color name="base">#aaaaaa</color>
     <color name="iron">#CCCCCC</color>
-
+    <color name="red">#FF0000</color>
+    <color name="light_red">#ffb2b2</color>
 </resources>

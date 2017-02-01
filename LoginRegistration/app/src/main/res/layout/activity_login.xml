@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:fitsSystemWindows="true">
 
     <LinearLayout
+        android:id="@+id/loginLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -32,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
-            >
+           >
 
             <EditText
                 android:id="@+id/editViewEmail"
@@ -40,7 +43,9 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/email"
                 android:textColor="@color/oil"
-                android:inputType="textEmailAddress"/>
+android:text="kanwal.bhohi@yahoo.in"
+                android:inputType="textEmailAddress"
+                />
         </android.support.design.widget.TextInputLayout>
 
 
@@ -57,11 +62,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/password"
+            android:maxLength="10"
+                android:text="Pass@123"
                 android:textColor="@color/black"
-
                 android:inputType="textPassword"/>
-        </android.support.design.widget.TextInputLayout>
 
+        </android.support.design.widget.TextInputLayout>
 
 
         <!-- Login Button-->
@@ -69,8 +75,8 @@
             android:id="@+id/btn_login"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:padding="12dp"
             android:background="@color/cyan"
             android:text="@string/login"

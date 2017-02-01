@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import butterknife.ButterKnife;
+
 public class UploadPrescription extends BaseActivty {
 
    // private TextView textView;
@@ -18,7 +20,6 @@ public class UploadPrescription extends BaseActivty {
     private ImageView imgCamera;
     private ImageView imgGallery;
     private ImageView imgExisting;
-
 
 
 

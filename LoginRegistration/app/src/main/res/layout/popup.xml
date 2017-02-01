@@ -4,13 +4,12 @@
     android:layout_height="fill_parent"
     android:background="@drawable/background_with_shadow"
     android:orientation="vertical"
-    android:padding="10sp"
+    android:padding="8sp"
     >
 
     <RelativeLayout  android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@color/cyan"
-
+        android:background="@color/cyan_light"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
@@ -38,7 +37,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/confirm"
-
         android:textColor="@color/white"
         android:layout_marginTop="31dp"
         android:layout_below="@+id/radioGroup"
@@ -60,7 +58,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/rdbEmail"
             android:checked="true"
-            android:buttonTint="@color/grey"
+            android:buttonTint="@color/cyan500"
             android:layout_below="@+id/radio"
             />
 
@@ -69,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/rdbOtp"
-            android:buttonTint="@color/grey"
+            android:buttonTint="@color/cyan500"
 
             />
     </RadioGroup>

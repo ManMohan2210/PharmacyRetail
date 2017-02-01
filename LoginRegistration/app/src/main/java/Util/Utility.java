@@ -2,7 +2,7 @@ package Util;
 
 import android.app.Activity;
 import android.content.Context;
-import android.view.View;
+import android.graphics.Typeface;
 import android.view.inputmethod.InputMethodManager;
 
 /**
@@ -10,7 +10,7 @@ import android.view.inputmethod.InputMethodManager;
  */
 
 public class Utility {
-
+    public static Typeface tf = null;
     public static boolean isNetworkAvailable() {
         return true;
     }
@@ -30,4 +30,9 @@ public class Utility {
         imm.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 
+    public static Typeface getPTSansFontStyle(Context context) {
+        if (tf == null)
+            tf = Typeface.createFromAsset(context.getAssets(), "pt_sans.ttf");
+        return tf;
+    }
 }

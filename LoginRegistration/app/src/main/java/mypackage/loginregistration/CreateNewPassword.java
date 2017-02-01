@@ -20,7 +20,7 @@ import Util.Constants;
 import Util.Strings;
 import Util.Utility;
 
-import static mypackage.loginregistration.R.id.editViewPassword;
+
 
 /**
  * Created by satveer on 14-01-2017.
