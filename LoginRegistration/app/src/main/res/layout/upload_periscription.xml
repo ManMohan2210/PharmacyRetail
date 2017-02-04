@@ -47,7 +47,7 @@
                 android:id="@+id/imageViewCamera"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:srcCompat="@drawable/camera"
+                android:src="@drawable/camera"
                 />
 
             <TextView
@@ -82,7 +82,7 @@
                 android:id="@+id/imageViewExisting"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:srcCompat="@drawable/existing"
+                android:src="@drawable/existing"
                 android:layout_above="@+id/tv_existing"
                 android:layout_centerHorizontal="true" />
         </RelativeLayout>
@@ -100,7 +100,7 @@
                 android:id="@+id/imageViewGallery"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:srcCompat="@drawable/gallery"
+                 android:src="@drawable/gallery"
                 android:layout_above="@+id/tv_gallery"
                 android:layout_centerHorizontal="true"
                 />

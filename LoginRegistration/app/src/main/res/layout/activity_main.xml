@@ -24,7 +24,7 @@
             android:id="@+id/img_location"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            app:srcCompat="@drawable/location" />
+            android:src="@drawable/location" />
 
         <TextView
             android:id="@+id/tv_location"
@@ -52,7 +52,7 @@
     android:layout_width="50dp"
     android:layout_height="50dp"
         android:layout_alignParentRight="true"
-    app:srcCompat="@drawable/direction" />
+    android:src="@drawable/direction" />
 
 
         <TextView

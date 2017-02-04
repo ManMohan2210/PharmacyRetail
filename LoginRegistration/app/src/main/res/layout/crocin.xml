@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:foregroundGravity="center"
-        app:srcCompat="@drawable/crocin"
+        android:src="@drawable/crocin"
 
         />
 

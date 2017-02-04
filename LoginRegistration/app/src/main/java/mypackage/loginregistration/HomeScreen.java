@@ -68,7 +68,7 @@ public class HomeScreen extends BaseActivty implements OnItemClickListener, Adap
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, item);
 
         textView.setThreshold(1);
-        textView.setDropDownBackgroundResource(R.drawable.autocomplete_dropdown);
+//        textView.setDropDownBackgroundResource(R.drawable.autocomplete_dropdown);
         // textView.setDropDownBackgroundDrawable(new ColorDrawable(context.getResources().getColor("@null")));
         //Set adapter to AutoCompleteTextView
         textView.setAdapter(adapter);

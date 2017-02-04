@@ -54,7 +54,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/exclamanation"
+        android:src="@drawable/exclamanation"
         android:id="@+id/imgViewEx"
         android:layout_above="@+id/tvOops"
         android:layout_alignRight="@+id/tvOops"

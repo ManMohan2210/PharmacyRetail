@@ -14,7 +14,7 @@
     <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            app:srcCompat="@drawable/location"
+            android:src="@drawable/location"
         android:id="@+id/imageView2"
         android:layout_alignBottom="@+id/txtForgotPwd"
         android:layout_alignParentLeft="true"
@@ -37,7 +37,7 @@
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
-        app:srcCompat="@drawable/direction"
+        android:src="@drawable/direction"
 
         android:id="@+id/imageView3"
         android:layout_below="@+id/txtForgotPwd"

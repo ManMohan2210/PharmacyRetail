@@ -1,9 +1,9 @@
 package mypackage.loginregistration;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -21,9 +21,9 @@ import java.util.regex.Pattern;
 
 import Util.Constants;
 import Util.Strings;
+import Util.Utility;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-
 
 
 public class LoginPage extends BaseActivty {
@@ -54,6 +54,12 @@ public class LoginPage extends BaseActivty {
     TextView mSignupLink;
     @Bind(R.id.loginLinearLayout)
     LinearLayout loginLinearLayout;
+
+    @Bind(R.id.ll_input_email)
+    TextInputLayout textInputLayoutEmail;
+
+    @Bind(R.id.ll_input_password)
+    TextInputLayout textInputLayoutPassword;
 
     private static final int REQUEST_SIGNUP = 0;
 
@@ -92,42 +98,15 @@ public class LoginPage extends BaseActivty {
     }
 
 
-
-
     private void initListener() {
         mLoginButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String email = mEmailText.getText().toString();
-                String password = mPasswordText.getText().toString();
-                Pattern pwd = Pattern.compile(Constants.REGEX_PASSWORD_VALIDATION);
-                if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    mEmailText.setError(Strings.ENTER_EMAIL);
-                   return;
-                } else {
-                    mEmailText.setError(null);
-                }
+                if (!isValidationClear()) return;
 
-                if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
-                    mPasswordText.setError(Strings.PASSWORD_NOT_VALID);
-                    return;
+                Utility.hideKeyboardFrom(LoginPage.this);
 
-                } else if (Pattern.matches(pwd.pattern(), password) == false) {
-                    mPasswordText.setError(Strings.ENTER_PASSWORD);
-                    return;
-
-                } else {
-                    mPasswordText.setError(null);
-                }
-
-
-                mLoginButton.setEnabled(false);
-                final ProgressDialog progressDialog = new ProgressDialog(LoginPage.this,
-                        R.style.AppTheme_Dark_Dialog);
-                progressDialog.setIndeterminate(true);
-                progressDialog.setMessage(Strings.AUTHENTICATING);
-                progressDialog.show();
                 Intent intent = new Intent(LoginPage.this, HomeScreen.class);
                 startActivity(intent);
 
@@ -140,6 +119,7 @@ public class LoginPage extends BaseActivty {
                 // Disable going back to the MainActivity
                 moveTaskToBack(true);
             }
+
             public void onClick(View v) {
                 Intent intent = new Intent(LoginPage.this, SignUp.class);
                 startActivity(intent);
@@ -155,6 +135,49 @@ public class LoginPage extends BaseActivty {
             }
         });
 
+        mEmailText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mEmailText.setCursorVisible(true);
+                textInputLayoutEmail.setError(null);
+            }
+        });
+
+        mPasswordText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPasswordText.setCursorVisible(true);
+                textInputLayoutPassword.setError(null);
+            }
+        });
+
+    }
+
+    private boolean isValidationClear() {
+        String email = mEmailText.getText().toString();
+        String password = mPasswordText.getText().toString();
+        Pattern pwd = Pattern.compile(Constants.REGEX_PASSWORD_VALIDATION);
+
+        mEmailText.setCursorVisible(false);
+        mPasswordText.setCursorVisible(false);
+
+
+        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            textInputLayoutEmail.setErrorEnabled(true);
+            textInputLayoutEmail.setError(Strings.ENTER_EMAIL);
+            return false;
+        }
+
+        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
+            textInputLayoutPassword.setError(Strings.PASSWORD_NOT_VALID);
+            return false;
+
+        } else if (Pattern.matches(pwd.pattern(), password) == false) {
+            textInputLayoutPassword.setError(Strings.ENTER_PASSWORD);
+            return false;
+
+        }
+        return true;
     }
 
     private void initiatePopupWindow() {
@@ -165,7 +188,7 @@ public class LoginPage extends BaseActivty {
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
             View popupView = inflater.inflate(R.layout.popup, null);
-           final PopupWindow popupWindow = new PopupWindow(popupView, 800, 600, true);
+            final PopupWindow popupWindow = new PopupWindow(popupView, 800, 600, true);
             popupWindow.setTouchable(true);
             popupWindow.setFocusable(true);
             popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);

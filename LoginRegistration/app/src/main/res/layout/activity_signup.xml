@@ -128,7 +128,6 @@
        android:layout_width="200dp"
        android:layout_height="wrap_content"
        android:clickable="true"
-       android:contextClickable="true"
        android:text="@string/TnC"
                 android:layout_toRightOf="@id/chbSignIn"
                 android:layout_alignBaseline="@id/chbSignIn"
