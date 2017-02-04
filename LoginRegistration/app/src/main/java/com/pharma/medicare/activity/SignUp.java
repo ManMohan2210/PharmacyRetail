@@ -1,4 +1,4 @@
-package com.pahrma.medicare.activity;
+package com.pharma.medicare.activity;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -18,11 +18,10 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.pahrma.medicare.Util.Constants;
-import com.pahrma.medicare.Util.Strings;
-import com.pahrma.medicare.Util.Utility;
-
-import com.pahrma.medicare.R;
+import com.pharma.medicare.Util.Constants;
+import com.pharma.medicare.Util.Strings;
+import com.pharma.medicare.Util.Utility;
+import com.pharma.medicare.activity.R;
 
 
 public class SignUp extends BaseActivty {

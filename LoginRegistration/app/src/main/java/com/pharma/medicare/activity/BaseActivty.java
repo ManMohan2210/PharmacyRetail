@@ -1,4 +1,4 @@
-package com.pahrma.medicare.activity;
+package com.pharma.medicare.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

@@ -1,11 +1,9 @@
-package com.pahrma.medicare.activity;
+package com.pharma.medicare.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
-
-import com.pahrma.medicare.R;
-import com.pahrma.medicare.activity.BaseActivty;
+import com.pharma.medicare.activity.R;
 
 public class Success extends BaseActivty {
 

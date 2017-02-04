@@ -1,4 +1,4 @@
-package com.pahrma.medicare.activity;
+package com.pharma.medicare.activity;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -19,10 +19,9 @@ import java.util.regex.Pattern;
 import android.view.Gravity;
 import android.graphics.PorterDuff;
 
-import com.pahrma.medicare.Util.Constants;
-import com.pahrma.medicare.Util.Strings;
-
-import com.pahrma.medicare.R;
+import com.pharma.medicare.Util.Constants;
+import com.pharma.medicare.Util.Strings;
+import com.pharma.medicare.activity.R;
 
 public class LoginPage extends BaseActivty {
 	private Toolbar toolbar;

@@ -1,4 +1,4 @@
-package com.pahrma.medicare.Util;
+package com.pharma.medicare.Util;
 
 /**
  * Created by satveer on 16-01-2017.

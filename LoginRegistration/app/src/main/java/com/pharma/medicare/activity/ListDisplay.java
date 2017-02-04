@@ -1,12 +1,11 @@
-package com.pahrma.medicare.activity;
+package com.pharma.medicare.activity;
 
 
     import android.os.Bundle;
     import android.widget.ArrayAdapter;
     import android.widget.ListView;
     import android.widget.TextView;
-
-    import com.pahrma.medicare.R;
+    import com.pharma.medicare.activity.R;
 
 public class ListDisplay extends BaseActivty {
 

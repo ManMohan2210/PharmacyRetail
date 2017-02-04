@@ -1,4 +1,4 @@
-package com.pahrma.medicare.activity;
+package com.pharma.medicare.activity;
 
 import android.app.ActionBar;
 import android.content.Intent;
@@ -14,9 +14,9 @@ import android.widget.TextView;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.liangfeizc.slidepageindicator.PageIndicator;
 import com.liangfeizc.slidepager.SlidePagerAdapter;
-import com.pahrma.medicare.R;
-
 import java.util.Arrays;
+import com.pharma.medicare.activity.R;
+
 
 public class InfoPagerActivity extends AppCompatActivity implements View.OnClickListener {
 	public static final String EXTRA_TITLE = "slidepageractivity.extra.title";
@@ -25,7 +25,7 @@ public class InfoPagerActivity extends AppCompatActivity implements View.OnClick
 
 
 	private static final String[] IMAGES = new String[]{"" + R.drawable.image1, "" + R.drawable
-			.image2, "" + R.drawable.image3, "" + R.drawable.image4};
+			.image2, "" +  R.drawable.image3, "" + R.drawable.image4};
 	private PageIndicator mPageIndicator;
 
 	@Override

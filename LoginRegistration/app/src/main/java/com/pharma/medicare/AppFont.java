@@ -1,4 +1,4 @@
-package com.pahrma.medicare;
+package com.pharma.medicare;
 
 /**
  * Created by satveer on 16-01-2017.
