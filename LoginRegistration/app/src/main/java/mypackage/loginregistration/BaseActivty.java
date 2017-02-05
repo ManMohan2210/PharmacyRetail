@@ -15,8 +15,11 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import java.util.List;
+
 import Util.QuickDialogs;
 import Util.Utility;
+import mypackage.loginregistration.Model.PrescriptionData;
 
 /**
  * Created by satveer on 15-01-2017.
@@ -37,6 +40,38 @@ public class BaseActivty extends AppCompatActivity {
 //
 //        super.setContentView(layoutResID);
 //    }
+    static final   String item[] = {
+        "Allegra", "Asprin", "Azithromycin", "Combiflame", "Crocin","Disprin", "Paracetamol",  "Pudinhara",
+        "VicksAction-500", "Vomikind", "Benadryl","Afghanistan", "Albania",
+            "Algeria", "American Samoa", "Andorra", "Angola", "Anguilla",
+            "Antarctica", "Antigua and Barbuda", "Argentina", "Armenia",
+            "Aruba", "Australia", "Austria", "Azerbaijan", "Bahrain",
+            "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin",
+            "Bermuda", "Bhutan", "Bolivia", "Bosnia and Herzegovina",
+            "Botswana", "Bouvet Island", "Brazil",
+            "British Indian Ocean Territory", "British Virgin Islands",
+            "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cote d'Ivoire",
+            "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands",
+            "Central African Republic", "Chad", "Chile", "China",
+            "Christmas Island", "Cocos (Keeling) Islands", "Colombia",
+            "Comoros", "Congo", "Cook Islands", "Costa Rica", "Croatia",
+            "Cuba", "Cyprus", "Czech Republic",
+            "Democratic Republic of the Congo", "Denmark", "Djibouti",
+            "Dominica", "Dominican Republic", "East Timor", "Ecuador", "Egypt",
+            "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia",
+            "Ethiopia", "Faeroe Islands", "Falkland Islands", "Fiji",
+            "Finland", "Former Yugoslav Republic of Macedonia", "France",
+            "French Guiana", "French Polynesia", "French Southern Territories",
+            "Gabon", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece",
+            "Greenland", "Grenada", "Guadeloupe", "Guam", "Guatemala",
+            "Guinea", "Guinea-Bissau", "Guyana", "Haiti",
+            "Heard Island and McDonald Islands", "Honduras", "Hong Kong",
+            "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq"};
+
+    List<PrescriptionData> precData;
+    static final  String[] cityArray = {"New Delhi","Gurgaon","Pune","Mumbai",
+            "Bangalore","Kolkata","Chennai","Chandhigarh","Nagpur"};
+
 private FrameLayout mMainContainer;
     private FrameLayout mErrorContainer;
     private ViewGroup mMainContent;

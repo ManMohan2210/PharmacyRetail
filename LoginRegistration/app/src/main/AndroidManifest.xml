@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="mypackage.loginregistration">
 
+    <uses-feature android:name="android.hardware.camera" android:required="false"></uses-feature>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/med"
@@ -16,12 +20,12 @@
              </intent-filter>-->
         </activity>
 
-        <activity android:name=".LoginPage">
+        <activity android:name=".LoginPage" android:windowSoftInputMode="stateHidden">
              <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
         </activity>
         <activity android:name=".UploadPrescription">
             <!--&lt;!&ndash;&ndash;&gt;<intent-filter>
@@ -30,32 +34,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>-->
         </activity>
-        <!-- <activity android:name=".PopupDemoActivity">
-            &lt;!&ndash; <intent-filter>
-                 <action android:name="android.intent.action.MAIN" />
-
-                 <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>&ndash;&gt;
-         </activity>-->
-         <activity android:name=".MainActivity">
-                   <!--<intent-filter>-->
-                       <!--<action android:name="android.intent.action.MAIN" />-->
-
-                       <!--<category android:name="android.intent.category.LAUNCHER" />-->
-                   <!--</intent-filter>-->
-               </activity>
 
 
         <activity android:name=".SignUp"></activity>
 
         <activity android:name=".Paracetamol"></activity>
         <activity android:name=".Crocin"></activity>
-        <activity android:name=".HomeScreen"><!-- <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>-->
-        </activity>
+        <activity android:name=".HomeScreen" android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".NoNetwork"></activity>
         <activity android:name=".PasswordChange"></activity>
         <activity android:name=".Success"></activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for

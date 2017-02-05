@@ -12,26 +12,15 @@
     tools:context="mypackage.loginregistration.LoginPage">
 
 
-    <Button
-            android:id="@+id/btn_continue"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/cyan"
-            android:text="@string/con"
-            android:textColor="@color/white"
-        android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:id="@+id/abc"
+        android:id="@+id/ll_btn_contianer"
         android:orientation="horizontal"
         android:layout_above="@+id/btn_continue"
         android:layout_alignParentLeft="true"
-        android:background="@drawable/background_with_shadow"
         android:layout_alignParentStart="true">
+
         <RelativeLayout
             android:id="@+id/layoutCamera"
             android:layout_width="333.3dp"
@@ -41,7 +30,8 @@
             android:paddingBottom="@dimen/activity_vertical_margin"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin">
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:layout_marginRight="1dp">
 
             <ImageView
                 android:id="@+id/imageViewCamera"
@@ -66,8 +56,8 @@
             android:layout_height="match_parent"
             android:layout_alignLeft="@id/layoutCamera"
             android:layout_weight="0.33"
-            android:background="@drawable/background_with_shadow">
-
+            android:background="@drawable/background_with_shadow"
+            android:layout_marginRight="1dp">
             <TextView
                 android:id="@+id/tv_existing"
                 android:layout_width="wrap_content"
@@ -119,18 +109,40 @@
         </RelativeLayout>
     </LinearLayout>
 
+
     <TextView
 
         android:id="@+id/choseOpt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/choseOpt"
-        android:layout_marginLeft="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="20dp"
-        android:layout_above="@+id/abc"
+        android:layout_marginTop="@dimen/abc_action_bar_default_padding_material"
+        android:layout_marginBottom="@dimen/abc_action_bar_default_padding_material"
+        android:layout_above="@id/ll_btn_contianer"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+            android:id="@+id/btn_continue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/cyan"
+            android:text="@string/con"
+            android:textColor="@color/white"
+            android:layout_marginTop="2dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
+
+    <ImageView
+        android:id="@+id/iv_selected_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/prescription"
+        android:background="@drawable/background_with_shadow"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_above="@id/choseOpt"/>
 
 
 </RelativeLayout>

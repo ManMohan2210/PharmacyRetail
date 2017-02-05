@@ -3,6 +3,7 @@ package mypackage.loginregistration;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -21,8 +22,11 @@ import Util.Utility;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+import static android.R.attr.action;
+import static mypackage.loginregistration.R.id.action0;
 import static mypackage.loginregistration.R.id.btnSignUp;
 import static mypackage.loginregistration.R.id.edtName;
+import static mypackage.loginregistration.R.id.txtViewTerm;
 
 
 public class SignUp extends BaseActivty {
@@ -52,6 +56,17 @@ public class SignUp extends BaseActivty {
     TextView mTvLogin;
     @Bind(R.id.btnSignUp)
     Button mBtnSignUp;
+    @Bind(R.id.txtViewTerm)
+    TextView mtxtViewTerm;
+
+    @Bind(R.id.ll_input_name)
+    TextInputLayout textInputLayoutName;
+    @Bind(R.id.ll_input_mob)
+    TextInputLayout textInputLayoutMNum;
+    @Bind(R.id.ll_input_email)
+    TextInputLayout textInputLayoutEmail;
+    @Bind(R.id.ll_input_password)
+    TextInputLayout textInputLayout;
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -130,7 +145,7 @@ public class SignUp extends BaseActivty {
                 }
 
                 if (mChbSignIn.isChecked() == false) {
-                    mChbSignIn.setError(Strings.CHECK_TNC);
+                    showSnackBar(Strings.CHECK_TNC,4);
                     return;
                 }
                 Intent intent = new Intent(SignUp.this, Success.class);
@@ -143,50 +158,16 @@ public class SignUp extends BaseActivty {
         });
 
 
-              /*  if (etEmail == null) {
-                    showToast(Strings.ENTER_EMAIL);
-                    return;
-                } else if (Utility.isNullOrEmpty(etEmail)) {
-                    showToast(Strings.ENTER_EMAIL);
-                    return;
-                } else if (Pattern.matches(p.pattern(), etEmail.toString()) == false) {
-                    showToast(Strings.ENTER_EMAIL);
-                    return;
-                }*/
 
 
-//                if (etPassword == null) {
-//                    showToast(Strings.ENTER_PASSWORD);
-//                    return;
-//                } else if (Utility.isNullOrEmpty(etPassword)) {
-//                    showToast(Strings.ENTER_PASSWORD);
-//                    return;
-//                }  else if (Pattern.matches(pwd.pattern(), etPassword.toString()) == false) {
-//                    showToast(Strings.ENTER_PASSWORD);
-//                    return;
-//                }
-
-        mChbSignIn.setOnClickListener(new View.OnClickListener() {
+        mtxtViewTerm.setOnClickListener(new View.OnClickListener() {
                                           public void onClick(View v) {
-                                              showToast(Strings.WIP);
+                                              showSnackBar(Strings.WIP,5);
                                           }
                                       }
 
         );
 
-      /*  checkBoxShowPwd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // checkbox status is changed from uncheck to checked.
-                if (!isChecked) {
-                    // show password
-                    edtPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                } else {
-                    // hide password
-                    edtPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                }
-            }
-        });*/
         mTvLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(SignUp.this, LoginPage.class);

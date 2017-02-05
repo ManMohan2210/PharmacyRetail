@@ -32,7 +32,7 @@ public class Utility {
 
     public static Typeface getPTSansFontStyle(Context context) {
         if (tf == null)
-            tf = Typeface.createFromAsset(context.getAssets(), "pt_sans.ttf");
+            tf = Typeface.createFromAsset(context.getAssets(), "colab_reg.otf");
         return tf;
     }
 }

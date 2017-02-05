@@ -2,23 +2,24 @@ package Util;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.widget.EditText;
 import android.widget.TextView;
 
 
-public class CustomPTSansTextView extends TextView {
+public class CustomPTSansEditTextView extends EditText {
     Context context;
-    public CustomPTSansTextView(Context context, AttributeSet attrs, int defStyle) {
+    public CustomPTSansEditTextView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         this.context = context;
         init();
     }
 
-    public CustomPTSansTextView(Context context, AttributeSet attrs) {
+    public CustomPTSansEditTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public CustomPTSansTextView(Context context) {
+    public CustomPTSansEditTextView(Context context) {
         super(context);
         init();
     }

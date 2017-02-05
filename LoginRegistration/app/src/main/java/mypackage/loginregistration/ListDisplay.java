@@ -12,8 +12,8 @@ package mypackage.loginregistration;
 public class ListDisplay extends BaseActivty {
 
         // Array of strings...
-        String[] cityArray = {"New Delhi","Gurgaon","Pune","Mumbai",
-                "Bangalore","Kolkata","Chennai"};
+       /* String[] cityArray = {"New Delhi","Gurgaon","Pune","Mumbai",
+                "Bangalore","Kolkata","Chennai"};*/
         private TextView label;
     private TextView txtViewForgot;
     private TextView txtViewAutodetect;
