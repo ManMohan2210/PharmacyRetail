@@ -18,7 +18,14 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:weightSum="1">
-
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/bac_dim_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#C0000000"
+            android:visibility="gone" >
+        </LinearLayout>
         <!--  Email Label -->
         <android.support.design.widget.TextInputLayout
             android:id="@+id/ll_input_email"

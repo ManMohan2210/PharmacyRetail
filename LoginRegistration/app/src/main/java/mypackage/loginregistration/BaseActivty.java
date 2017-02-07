@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -246,10 +247,19 @@ private FrameLayout mMainContainer;
      */
     protected void showSnackBar(String msg, String
             callBackAction, View.OnClickListener callBackListener) {
-        Snackbar snackbar = Snackbar
+       /* Snackbar snackbar = Snackbar
                 .make(mMainContainer, msg, Snackbar.LENGTH_LONG)
                 .setAction(callBackAction, callBackListener);
+        snackbar.show();*/
+        CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.snackbarCoordinatorLayout);
+        Snackbar snackbar = Snackbar.make(coordinatorLayout, msg, Snackbar.LENGTH_LONG);
+        View view = snackbar.getView();
+        CoordinatorLayout.LayoutParams params =(CoordinatorLayout.LayoutParams)view.getLayoutParams();
+        params.gravity = Gravity.TOP;
+        view.setLayoutParams(params);
         snackbar.show();
     }
 
 }
+
+

@@ -10,9 +10,9 @@
     <RelativeLayout  android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="@color/cyan_light"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+                     android:layout_alignParentTop="true"
+                     android:layout_alignParentLeft="true"
+                     android:layout_alignParentStart="true">
 
 
     <TextView
@@ -31,20 +31,7 @@
         android:layout_marginTop="5dp"
         android:layout_below="@id/tvReset"/>
 
-    <Button
-        android:id="@+id/btn_close_popup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/confirm"
-        android:textColor="@color/white"
-        android:layout_marginTop="31dp"
-        android:layout_below="@+id/radioGroup"
-        android:layout_centerHorizontal="true"
-        android:shadowRadius="@integer/google_play_services_version"
-        android:onClick="myClick" android:background="@drawable/btn_selector"/>
-
-    <RadioGroup
+        <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -72,7 +59,35 @@
             />
     </RadioGroup>
 
+        <Button
+            android:id="@+id/btn_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/ok"
+            android:textColor="@color/white"
+            android:shadowRadius="@integer/google_play_services_version"
+            android:onClick="myClick" android:background="@drawable/btn_selector"
+            android:layout_alignBaseline="@+id/btn_close_popup"
+            android:layout_alignBottom="@+id/btn_close_popup"
+            android:layout_alignLeft="@+id/tvReset"
+            android:layout_alignStart="@+id/tvReset"/>
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/btn_close_popup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/cancel"
+            android:textColor="@color/white"
+            android:layout_marginTop="30dp"
+            android:shadowRadius="@integer/google_play_services_version"
+            android:onClick="myClick" android:background="@drawable/btn_selector"
+            android:layout_below="@+id/radioGroup"
+            android:layout_alignRight="@+id/tvReset"
+            android:layout_alignEnd="@+id/tvReset"/>
+
+
+    </RelativeLayout>
 
 </RelativeLayout>

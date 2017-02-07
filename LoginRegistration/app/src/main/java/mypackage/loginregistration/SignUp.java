@@ -3,7 +3,10 @@ package mypackage.loginregistration;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -23,6 +26,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 import static android.R.attr.action;
+import static android.R.string.ok;
 import static mypackage.loginregistration.R.id.action0;
 import static mypackage.loginregistration.R.id.btnSignUp;
 import static mypackage.loginregistration.R.id.edtName;
@@ -145,7 +149,7 @@ public class SignUp extends BaseActivty {
                 }
 
                 if (mChbSignIn.isChecked() == false) {
-                    showSnackBar(Strings.CHECK_TNC,4);
+                    showSnackBar(Strings.CHECK_TNC,null,null);
                     return;
                 }
                 Intent intent = new Intent(SignUp.this, Success.class);
@@ -160,13 +164,30 @@ public class SignUp extends BaseActivty {
 
 
 
-        mtxtViewTerm.setOnClickListener(new View.OnClickListener() {
+       /* mtxtViewTerm.setOnClickListener(new View.OnClickListener() {
                                           public void onClick(View v) {
                                               showSnackBar(Strings.WIP,5);
                                           }
                                       }
 
+        );*/
+           mtxtViewTerm.setOnClickListener(new View.OnClickListener() {
+                                          public void onClick(View v) {
+                                              showSnackBar(Strings.WIP,"OK",null); //Strings.WIP,"ok",);
+
+                                              /*CoordinatorLayout   coordinatorLayout = (CoordinatorLayout) findViewById(R.id.snackbarCoordinatorLayout);
+                                              Snackbar snackbar = Snackbar.make(coordinatorLayout, "Text", Snackbar.LENGTH_LONG);
+                                              View view = snackbar.getView();
+                                              CoordinatorLayout.LayoutParams params =(CoordinatorLayout.LayoutParams)view.getLayoutParams();
+                                              params.gravity = Gravity.TOP;
+                                              view.setLayoutParams(params);
+                                              snackbar.show();*/
+
+                                          }
+                                      }
+
         );
+
 
         mTvLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

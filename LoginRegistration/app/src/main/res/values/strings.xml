@@ -17,7 +17,8 @@
     <string name="retry">Retry</string>
     <string name="NoNetwork">No Network Available. </string>
     <string name="resetPwd">Reset your password by.</string>
-    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">Ok</string>
     <string name="viaOtp">Via OTP</string>
     <string name="sendOtp">Send OTP</string>
     <string name="sendEmail">Send Email</string>

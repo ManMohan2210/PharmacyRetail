@@ -36,7 +36,7 @@ public class LoginPage extends BaseActivty {
     private TextView txtWelcome;
     private boolean isLogin = false;
     //private TextView txtForgotPwd;
-    private Button btnClosePopup;
+    private Button btnOkPopup;
     private PopupWindow pwindo;
     private RadioButton rdbEmail;
     private RadioButton rdbOtp;
@@ -54,6 +54,9 @@ public class LoginPage extends BaseActivty {
     TextView mSignupLink;
     @Bind(R.id.loginLinearLayout)
     LinearLayout loginLinearLayout;
+
+    @Bind(R.id.bac_dim_layout)
+    LinearLayout back_dim_layout;
 
     @Bind(R.id.ll_input_email)
     TextInputLayout textInputLayoutEmail;
@@ -183,7 +186,7 @@ public class LoginPage extends BaseActivty {
     private void initiatePopupWindow() {
         try {
 // We need to get the instance of the LayoutInflater
-
+            back_dim_layout.setVisibility(View.VISIBLE);
             LayoutInflater inflater = (LayoutInflater) LoginPage.this
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -192,15 +195,12 @@ public class LoginPage extends BaseActivty {
             popupWindow.setTouchable(true);
             popupWindow.setFocusable(true);
             popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
-            btnClosePopup = (Button) popupView.findViewById(R.id.btn_close_popup);
+            btnOkPopup = (Button) popupView.findViewById(R.id.btn_ok);
             RadioButton rdbEmail = (RadioButton) popupView.findViewById(R.id.rdbEmail);
             RadioButton rdbOtp = (RadioButton) popupView.findViewById(R.id.rdbOtp);
             final RadioGroup radioGroup = (RadioGroup) popupView.findViewById(R.id.radioGroup);
-            ((Button) popupView.findViewById(R.id.btn_close_popup))
+            ((Button) popupView.findViewById(R.id.btn_ok))
                     .setOnClickListener(new OnClickListener() {
-
-
-                        // @TargetApi(Build.VERSION_CODES.GINGERBREAD)
                         public void onClick(View arg0) {
                             if (radioGroup.getCheckedRadioButtonId() != -1) {
                                 int id = radioGroup.getCheckedRadioButtonId();
@@ -219,12 +219,20 @@ public class LoginPage extends BaseActivty {
                         }
 
                     });
+            ((Button) popupView.findViewById(R.id.btn_close_popup))
+                    .setOnClickListener(new OnClickListener() {
+                        public void onClick(View arg0) {
+                            popupWindow.dismiss();
+                            back_dim_layout.setVisibility(View.GONE);
+                        }
 
+                    });
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 
 }
 
