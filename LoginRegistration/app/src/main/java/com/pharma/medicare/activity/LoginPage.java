@@ -1,154 +1,232 @@
 package com.pharma.medicare.activity;
 
-import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.view.View;
+import android.content.Context;
 import android.content.Intent;
-import android.widget.EditText;
-import android.widget.PopupWindow;
-import android.widget.TextView;
-import android.view.View.OnClickListener;
-import android.view.LayoutInflater;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
+import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
+import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
-import android.graphics.PorterDuff;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+
+import java.util.regex.Pattern;
 
 import com.pharma.medicare.Util.Constants;
 import com.pharma.medicare.Util.Strings;
-import com.pharma.medicare.activity.R;
+import com.pharma.medicare.Util.Utility;
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 
 public class LoginPage extends BaseActivty {
-	private Toolbar toolbar;
-	private Button btnLogin;
-	private EditText editViewEmail;
-	private EditText editViewPassword;
-	private TextView txtSignUp;
-	private TextView txtWelcome;
-	private boolean isLogin = false;
-	private TextView txtForgotPwd;
-	//---
-	Button btnClosePopup;
-	Button btnCreatePopup;
-	private PopupWindow pwindo;
+    private Toolbar toolbar;
+    //@Bind(R.id.btn_login)
+    // private Button btnLogin;
+    //private EditText editViewEmail;
+    //private EditText editViewPassword;
+    //private TextView txtSignUp;
+    private TextView txtWelcome;
+    private boolean isLogin = false;
+    //private TextView txtForgotPwd;
+    private Button btnClosePopup;
+    private PopupWindow pwindo;
+    private RadioButton rdbEmail;
+    private RadioButton rdbOtp;
+    private RadioGroup radioGroup;
+    private String selection;
+    @Bind(R.id.txtForgotPwd)
+    TextView txtForgotPwd;
+    @Bind(R.id.editViewEmail)
+    EditText mEmailText;
+    @Bind(R.id.editViewPassword)
+    EditText mPasswordText;
+    @Bind(R.id.btn_login)
+    Button mLoginButton;
+    @Bind(R.id.txtViewSignUp)
+    TextView mSignupLink;
+    @Bind(R.id.loginLinearLayout)
+    LinearLayout loginLinearLayout;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_login);
-		initView();
-		initListener();
-		//---
+    @Bind(R.id.ll_input_email)
+    TextInputLayout textInputLayoutEmail;
 
-	}
+    @Bind(R.id.ll_input_password)
+    TextInputLayout textInputLayoutPassword;
 
-	private void initView() {
-		btnLogin = (Button) findViewById(R.id.btn_login);
-		editViewEmail = (EditText) findViewById(R.id.editViewEmail);
-		editViewPassword = (EditText) findViewById(R.id.editViewPassword);
-		txtSignUp = (TextView) findViewById(R.id.txtViewSignUp);
-		txtForgotPwd = (TextView) findViewById(R.id.txtForgotPwd);
-		final Intent intent = getIntent();
-		editViewEmail.getBackground().setColorFilter(getResources().getColor(R.color.cyan), PorterDuff.Mode.SRC_ATOP);
-		editViewPassword.getBackground().setColorFilter(getResources().getColor(R.color.cyan),
-                PorterDuff.Mode.SRC_ATOP);
-	}
+    private static final int REQUEST_SIGNUP = 0;
 
-	private void initListener() {
-		txtSignUp.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				Intent intent = new Intent(LoginPage.this, SignUp.class);
-				startActivity(intent);
-			}
-		});
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+        ButterKnife.bind(this);
 
-
-		btnLogin.setOnClickListener(new View.OnClickListener() {
-
-			public void onClick(View v) {
-				Editable etPassword = editViewPassword.getText();
-				Editable etEmail = editViewEmail.getText();
-				Pattern p = Pattern.compile(Constants.REGEX_EMAIL_VALIDATION);
-				Matcher m = p.matcher(etEmail);
-				final boolean b = m.matches();
-				Pattern pwd = Pattern.compile(Constants.REGEX_PASSWORD_VALIDATION);
-				Matcher m1 = pwd.matcher(etPassword);
-				if (etEmail != null && etEmail.equals("")) {
-					showToast(Strings.ENTER_EMAIL);
-					return;
-				} else if (etEmail == null) {
-					showToast(Strings.ENTER_EMAIL);
-					return;
-				} else if (Pattern.matches(p.pattern(), etEmail.toString()) == false) {
-					showToast(Strings.ENTER_EMAIL);
-					return;
-				}
-				if (etPassword != null && etPassword.equals("")) {
-					showToast(Strings.ENTER_PASSWORD);
-					return;
-				} else if (etPassword == null) {
-					showToast(Strings.ENTER_PASSWORD);
-					return;
-				} else if (Pattern.matches(pwd.pattern(), etPassword.toString()) == false) {
-					showToast(Strings.ENTER_PASSWORD);
-					return;
-				}
+        //  initView();
+        initListener();
+    }
 
 
-				btnLogin.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Intent intent = new Intent(LoginPage.this, Success.class);
-						startActivity(intent);
-					}
-				});
-			}
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_SIGNUP) {
+            if (resultCode == RESULT_OK) {
 
-		});
-		txtForgotPwd.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-
-				initiatePopupWindow();
-			}
-		});
-
-	}
+                // TODO: Implement successful signup logic here
+                // By default we just finish the Activity and log them in automatically
+                this.finish();
+            }
+        }
+    }
 
 
-	private void initiatePopupWindow() {
-		try {
+    public void onLoginSuccess() {
+        mLoginButton.setEnabled(true);
+        finish();
+    }
+
+    public void onLoginFailed() {
+//        showToast("Login Failed!");
+
+        mLoginButton.setEnabled(true);
+    }
+
+
+    private void initListener() {
+        mLoginButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (!isValidationClear()) return;
+
+                Utility.hideKeyboardFrom(LoginPage.this);
+
+                Intent intent = new Intent(LoginPage.this, HomeScreen.class);
+                startActivity(intent);
+
+            }
+        });
+
+        mSignupLink.setOnClickListener(new OnClickListener() {
+
+            public void onBackPressed() {
+                // Disable going back to the MainActivity
+                moveTaskToBack(true);
+            }
+
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginPage.this, SignUp.class);
+                startActivity(intent);
+            }
+        });
+        txtForgotPwd.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                //loginLinearLayout.setAlpha(100);
+                initiatePopupWindow();
+
+            }
+        });
+
+        mEmailText.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mEmailText.setCursorVisible(true);
+                textInputLayoutEmail.setError(null);
+            }
+        });
+
+        mPasswordText.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPasswordText.setCursorVisible(true);
+                textInputLayoutPassword.setError(null);
+            }
+        });
+
+    }
+
+    private boolean isValidationClear() {
+        String email = mEmailText.getText().toString();
+        String password = mPasswordText.getText().toString();
+        Pattern pwd = Pattern.compile(Constants.REGEX_PASSWORD_VALIDATION);
+
+        mEmailText.setCursorVisible(false);
+        mPasswordText.setCursorVisible(false);
+
+
+        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            textInputLayoutEmail.setErrorEnabled(true);
+            textInputLayoutEmail.setError(Strings.ENTER_EMAIL);
+            return false;
+        }
+
+        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
+            textInputLayoutPassword.setError(Strings.PASSWORD_NOT_VALID);
+            return false;
+
+        } else if (Pattern.matches(pwd.pattern(), password) == false) {
+            textInputLayoutPassword.setError(Strings.ENTER_PASSWORD);
+            return false;
+
+        }
+        return true;
+    }
+
+    private void initiatePopupWindow() {
+        try {
 // We need to get the instance of the LayoutInflater
 
-			LayoutInflater inflater = (LayoutInflater) LoginPage.this.getSystemService(LAYOUT_INFLATER_SERVICE);
-			View layout = inflater.inflate(R.layout.popup, (ViewGroup) findViewById(R.id
-                    .popup_element));
-			pwindo = new PopupWindow(layout, 900, 700, true);
-			pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
+            LayoutInflater inflater = (LayoutInflater) LoginPage.this
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-			btnClosePopup = (Button) layout.findViewById(R.id.btn_close_popup);
-			btnClosePopup.setOnClickListener(cancel_button_click_listener);
+            View popupView = inflater.inflate(R.layout.popup, null);
+            final PopupWindow popupWindow = new PopupWindow(popupView, 800, 600, true);
+            popupWindow.setTouchable(true);
+            popupWindow.setFocusable(true);
+            popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
+            btnClosePopup = (Button) popupView.findViewById(R.id.btn_close_popup);
+            RadioButton rdbEmail = (RadioButton) popupView.findViewById(R.id.rdbEmail);
+            RadioButton rdbOtp = (RadioButton) popupView.findViewById(R.id.rdbOtp);
+            final RadioGroup radioGroup = (RadioGroup) popupView.findViewById(R.id.radioGroup);
+            ((Button) popupView.findViewById(R.id.btn_close_popup))
+                    .setOnClickListener(new OnClickListener() {
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
-	private OnClickListener cancel_button_click_listener = new OnClickListener() {
-		public void onClick(View v) {
-			pwindo.dismiss();
+                        // @TargetApi(Build.VERSION_CODES.GINGERBREAD)
+                        public void onClick(View arg0) {
+                            if (radioGroup.getCheckedRadioButtonId() != -1) {
+                                int id = radioGroup.getCheckedRadioButtonId();
+                                View radioButton = radioGroup.findViewById(id);
+                                int radioId = radioGroup.indexOfChild(radioButton);
+                                RadioButton btn = (RadioButton) radioGroup.getChildAt(radioId);
+                                selection = (String) btn.getText();
 
-		}
-	};
+                            }
+
+                            popupWindow.dismiss();
+                            Intent intent = new Intent(getBaseContext(), PasswordChange.class);
+                            intent.putExtra("selection", selection);
+                            startActivity(intent);
+
+                        }
+
+                    });
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }
-
 
 
 

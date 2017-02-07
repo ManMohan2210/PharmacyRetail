@@ -3,21 +3,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/activity_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="mypackage.loginregistration.com.pahrma.medicare.LoginPage">
+    tools:context="mypackage.loginregistration.LoginPage">
 
 
     <Button
         android:text="@string/retry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_retry"
         android:textColor="@color/white"
         android:background="@color/cyan"
         android:layout_alignParentLeft="true"
@@ -50,18 +49,17 @@
         android:text="@string/oops"
         android:textSize="50dp"
         android:layout_centerVertical="true"
-        android:layout_alignRight="@+id/tvNoNetwork"
-        android:layout_alignEnd="@+id/tvNoNetwork" />
+        android:layout_centerHorizontal="true" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/exclamanation"
-        android:id="@+id/imageView"
-        android:layout_marginTop="29dp"
-        android:layout_alignParentTop="true"
+        android:src="@drawable/exclamanation"
+        android:id="@+id/imgViewEx"
+        android:layout_above="@+id/tvOops"
         android:layout_alignRight="@+id/tvOops"
-        android:layout_alignEnd="@+id/tvOops" />
+        android:layout_alignEnd="@+id/tvOops"
+        android:layout_marginBottom="12dp" />
 
 
 </RelativeLayout>

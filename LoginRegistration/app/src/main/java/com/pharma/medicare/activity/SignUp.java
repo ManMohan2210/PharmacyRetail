@@ -3,39 +3,61 @@ package com.pharma.medicare.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.graphics.Paint;
 
 import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import com.pharma.medicare.Util.Constants;
-import com.pharma.medicare.Util.Strings;
-import com.pharma.medicare.Util.Utility;
-import com.pharma.medicare.activity.R;
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 
 public class SignUp extends BaseActivty {
 
-    private Button btnLogin;
-    public final int CODE_SIGNUP = 1111;
-    private EditText edtName;
-    private EditText edtEmail;
-    private EditText edtPassword;
-    private Button btnSignUp;
-    private TextView txtViewSignUp;
-    private EditText edtMobNum;
-    private TextView txtViewTerm;
-    private CheckBox chbSignIn;
+    // private Button btnLogin;
+    //  public final int CODE_SIGNUP = 1111;
+    // private EditText edtName;
+    //private EditText edtEmail;
+    //private EditText edtPassword;
+    //private Button btnSignUp;
+    // private TextView txtViewSignUp;
+    // private EditText edtMobNum;
+    // private TextView txtViewTerm;
+    //private CheckBox chbSignIn;
+    // private CheckBox checkBoxShowPwd;
+    @Bind(R.id.edtName)
+    EditText mEdtName;
+    @Bind(R.id.edtMobNum)
+    EditText mEdtMobNum;
+    @Bind(R.id.edtEmail)
+    EditText mEdtEmail;
+    @Bind(R.id.edtNewPassword)
+    EditText mEdtPassword;
+    @Bind(R.id.chbSignIn)
+    CheckBox mChbSignIn;
+    @Bind(R.id.tv_login)
+    TextView mTvLogin;
+    @Bind(R.id.btnSignUp)
+    Button mBtnSignUp;
+    @Bind(R.id.txtViewTerm)
+    TextView mtxtViewTerm;
+
+    @Bind(R.id.ll_input_name)
+    TextInputLayout textInputLayoutName;
+    @Bind(R.id.ll_input_mob)
+    TextInputLayout textInputLayoutMNum;
+    @Bind(R.id.ll_input_email)
+    TextInputLayout textInputLayoutEmail;
+    @Bind(R.id.ll_input_password)
+    TextInputLayout textInputLayout;
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -47,88 +69,73 @@ public class SignUp extends BaseActivty {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+        ButterKnife.bind(this);
         final Intent intent = getIntent();
-        initView();
+        //initView();
         initListener();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
-    private void initView() {
-        edtName = (EditText) findViewById(R.id.edtName);
-        edtPassword = (EditText) findViewById(R.id.edtPassword);
-        btnSignUp = (Button) findViewById(R.id.btnSignUp);
+   /* private void initView() {
+        edtName = (EditText) findViewById(edtName);
+        edtPassword = (EditText) findViewById(R.id.edtNewPassword);
+        btnSignUp = (Button) findViewById(btnSignUp);
         txtViewSignUp = (TextView) findViewById(R.id.txtViewSignUp);
         txtViewTerm = (TextView) findViewById(R.id.txtViewTerm);
-        edtEmail = (EditText) findViewById(R.id.edtEmail);
-        edtMobNum = (EditText) findViewById(R.id.edtMobNum);
-        chbSignIn = (CheckBox) findViewById(R.id.chbSignIn) ;
+        edtEmail = (EditText) findViewById(edtEmail);
+        edtMobNum = (EditText) findViewById(edtMobNum);
+        chbSignIn = (CheckBox) findViewById(chbSignIn) ;
+       // checkBoxShowPwd = (CheckBox) findViewById(R.id.cbShowPwd);
         txtViewTerm.setPaintFlags(txtViewTerm.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-    }
+    }*/
 
     private void initListener() {
-        txtViewSignUp.setOnClickListener(new View.OnClickListener() {
+
+        mBtnSignUp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(SignUp.this, LoginPage.class);
-                startActivityForResult(intent, CODE_SIGNUP);
-            }
-        });
-        btnSignUp.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                String etEmail = edtEmail.getText().toString();
-                String etPassword = edtPassword.getText().toString();
-                String edtMobText = edtMobNum.getText().toString();
-                String edtNameText= edtName.getText().toString();
-                Pattern p = Pattern.compile(Constants.REGEX_EMAIL_VALIDATION);
-                Matcher m = p.matcher(etEmail);
-                final boolean b = m.matches();
-                Pattern pwd = Pattern.compile(Constants.REGEX_PASSWORD_VALIDATION);
-                Matcher m1 = pwd.matcher(etPassword);
-                Pattern mob = Pattern.compile(Constants.REGEX_MOBILE_VALIDATION);
-                if (edtNameText == null) {
-                    showToast(Strings.ENTER_NAME);
+                String name = mEdtName.getText().toString();
+                String mobNum = mEdtMobNum.getText().toString();
+                String email = mEdtEmail.getText().toString();
+                String password = mEdtPassword.getText().toString();
+                Pattern pwd = Pattern.compile(com.pharma.medicare.Util.Constants.REGEX_PASSWORD_VALIDATION);
+                Pattern mob = Pattern.compile(com.pharma.medicare.Util.Constants.REGEX_MOBILE_VALIDATION);
+
+                if (com.pharma.medicare.Util.Utility.isNullOrEmpty(name)) {
+                    mEdtName.setError(com.pharma.medicare.Util.Strings.ENTER_NAME);
                     return;
-                } else if (Utility.isNullOrEmpty(edtNameText)) {
-                    showToast(Strings.ENTER_NAME);
-                    return;
+                }else {
+                    mEdtName.setError(null);
                 }
-                if (etEmail == null) {
-                    showToast(Strings.ENTER_EMAIL);
+                if (com.pharma.medicare.Util.Utility.isNullOrEmpty(mobNum)) {
+                    mEdtMobNum.setError(com.pharma.medicare.Util.Strings.ENTER_MOBILE);
                     return;
-                } else if (Utility.isNullOrEmpty(etEmail)) {
-                    showToast(Strings.ENTER_EMAIL);
+                } else if (Pattern.matches(mob.pattern(),mobNum) == false) {
+                    mEdtMobNum.setError(com.pharma.medicare.Util.Strings.ENTER_MOBILE);
                     return;
-                } else if (Pattern.matches(p.pattern(), etEmail.toString()) == false) {
-                    showToast(Strings.ENTER_EMAIL);
+                }else {
+                    mEdtMobNum.setError(null);
+
+                }
+                if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    mEdtEmail.setError(com.pharma.medicare.Util.Strings.ENTER_EMAIL);
                     return;
+                } else {
+                    mEdtEmail.setError(null);
                 }
 
-                if (edtMobText == null) {
-                    showToast(Strings.ENTER_MOBILE);
+                if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
+                    mEdtPassword.setError(com.pharma.medicare.Util.Strings.PASSWORD_NOT_VALID);
                     return;
-                } else if (Utility.isNullOrEmpty(edtMobText)) {
-                    showToast(Strings.ENTER_MOBILE);
+
+                } else if (Pattern.matches(pwd.pattern(), password) == false) {
+                    mEdtPassword.setError(com.pharma.medicare.Util.Strings.ENTER_PASSWORD);
                     return;
-                } else if(Pattern.matches(mob.pattern(),edtMobText.toString())==false)
-                {
-                    showToast(Strings.ENTER_MOBILE);
-                    return;
+
+                } else {
+                    mEdtPassword.setError(null);
                 }
-                if (etPassword == null) {
-                    showToast(Strings.ENTER_PASSWORD);
-                    return;
-                } else if (Utility.isNullOrEmpty(etPassword)) {
-                    showToast(Strings.ENTER_PASSWORD);
-                    return;
-                }  else if (Pattern.matches(pwd.pattern(), etPassword.toString()) == false) {
-                    showToast(Strings.ENTER_PASSWORD);
-                    return;
-                }
-                if (chbSignIn.isChecked()==false)
-                {
-                    showToast(Strings.CHECK_TNC);
+
+                if (mChbSignIn.isChecked() == false) {
+                    showSnackBar(com.pharma.medicare.Util.Strings.CHECK_TNC,4);
                     return;
                 }
                 Intent intent = new Intent(SignUp.this, Success.class);
@@ -139,23 +146,28 @@ public class SignUp extends BaseActivty {
 
 
         });
-        txtViewTerm.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v) {
-                showToast(Strings.WIP);
-                                           }
-        }
+
+
+
+
+        mtxtViewTerm.setOnClickListener(new View.OnClickListener() {
+                                            public void onClick(View v) {
+                                                showSnackBar(com.pharma.medicare.Util.Strings.WIP,5);
+                                            }
+                                        }
 
         );
 
-
+        mTvLogin.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(SignUp.this, LoginPage.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
 
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
     public Action getIndexApiAction() {
         Thing object = new Thing.Builder()
                 .setName("SignUp Page") // TODO: Define a title for the content shown.
@@ -168,27 +180,8 @@ public class SignUp extends BaseActivty {
                 .build();
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        AppIndex.AppIndexApi.start(client, getIndexApiAction());
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        AppIndex.AppIndexApi.end(client, getIndexApiAction());
-        client.disconnect();
-    }
 }
-
 
 
 

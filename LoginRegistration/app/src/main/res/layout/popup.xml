@@ -2,44 +2,34 @@
     android:id="@+id/popup_element"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/cyan"
+    android:background="@drawable/background_with_shadow"
     android:orientation="vertical"
-    android:padding="10sp"
-    android:weightSum="1">
+    android:padding="8sp"
+    >
+
+    <RelativeLayout  android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/cyan_light"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
 
     <TextView
-        android:id="@+id/txtView"
+        android:id="@+id/tvReset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/resetPwd"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="15dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-    <RadioButton
-        android:text="@string/viaEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:id="@+id/radioButton"
-        android:buttonTint="@color/grey"
-        android:layout_below="@+id/txtView"
-        android:layout_toLeftOf="@+id/btn_close_popup"
-        android:layout_toStartOf="@+id/btn_close_popup" />
-
-    <RadioButton
-        android:text="@string/viaEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/radioButton2"
-        android:buttonTint="@color/grey"
-        android:layout_marginRight="58dp"
-        android:layout_marginEnd="58dp"
-        android:layout_alignBaseline="@+id/radioButton"
-        android:layout_alignBottom="@+id/radioButton"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_centerHorizontal="true" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="@color/silverGrey"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/tvReset"/>
 
     <Button
         android:id="@+id/btn_close_popup"
@@ -47,13 +37,42 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/confirm"
-        android:background="@color/grey"
         android:textColor="@color/white"
-        android:layout_marginTop="52dp"
-        android:layout_below="@+id/radioButton"
-        android:layout_toLeftOf="@+id/radioButton2"
-        android:layout_toStartOf="@+id/radioButton2" />
+        android:layout_marginTop="31dp"
+        android:layout_below="@+id/radioGroup"
+        android:layout_centerHorizontal="true"
+        android:shadowRadius="@integer/google_play_services_version"
+        android:onClick="myClick" android:background="@drawable/btn_selector"/>
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_below="@+id/tvReset"
+        android:layout_centerHorizontal="true">
+        <RadioButton
+            android:text="@string/viaEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rdbEmail"
+            android:checked="true"
+            android:buttonTint="@color/cyan500"
+            android:layout_below="@+id/radio"
+            />
+
+        <RadioButton
+            android:text="@string/viaOtp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rdbOtp"
+            android:buttonTint="@color/cyan500"
+
+            />
+    </RadioGroup>
+
 
 </RelativeLayout>
 
-
+</RelativeLayout>
