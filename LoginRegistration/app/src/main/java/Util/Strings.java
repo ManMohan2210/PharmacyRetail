@@ -14,4 +14,5 @@ public class Strings {
     public static final String PASSWORD_NOT_MATCHED = "Password not matched, please check ! ";
     public static final String PASSWORD_NOT_VALID = "Password range is between 4 and 10 alphanumeric characters";
     public static final String AUTHENTICATING ="Authenticating...";
+    public static final String PASSWORD_CHANGED="Password changed successfully.";
 }

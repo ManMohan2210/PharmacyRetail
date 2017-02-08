@@ -32,7 +32,7 @@
     <string name="textForLocation">We will need your location data to show your services available in your area.</string>
     <string name="topCity">Top Cities</string>
     <string name="autoDetect">Auto-detect Current Location</string>
-    <string name="con">Continue</string>
+    <string name="send">Send to Chemist</string>
     <string name="choseOpt">Choose an option to upload</string>
     <string name="existing">EXISTING</string>
     <string name="camera">CAMERA</string>

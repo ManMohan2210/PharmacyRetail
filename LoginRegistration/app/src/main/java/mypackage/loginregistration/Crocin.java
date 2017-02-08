@@ -10,7 +10,7 @@ import butterknife.ButterKnife;
 /**
  * Created by satveer on 25-01-2017.
  */
-class Crocin extends BaseActivty{
+public class  Crocin extends BaseActivty{
 
     private TextView textViewDetails;
     private ImageView imgView;

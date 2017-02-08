@@ -36,13 +36,13 @@
         </activity>
 
 
-        <activity android:name=".SignUp"></activity>
+        <activity android:name=".SignUp" android:windowSoftInputMode="stateHidden"></activity>
 
         <activity android:name=".Paracetamol"></activity>
         <activity android:name=".Crocin"></activity>
         <activity android:name=".HomeScreen" android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".NoNetwork"></activity>
-        <activity android:name=".PasswordChange"></activity>
+        <activity android:name=".PasswordChange" android:windowSoftInputMode="stateHidden"></activity>
         <activity android:name=".Success"></activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <meta-data

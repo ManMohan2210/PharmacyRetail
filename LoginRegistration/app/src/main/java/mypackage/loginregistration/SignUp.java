@@ -70,7 +70,7 @@ public class SignUp extends BaseActivty {
     @Bind(R.id.ll_input_email)
     TextInputLayout textInputLayoutEmail;
     @Bind(R.id.ll_input_password)
-    TextInputLayout textInputLayout;
+    TextInputLayout textInputLayoutPwd;
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -112,40 +112,39 @@ public class SignUp extends BaseActivty {
                 String password = mEdtPassword.getText().toString();
                 Pattern pwd = Pattern.compile(Constants.REGEX_PASSWORD_VALIDATION);
                 Pattern mob = Pattern.compile(Constants.REGEX_MOBILE_VALIDATION);
-
+                mEdtName.setCursorVisible(false);
+                mEdtMobNum.setCursorVisible(false);
+                mEdtEmail.setCursorVisible(false);
+                mEdtPassword.setCursorVisible(false);
                 if (Utility.isNullOrEmpty(name)) {
-                    mEdtName.setError(Strings.ENTER_NAME);
+                    textInputLayoutName.setErrorEnabled(true);
+                    textInputLayoutName.setError(Strings.ENTER_NAME);
                     return;
-                }else {
-                    mEdtName.setError(null);
                 }
                 if (Utility.isNullOrEmpty(mobNum)) {
-                    mEdtMobNum.setError(Strings.ENTER_MOBILE);
+                    textInputLayoutMNum.setErrorEnabled(true);
+                    textInputLayoutMNum.setError(Strings.ENTER_MOBILE);
                     return;
                 } else if (Pattern.matches(mob.pattern(),mobNum) == false) {
-                    mEdtMobNum.setError(Strings.ENTER_MOBILE);
+                    textInputLayoutMNum.setErrorEnabled(true);
+                    textInputLayoutMNum.setError(Strings.ENTER_MOBILE);
                     return;
-                }else {
-                    mEdtMobNum.setError(null);
-
                 }
                 if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    mEdtEmail.setError(Strings.ENTER_EMAIL);
+                    textInputLayoutEmail.setErrorEnabled(true);
+                    textInputLayoutEmail.setError(Strings.ENTER_EMAIL);
                     return;
-                } else {
-                    mEdtEmail.setError(null);
                 }
 
                 if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
-                    mEdtPassword.setError(Strings.PASSWORD_NOT_VALID);
+                    textInputLayoutPwd.setErrorEnabled(true);
+                    textInputLayoutPwd.setError(Strings.PASSWORD_NOT_VALID);
                     return;
 
                 } else if (Pattern.matches(pwd.pattern(), password) == false) {
-                    mEdtPassword.setError(Strings.ENTER_PASSWORD);
+                    textInputLayoutPwd.setErrorEnabled(true);
+                    textInputLayoutPwd.setError(Strings.ENTER_PASSWORD);
                     return;
-
-                } else {
-                    mEdtPassword.setError(null);
                 }
 
                 if (mChbSignIn.isChecked() == false) {
@@ -196,7 +195,36 @@ public class SignUp extends BaseActivty {
             }
         });
 
+        mEdtName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mEdtName.setCursorVisible(true);
+                textInputLayoutName.setError(null);
+            }
+        });
+        mEdtMobNum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mEdtMobNum.setCursorVisible(true);
+                textInputLayoutMNum.setError(null);
+            }
+        });
+        mEdtEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mEdtEmail.setCursorVisible(true);
+                textInputLayoutEmail.setError(null);
+            }
+        });
+        mEdtPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mEdtPassword.setCursorVisible(true);
+                textInputLayoutPwd.setError(null);
+            }
+        });
     }
+
 
 
     public Action getIndexApiAction() {

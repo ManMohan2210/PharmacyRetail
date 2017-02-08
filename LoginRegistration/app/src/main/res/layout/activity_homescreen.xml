@@ -19,7 +19,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
-        android:drawableRight="@drawable/search"
+        android:drawableLeft="@drawable/search"
         android:hint="@string/searchMedicine"/>
 
     <ListView

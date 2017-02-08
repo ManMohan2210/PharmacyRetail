@@ -34,9 +34,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/name"
+                android:text="kanwal"
                 android:inputType="textPersonName"
                 android:maxLength="15"
-                android:text="Kanwal"
                 android:textColor="@color/oil" />
         </android.support.design.widget.TextInputLayout>
 
@@ -50,11 +50,11 @@
 
             <EditText
                 android:id="@+id/edtMobNum"
+                android:text="9876543210"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/mob"
                 android:inputType="number"
-                android:text="9876543210"
                 android:maxLength="10"
                 android:textColor="@color/oil"
 
@@ -73,8 +73,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/email"
+                    android:text="kanwal.bhohi@yahoo.in"
                     android:inputType="textEmailAddress"
-                    android:text="kanwal.bhohi@yahoo.co.in"
                     android:textColor="@color/oil" />
             </android.support.design.widget.TextInputLayout>
 
@@ -92,8 +92,8 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/password"
                     android:inputType="textPassword"
-                    android:text="Pass@1234"
                     android:maxLength="10"
+                    android:text="Pass@123"
                     android:textColor="@color/black" />
 
             </android.support.design.widget.TextInputLayout>

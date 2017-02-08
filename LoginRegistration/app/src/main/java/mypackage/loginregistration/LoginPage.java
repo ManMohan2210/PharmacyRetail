@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
@@ -24,6 +25,9 @@ import Util.Strings;
 import Util.Utility;
 import butterknife.Bind;
 import butterknife.ButterKnife;
+//import mypackage.loginregistration.R.id.activity_login;
+
+import static android.R.attr.x;
 
 
 public class LoginPage extends BaseActivty {
@@ -55,8 +59,8 @@ public class LoginPage extends BaseActivty {
     @Bind(R.id.loginLinearLayout)
     LinearLayout loginLinearLayout;
 
-    @Bind(R.id.bac_dim_layout)
-    LinearLayout back_dim_layout;
+    @Bind(R.id.mainmenu)
+    FrameLayout layout_MainMenu;
 
     @Bind(R.id.ll_input_email)
     TextInputLayout textInputLayoutEmail;
@@ -69,6 +73,8 @@ public class LoginPage extends BaseActivty {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        layout_MainMenu = (FrameLayout) findViewById( R.id.mainmenu);
+        layout_MainMenu.getForeground().setAlpha( 0);
         ButterKnife.bind(this);
 
         //  initView();
@@ -171,8 +177,8 @@ public class LoginPage extends BaseActivty {
             return false;
         }
 
-        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
-            textInputLayoutPassword.setError(Strings.PASSWORD_NOT_VALID);
+        if (password.isEmpty() /*|| password.length() < 4 || password.length() > 10*/) {
+            textInputLayoutPassword.setError(Strings.ENTER_PASSWORD);
             return false;
 
         } else if (Pattern.matches(pwd.pattern(), password) == false) {
@@ -186,10 +192,10 @@ public class LoginPage extends BaseActivty {
     private void initiatePopupWindow() {
         try {
 // We need to get the instance of the LayoutInflater
-            back_dim_layout.setVisibility(View.VISIBLE);
+
             LayoutInflater inflater = (LayoutInflater) LoginPage.this
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
+            layout_MainMenu.getForeground().setAlpha( 220);
             View popupView = inflater.inflate(R.layout.popup, null);
             final PopupWindow popupWindow = new PopupWindow(popupView, 800, 600, true);
             popupWindow.setTouchable(true);
@@ -212,6 +218,7 @@ public class LoginPage extends BaseActivty {
                             }
 
                             popupWindow.dismiss();
+                            layout_MainMenu.getForeground().setAlpha( 0);
                             Intent intent = new Intent(getBaseContext(), PasswordChange.class);
                             intent.putExtra("selection", selection);
                             startActivity(intent);
@@ -223,7 +230,8 @@ public class LoginPage extends BaseActivty {
                     .setOnClickListener(new OnClickListener() {
                         public void onClick(View arg0) {
                             popupWindow.dismiss();
-                            back_dim_layout.setVisibility(View.GONE);
+                            layout_MainMenu.getForeground().setAlpha( 0);
+
                         }
 
                     });
