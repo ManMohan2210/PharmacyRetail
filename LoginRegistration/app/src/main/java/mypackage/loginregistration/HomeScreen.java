@@ -2,7 +2,9 @@
 package mypackage.loginregistration;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -14,8 +16,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Set;
 
 import adapters.MedicinesListAdapter;
 import butterknife.Bind;
@@ -96,4 +100,5 @@ public class HomeScreen extends BaseActivty implements OnItemClickListener, Adap
                 break;
         }
     }
+
 }

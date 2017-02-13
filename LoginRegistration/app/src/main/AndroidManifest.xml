@@ -20,12 +20,19 @@
              </intent-filter>-->
         </activity>
 
-        <activity android:name=".LoginPage" android:windowSoftInputMode="stateHidden">
+      <!--  <activity android:name=".LoginPage" android:windowSoftInputMode="stateHidden">
              <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
+        </activity>-->
+        <activity android:name=".HomeScreenSearch" android:windowSoftInputMode="stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".UploadPrescription">
             <!--&lt;!&ndash;&ndash;&gt;<intent-filter>
@@ -43,13 +50,20 @@
         <activity android:name=".HomeScreen" android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".NoNetwork"></activity>
         <activity android:name=".PasswordChange" android:windowSoftInputMode="stateHidden"></activity>
+
         <activity android:name=".Success"></activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <application>
+            <provider android:name=".SuggestionProvider"
+                      android:authorities="LoginRegistration\app\src\main\java\mypackage\loginregistration\.SuggestionProvider" />
+            ...
+        </application>
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
     </application>
+
 </manifest>
 
 
