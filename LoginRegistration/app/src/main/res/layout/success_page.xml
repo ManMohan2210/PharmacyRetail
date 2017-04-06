@@ -30,18 +30,6 @@
         android:layout_marginTop="44dp" />
 
     <Button
-        android:id="@+id/btn_select_city"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/cyan"
-        android:text="select city"
-        android:textColor="@color/white"
-        android:layout_below="@+id/btn_upload"
-        android:layout_alignRight="@+id/btn_no_network"
-        android:layout_alignEnd="@+id/btn_no_network"
-        android:layout_marginTop="39dp" />
-
-    <Button
         android:id="@+id/btn_no_network"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -51,5 +39,27 @@
         android:layout_marginTop="46dp"
         android:layout_below="@+id/btn_select_city"
         android:layout_centerHorizontal="true" />
+    <Button
+        android:id="@+id/btn_select_city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/cyan"
+        android:text="select city"
+        android:textColor="@color/white"
+        android:layout_below="@id/btn_upload"
+        android:layout_alignRight="@id/btn_no_network"
+        android:layout_alignEnd="@id/btn_no_network"
+        android:layout_marginTop="39dp" />
+
+    <Button
+        android:id="@+id/btn_searchmedicine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/cyan"
+        android:text="Search medicine"
+        android:textColor="@color/white"
+        android:layout_marginTop="31dp"
+        android:layout_below="@+id/btn_no_network"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

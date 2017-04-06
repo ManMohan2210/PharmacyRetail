@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -79,6 +81,30 @@ public class LoginPage extends BaseActivty {
 
         //  initView();
         initListener();
+
+        FragmentManager fm = getSupportFragmentManager();
+        Fragment fragment = fm.findFragmentById(R.id.fragment_container);
+
+        if (fragment == null) {
+            fragment = new FacebookFragment();
+            fm.beginTransaction()
+                    .add(R.id.fragment_container, fragment)
+                    .commit();
+        }
+
+        FragmentManager fmg = getSupportFragmentManager();
+        Fragment fragmentg = fmg.findFragmentById(R.id.google_fragment_container);
+
+
+        if (fragmentg == null) {
+            fragmentg = new GPlusFragment();
+            fmg.beginTransaction()
+                    .add(R.id.google_fragment_container, fragmentg)
+                    .commit();
+
+
+        }
+
     }
 
 

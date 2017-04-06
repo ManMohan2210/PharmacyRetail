@@ -15,7 +15,7 @@ public class Success extends BaseActivty {
     private Button btnUpload;
     private Button btnSelectCity;
     private Button btnNoNetwork;
-
+    private Button btnSearchMedicine;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +28,7 @@ public class Success extends BaseActivty {
         btnUpload = (Button)findViewById(R.id.btn_upload);
         btnSelectCity=(Button)findViewById(R.id.btn_select_city);
         btnNoNetwork=(Button)findViewById(R.id.btn_no_network);
+        btnSearchMedicine=(Button)findViewById(R.id.btn_searchmedicine);
 
         btnUpload.setOnClickListener(new View.OnClickListener(
         ) {
@@ -51,6 +52,14 @@ public class Success extends BaseActivty {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Success.this, NoNetwork.class);
+                startActivity(intent);
+            }
+        });
+        btnSearchMedicine.setOnClickListener(new View.OnClickListener(
+        ) {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Success.this, HomeScreen.class);
                 startActivity(intent);
             }
         });
