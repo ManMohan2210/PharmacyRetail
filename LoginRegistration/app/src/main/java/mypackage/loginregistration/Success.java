@@ -1,13 +1,10 @@
 package mypackage.loginregistration;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class Success extends BaseActivty {
 
@@ -16,6 +13,7 @@ public class Success extends BaseActivty {
     private Button btnSelectCity;
     private Button btnNoNetwork;
     private Button btnSearchMedicine;
+    private Button btnAddMedicine;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +27,7 @@ public class Success extends BaseActivty {
         btnSelectCity=(Button)findViewById(R.id.btn_select_city);
         btnNoNetwork=(Button)findViewById(R.id.btn_no_network);
         btnSearchMedicine=(Button)findViewById(R.id.btn_searchmedicine);
+        btnAddMedicine=(Button)findViewById(R.id.btn_add_medicine);
 
         btnUpload.setOnClickListener(new View.OnClickListener(
         ) {
@@ -60,6 +59,14 @@ public class Success extends BaseActivty {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Success.this, HomeScreen.class);
+                startActivity(intent);
+            }
+        });
+        btnAddMedicine.setOnClickListener(new View.OnClickListener(
+        ) {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Success.this, AddMedicine.class);
                 startActivity(intent);
             }
         });

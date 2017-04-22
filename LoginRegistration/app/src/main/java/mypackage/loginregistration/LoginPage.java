@@ -27,13 +27,13 @@ import Util.Strings;
 import Util.Utility;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-//import mypackage.loginregistration.R.id.activity_login;
 
-import static android.R.attr.x;
+//import mypackage.loginregistration.R.id.activity_login;
 
 
 public class LoginPage extends BaseActivty {
     private Toolbar toolbar;
+
     //@Bind(R.id.btn_login)
     // private Button btnLogin;
     //private EditText editViewEmail;

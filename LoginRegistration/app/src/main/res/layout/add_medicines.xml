@@ -1,26 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:paddingTop="20dp"
-              android:orientation="vertical">
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainmenu"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   >
 
-    <EditText
-        android:id="@+id/edt_medicine_name"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:hint="Please insert Medicine Name" />
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fitsSystemWindows="true">
+
+        <LinearLayout
+            android:id="@+id/loginLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:weightSum="1">
+
+            <EditText
+                android:id="@+id/edt_medicine_name"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="Please insert Medicine Name"/>
 
 
-    <EditText
-        android:id="@+id/edt_medicine_description"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:hint="Please insert medicine description" />
+            <EditText
+                android:id="@+id/edt_medicine_description"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="Please insert medicine description"/>
 
-    <Button
-        android:id="@+id/btn_save"
-        android:text="Add and Save Medicine"
-        android:layout_width="match_parent"
-        android:layout_height="60dp" />
-</LinearLayout>
+            <ImageView
+                android:id="@+id/medicine_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/btn_upload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/cyan"
+                    android:text="Upload"
+                    android:textColor="@color/white"/>
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/btn_click"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/cyan"
+                    android:text="Capture"
+                    android:textColor="@color/white"/>
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/btn_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/cyan"
+                    android:text="Add and Save medicine"
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+</FrameLayout>
