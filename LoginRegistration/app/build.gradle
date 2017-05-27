@@ -5,7 +5,7 @@ android {
     compileSdkVersion 22
     buildToolsVersion '25.0.0'
     defaultConfig {
-        applicationId "mypackage.loginregistration"
+        applicationId "com.medicare"
         minSdkVersion 15
         targetSdkVersion 22
         versionCode 1

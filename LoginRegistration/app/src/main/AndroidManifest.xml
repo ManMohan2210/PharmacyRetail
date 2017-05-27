@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="mypackage.loginregistration">
+    package="com.medicare.activity">
 
     <uses-feature android:name="android.hardware.camera" android:required="false"></uses-feature>
     <uses-feature
@@ -38,11 +38,15 @@
             android:resource="@color/colorAccent" />
 
         <activity android:name=".ListDisplay">
-            <!-- <intent-filter>
-                 <action android:name="android.intent.action.MAIN" />
-                 <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>-->
+        <!-- <intent-filter>
+             <action android:name="android.intent.action.MAIN" />
+             <category android:name="android.intent.category.LAUNCHER" />
+         </intent-filter>-->
+    </activity>
+        <activity android:name=".AddMedicine">
+
         </activity>
+        <activity android:name="com.medicare.activity.MedicineList" android:label="Medicine List" android:parentActivityName=".AddMedicine"/>
 
         <activity android:name=".LoginPage" android:windowSoftInputMode="stateHidden">
              <intent-filter>
@@ -70,7 +74,7 @@
         <activity android:name=".SignUp" android:windowSoftInputMode="stateHidden"></activity>
 
         <activity android:name=".Paracetamol"></activity>
-        <activity android:name=".Crocin"></activity>
+        <activity android:name="com.medicare.activity.Crocin"></activity>
         <activity android:name=".HomeScreen" android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".NoNetwork"></activity>
         <activity android:name=".PasswordChange" android:windowSoftInputMode="stateHidden"></activity>
@@ -108,13 +112,13 @@
             ...
         </application>
         <service
-            android:name=".MyFirebaseMessagingService">
+            android:name="com.medicare.services.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
         <service
-            android:name=".MyFirebaseInstanceIDService">
+            android:name="com.medicare.services.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>

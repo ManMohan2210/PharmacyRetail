@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="mypackage.loginregistration.LoginPage">
+    tools:context="com.medicare.loginregistration.com.medicare.activity.LoginPage">
 
     <ImageView
             android:layout_width="50dp"

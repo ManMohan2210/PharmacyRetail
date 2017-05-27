@@ -33,7 +33,7 @@
                 android:layout_marginTop="8dp"
                 >
 
-                <Util.CustomPTSansEditTextView
+                <com.medicare.Util.CustomPTSansEditTextView
                     android:id="@+id/editViewEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -120,7 +120,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        tools:context=".LoginActivity"
+                        tools:context="com.medicare.activity.LoginActivity"
                         >
                     </LinearLayout>
 
@@ -130,7 +130,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        tools:context=".IntegrationWithGoogle">
+                        tools:context="com.medicare.activity.IntegrationWithGoogle">
 
 
                     </LinearLayout>

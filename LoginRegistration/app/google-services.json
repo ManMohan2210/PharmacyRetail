@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:617950855357:android:4cd6008fa41c02ff",
         "android_client_info": {
-          "package_name": "mypackage.loginregistration"
+          "package_name": "com.medicare"
         }
       },
       "oauth_client": [
@@ -26,7 +26,7 @@
           "client_id": "617950855357-gmpapvpd9lso8sj2ma0g7h1fb2qbobgn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "mypackage.loginregistration",
+            "package_name": "com.medicare",
             "certificate_hash": "fa98f4eae58799ec8a1544065d07c44c94ff4fff"
           }
         }
