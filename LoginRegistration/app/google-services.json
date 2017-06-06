@@ -1,39 +1,35 @@
 {
   "project_info": {
-    "project_number": "617950855357",
-    "firebase_url": "https://medicalapp-83f59.firebaseio.com",
-    "project_id": "medicalapp-83f59",
-    "storage_bucket": "medicalapp-83f59.appspot.com"
+    "project_number": "872528045825",
+    "firebase_url": "https://medicare-169109.firebaseio.com",
+    "project_id": "medicare-169109",
+    "storage_bucket": "medicare-169109.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:617950855357:android:4cd6008fa41c02ff",
+        "mobilesdk_app_id": "1:872528045825:android:09990bbab0892db2",
         "android_client_info": {
-          "package_name": "com.medicare"
+          "package_name": "com.medicare.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "617950855357-ctje99ioplqvibuiuk569igsprbscr39.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "617950855357-08h7a9n3rfc0r63fm9memgl66j40m32e.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "617950855357-gmpapvpd9lso8sj2ma0g7h1fb2qbobgn.apps.googleusercontent.com",
+          "client_id": "872528045825-ldgliqnvos8tghu3b3n8rfr175r0egmv.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.medicare",
+            "package_name": "com.medicare.app",
             "certificate_hash": "fa98f4eae58799ec8a1544065d07c44c94ff4fff"
           }
+        },
+        {
+          "client_id": "872528045825-nfgecm0gl9bmojpvqogboqs8mko5c70n.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCaRxLbwMESrOyN0mMtrNcMqf61sA8irvM"
+          "current_key": "AIzaSyApalRVGK78vEpYTn2Tw5_mmT3VPwCWtxk"
         }
       ],
       "services": {
@@ -44,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "617950855357-ctje99ioplqvibuiuk569igsprbscr39.apps.googleusercontent.com",
+              "client_id": "872528045825-nfgecm0gl9bmojpvqogboqs8mko5c70n.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

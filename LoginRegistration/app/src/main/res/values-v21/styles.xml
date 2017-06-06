@@ -5,7 +5,7 @@
         <item name="colorPrimary">@color/base</item>
         <item name="colorPrimaryDark">@color/cyan</item>
         <item name="colorAccent">@color/cyan</item>
-        <item name="android:colorBackground">@color/cyan500</item>
+        <item name="android:colorBackground">?android:attr/colorControlActivated</item>
         <item name="android:colorForeground">@color/cyan_light</item>
         <item name="android:navigationBarColor">@color/cyan</item>
         <item name="android:textColorPrimary">@color/oil</item>

@@ -101,5 +101,9 @@
          from https://console.developers.google.com/ -->
 <string name="server_client_id">YOUR_SERVER_CLIENT_ID</string>
     <string name="sha_key">FA:98:F4:EA:E5:87:99:EC:8A:15:44:06:5D:07:C4:4C:94:FF:4F:FF</string>
+    <string name="choose_type">Choose user type</string>
+    <string name="retailer">Retailer</string>
+    <string name="customer">Customer</string>
+    <string name="access_token">pk.eyJ1Ijoia2Fud2FsMDAxIiwiYSI6ImNqM2JqMmVjNTAwNHUzMW83eHJ4bDgzNXQifQ.42OZllCLcdCliEjkYh0WtQ</string>
     </resources>
 

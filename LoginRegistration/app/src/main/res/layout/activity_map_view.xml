@@ -1,0 +1,15 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+     <!--Set the starting camera position and map style using xml
+    <com.mapbox.mapboxsdk.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        mapbox:mapbox_cameraTargetLat="28.644800"
+        mapbox:mapbox_cameraTargetLng="77.216721"
+        mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets"
+        mapbox:mapbox_cameraZoom="11"/>-->
+</RelativeLayout>
