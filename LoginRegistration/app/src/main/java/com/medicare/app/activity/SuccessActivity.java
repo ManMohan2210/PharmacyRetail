@@ -52,7 +52,8 @@ public class SuccessActivity extends BaseActivty {
         ) {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SuccessActivity.this, NoNetworkActivity.class);
+               // Intent intent = new Intent(SuccessActivity.this, NoNetworkActivity.class);
+                Intent intent = new Intent(SuccessActivity.this, UberMapActivity.class);
                 startActivity(intent);
             }
         });
