@@ -3,6 +3,7 @@ package com.medicare.app.services;
 
 import android.util.Log;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
@@ -11,7 +12,7 @@ import com.google.firebase.iid.FirebaseInstanceIdService;
 public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
 
     private static final String TAG = "MyFirebaseIIDService";
-
+    private FirebaseAnalytics mFirebaseAnalytics;
     @Override
     public void onTokenRefresh() {
 

@@ -226,7 +226,6 @@ private FrameLayout mMainContainer;
         snackbar.show();
     }
 
-
     /**
      * Show toast.
      *

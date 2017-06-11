@@ -1,6 +1,5 @@
 package com.medicare.app.activity;
 
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.GridView;
@@ -19,6 +18,7 @@ public class MedicineListActivity extends BaseActivty {
     GridView gridView;
     ArrayList<MedicineModel> list;
     MedicineListAdaptor adaptor=null;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +29,7 @@ public class MedicineListActivity extends BaseActivty {
         gridView.setAdapter(adaptor);
 
 
-        //get all the data from sqlte
+        /*//get all the data from sqlte
         Cursor cursor= AddMedicineActivity.sqLiteHelper.getData("SELECT * FROM MEDICINE");
         list.clear();
         while(cursor.moveToNext()){
@@ -40,6 +40,6 @@ public class MedicineListActivity extends BaseActivty {
             list.add(new MedicineModel(id, name, description,image));
 
         }
-        adaptor.notifyDataSetChanged();
+        adaptor.notifyDataSetChanged();*/
     }
 }

@@ -39,7 +39,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/email"
                     android:inputType="textEmailAddress"
-                    android:text="kanwal.bhohi@yahoo.in"
+                    android:text="kanwal.kaur@gmail.com"
                     android:textColor="@color/oil"/>
             </android.support.design.widget.TextInputLayout>
 
@@ -157,4 +157,5 @@
         </LinearLayout>
 
     </ScrollView>
+
 </FrameLayout>

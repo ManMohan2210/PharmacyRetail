@@ -41,10 +41,13 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.medicare.app.R;
 
 import java.util.List;
 import java.util.Locale;
+
+import static com.medicare.app.R.id.map;
 
 
 public class UberMapActivity extends BaseActivty implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
@@ -81,7 +84,7 @@ public class UberMapActivity extends BaseActivty implements OnMapReadyCallback, 
         mContext = this;
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+                .findFragmentById(map);
 
         mLocationMarkerText = (TextView) findViewById(R.id.locationMarkertext);
         mLocationAddress = (EditText) findViewById(R.id.Address);
@@ -155,7 +158,7 @@ public class UberMapActivity extends BaseActivty implements OnMapReadyCallback, 
         mMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
             @Override
             public void onCameraChange(CameraPosition cameraPosition) {
-                Log.d("Camera postion change" + "", cameraPosition + "");
+                //Log.d("Camera postion change" + "", cameraPosition + "");
                 mCenterLatLong = cameraPosition.target;
                 String fullAddress = "";
 
@@ -191,9 +194,9 @@ public class UberMapActivity extends BaseActivty implements OnMapReadyCallback, 
 //        mMap.getUiSettings().setMyLocationButtonEnabled(true);
 //
 //        // Add a marker in Sydney and move the camera
-//        LatLng sydney = new LatLng(-34, 151);
-//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+      //LatLng india = new LatLng(‎28.644800,77.216721);
+     // mMap.addMarker(new MarkerOptions().position(india).title("Marker in India"));
+     // mMap.moveCamera(CameraUpdateFactory.newLatLng(india));
     }
 
     @Override
@@ -323,6 +326,9 @@ public class UberMapActivity extends BaseActivty implements OnMapReadyCallback, 
             return;
         }
 
+         LatLngBounds INDIA = new LatLngBounds(
+                new LatLng(20, 78 ), new LatLng( 20.5937, 78.9629));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(INDIA, 0));
         // check if map is created successfully or not
         if (mMap != null) {
             mMap.getUiSettings().setZoomControlsEnabled(false);
@@ -332,13 +338,15 @@ public class UberMapActivity extends BaseActivty implements OnMapReadyCallback, 
             latLong = new LatLng(location.getLatitude(), location.getLongitude());
 
             CameraPosition cameraPosition = new CameraPosition.Builder()
-                    .target(latLong).zoom(19f).tilt(70).build();
+                    .target(latLong).zoom(19f).tilt(0).build();
 
             mMap.setMyLocationEnabled(true);
             mMap.getUiSettings().setMyLocationButtonEnabled(true);
             mMap.animateCamera(CameraUpdateFactory
                     .newCameraPosition(cameraPosition));
 
+            mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(new LatLng(20.5937,78.9629) , 19f) );
+            //CameraUpdateFactory.zoomBy(100f);
            // mLocationMarkerText.setText("Lat : " + location.getLatitude() + "," + "Long : " + location.getLongitude());
             fullAddress =getCompleteAddressString(location.getLatitude(),location.getLongitude());
             mLocationMarkerText.setText(fullAddress);
@@ -474,6 +482,7 @@ public class UberMapActivity extends BaseActivty implements OnMapReadyCallback, 
 
                 CameraPosition cameraPosition = new CameraPosition.Builder()
                         .target(latLong).zoom(19f).tilt(70).build();
+                mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(new LatLng(20.5937,78.9629) , 19f) );
 
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling
@@ -524,4 +533,25 @@ public class UberMapActivity extends BaseActivty implements OnMapReadyCallback, 
         return strAdd;
     }
 
+
+
+    void getCurrentLocation() {
+        Location myLocation  = mMap.getMyLocation();
+        if(myLocation!=null)
+        {
+            double dLatitude = myLocation.getLatitude();
+            double dLongitude = myLocation.getLongitude();
+            Log.i("APPLICATION"," : "+dLatitude);
+            Log.i("APPLICATION"," : "+dLongitude);
+           // mMap.addMarker(new MarkerOptions().position(
+                    //new LatLng(dLatitude, dLongitude)).title("My Location").icon(BitmapDescriptorFactory.fromBitmap(Utils.getBitmap("pointer_icon.png"))));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(dLatitude, dLongitude), 8));
+
+        }
+        else
+        {
+            Toast.makeText(this, "Unable to fetch the current location", Toast.LENGTH_SHORT).show();
+        }
+
+    }
 }

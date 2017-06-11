@@ -2,14 +2,21 @@ package com.medicare.app.fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.medicare.app.R;
 import com.medicare.app.Util.ConstantsUtil;
 import com.medicare.app.Util.StringsUtil;
@@ -33,6 +40,8 @@ public class CreateNewPasswordFragment extends Fragment implements View.OnClickL
     private TextInputLayout textInputLayoutNewPwd;
     private TextInputLayout textInputLayoutCnfPwd;
     private Activity mActivity;
+    private ProgressDialog progressDialog;
+    BaseActivty baseActivity = (BaseActivty) getActivity();
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +99,23 @@ public class CreateNewPasswordFragment extends Fragment implements View.OnClickL
                     textInputLayoutCnfPwd.setError(StringsUtil.PASSWORD_NOT_MATCHED);// Toast.makeText(getActivity(), StringsUtil.PASSWORD_NOT_MATCHED, Toast.LENGTH_LONG).show();
                     return;
                 }
+                progressDialog.setMessage("Wait plzz...");
+                progressDialog.show();
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                user.updatePassword(edtConfirmPassword.getText().toString().trim())
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(baseActivity, "Password is updated!", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(baseActivity, "Failed to update password!", Toast.LENGTH_SHORT).show();
+
+                                }
+                                progressDialog.dismiss();
+                            }
+                        });
                 ((BaseActivty)mActivity).showSnackBar(StringsUtil.PASSWORD_CHANGED,6);  //Toast.makeText(getActivity(), "Password changed successfully.", Toast.LENGTH_LONG).show();
             }
 
@@ -134,6 +160,8 @@ public class CreateNewPasswordFragment extends Fragment implements View.OnClickL
                 textInputLayoutCnfPwd.setError(null);
             }
         });
+
+
         return view;
     }
 

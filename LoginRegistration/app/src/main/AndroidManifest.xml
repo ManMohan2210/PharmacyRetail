@@ -1,153 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.medicare.app">
+          package="com.medicare.app">
+
     <permission
         android:name="com.medicare.app.permission.MAPS_RECEIVE"
-        android:protectionLevel="signature" />
+        android:protectionLevel="signature"/>
 
-    <uses-feature android:name="android.hardware.camera" android:required="false"></uses-feature>
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false"/>
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="com.medicare.app.permission.MAPS_RECEIVE" />
-    <uses-permission android:name="com.medicare.app.permission.READ_GSERVICES" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="com.medicare.app.permission.MAPS_RECEIVE"/>
+    <uses-permission android:name="com.medicare.app.permission.READ_GSERVICES"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/med"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppTheme.Light.NoActionBar"
-        >
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
-        <!--<meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />-->
+        android:theme="@style/Theme.AppTheme.Light.NoActionBar">
         <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
+        <!--
+            <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-        <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
-     See README(https://goo.gl/l4GJaQ) for more. -->
+        -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
+        <!--
+     Set custom default icon. This is used when no icon is set for incoming notification messages.
+     See README(https://goo.gl/l4GJaQ) for more.
+        -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/abc_cab_background_top_material" />
-        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
-             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+            android:resource="@drawable/abc_cab_background_top_material"/>
+        <!--
+             Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/colorAccent" />
+            android:resource="@color/colorAccent"/>
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyApalRVGK78vEpYTn2Tw5_mmT3VPwCWtxk"/>
-        <activity android:name="com.medicare.app.activity.ListDisplayActivity">
-        <!-- <intent-filter>
+
+        <activity android:name=".activity.ListDisplayActivity">
+
+            <!--
+         <intent-filter>
              <action android:name="android.intent.action.MAIN" />
              <category android:name="android.intent.category.LAUNCHER" />
-         </intent-filter>-->
-    </activity>
-        <activity android:name="com.medicare.app.activity.AddMedicineActivity">
-
-    </activity>
-    <activity android:name="com.medicare.app.activity.GoogleMapActivity">
-
+         </intent-filter>
+            -->
         </activity>
-        <activity android:name="com.medicare.app.activity.UberMapActivity">
-
+        <activity android:name=".activity.AddMedicineActivity">
         </activity>
-        <activity android:name="com.medicare.app.activity.MedicineListActivity" android:label="Medicine List" android:parentActivityName="com.medicare.app.activity.AddMedicineActivity"/>
+        <activity android:name=".activity.ProfileActivity">
+        </activity>
+        <activity android:name=".activity.UserType">
+        </activity>
+        <activity android:name=".activity.GoogleMapActivity">
+        </activity>
+        <activity android:name=".activity.UberMapActivity">
+        </activity>
+        <activity
+            android:name=".activity.MedicineListActivity"
+            android:label="Medicine List"
+            android:parentActivityName=".activity.AddMedicineActivity"/>
+        <activity
+            android:name=".activity.LoginPageActivity"
+            android:windowSoftInputMode="stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
 
-        <activity android:name="com.medicare.app.activity.LoginPageActivity" android:windowSoftInputMode="stateHidden">
-             <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.HomeScreenSearchActivity"
+            android:windowSoftInputMode="stateHidden">
+
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+        </activity>
+        <activity android:name=".activity.UploadPrescriptionActivity">
+
+            <!--
+            &lt;!&ndash;&ndash;&gt;<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+        </activity>
+        <activity
+            android:name=".activity.SignUpActivity"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".activity.ParacetamolActivity"/>
+        <activity android:name=".activity.CrocinActivity"/>
+        <activity
+            android:name=".activity.HomeScreenActivity"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".activity.NoNetworkActivity"/>
+        <activity
+            android:name=".activity.PasswordChangeActivity"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".activity.SuccessActivity"/>
+        <activity android:name=".activity.IntegrationWithGoogleActivity">
+
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+        </activity>
+        <activity android:name=".activity.LoginActivity">
+
+            <!--
+        <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
+            -->
         </activity>
-        <activity android:name="com.medicare.app.activity.HomeScreenSearchActivity" android:windowSoftInputMode="stateHidden">
-           <!-- <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
-        </activity>
-        <activity android:name="com.medicare.app.activity.UploadPrescriptionActivity">
-            <!--&lt;!&ndash;&ndash;&gt;<intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
-        </activity>
-
-
-        <activity android:name="com.medicare.app.activity.SignUpActivity" android:windowSoftInputMode="stateHidden"></activity>
-
-        <activity android:name="com.medicare.app.activity.ParacetamolActivity"></activity>
-        <activity android:name="com.medicare.app.activity.CrocinActivity"></activity>
-        <activity android:name="com.medicare.app.activity.HomeScreenActivity" android:windowSoftInputMode="stateHidden"/>
-        <activity android:name="com.medicare.app.activity.NoNetworkActivity"></activity>
-        <activity android:name="com.medicare.app.activity.PasswordChangeActivity" android:windowSoftInputMode="stateHidden"></activity>
-
-        <activity android:name="com.medicare.app.activity.SuccessActivity"></activity>
-
-        <activity android:name="com.medicare.app.activity.IntegrationWithGoogleActivity" >
-           <!-- <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
-        </activity>
-
-
-        <activity android:name="com.medicare.app.activity.LoginActivity" >
-        <!--<intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>--></activity>
-            <activity android:name="com.facebook.FacebookActivity"
-                      android:configChanges=
-                          "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-                      android:theme="@android:style/Theme.Translucent.NoTitleBar"
-                      android:label="@string/app_name" />
-
-            <provider android:authorities="com.facebook.app.FacebookContentProvider148851038810437"
-                      android:name="com.facebook.FacebookContentProvider"
-                      android:exported="true" />
+        <provider
+            android:name="com.facebook.FacebookContentProvider"
+            android:authorities="com.facebook.app.FacebookContentProvider148851038810437"
+            android:exported="true"/>
 
         <application>
-            <provider android:name=".SuggestionProvider"
-                      android:authorities="LoginRegistration\app\src\main\java\mypackage\loginregistration\.SuggestionProvider" />
+            <provider
+                android:name=".SuggestionProvider"
+                android:authorities="LoginRegistration\app\src\main\java\mypackage\loginregistration\.SuggestionProvider"/>
             ...
         </application>
-        <service
-            android:name="com.medicare.app.services.MyFirebaseMessagingService">
+
+        <service android:name=".services.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
-        <service
-            android:name="com.medicare.app.services.MyFirebaseInstanceIDService">
+        <service android:name=".services.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>
         </service>
         <service
-            android:name="com.medicare.app.activity.FetchAddressIntentService"
-            android:exported="false" />
+            android:name=".activity.FetchAddressIntentService"
+            android:exported="false"/>
+
+        <activity android:name=".activity.ProfileActivity">
+        </activity>
     </application>
 
 </manifest>
-
-
-
-
-
-

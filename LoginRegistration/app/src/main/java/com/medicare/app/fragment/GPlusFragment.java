@@ -1,35 +1,14 @@
 package com.medicare.app.fragment;
 
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.OptionalPendingResult;
-import com.google.android.gms.common.api.ResultCallback;
-import com.medicare.app.R;
 
 //import static com.medicare.app.loginregistration.R.id.postPhotoButton;
 //import static com.medicare.app.loginregistration.R.id.postStatusUpdateButton;
 
 
-public class GPlusFragment extends Fragment implements GoogleApiClient.OnConnectionFailedListener {
+public class GPlusFragment extends Fragment {
+        //implements GoogleApiClient.OnConnectionFailedListener {
+    /*
 
     private static final String TAG = "GPlusFragent";
     private int RC_SIGN_IN = 0;
@@ -40,7 +19,7 @@ public class GPlusFragment extends Fragment implements GoogleApiClient.OnConnect
     private Button disconnectButton;
     private LinearLayout signOutView;
     private TextView mStatusTextView;
-    private ProgressDialog mProgressDialog;
+    //private ProgressDialog mProgressDialog;
     private ImageView imgProfilePic;
 
 
@@ -53,11 +32,11 @@ public class GPlusFragment extends Fragment implements GoogleApiClient.OnConnect
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
-
+      //  mProgressDialog = new ProgressDialog(getActivity());
         // Build a GoogleApiClient with access to the Google Sign-In API and the
 // options specified by gso.
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
-                .enableAutoManage(getActivity() /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .enableAutoManage(getActivity() *//* FragmentActivity *//*, this *//* OnConnectionFailedListener *//*)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
@@ -75,17 +54,17 @@ public class GPlusFragment extends Fragment implements GoogleApiClient.OnConnect
             // and the GoogleSignInResult will be available instantly.
             Log.d(TAG, "Got cached sign-in");
             GoogleSignInResult result = opr.get();
-            handleSignInResult(result);
+            //handleSignInResult(result);
         } else {
-            // If the user has not previously signed in on this device or the sign-in has expired,
+           *//* // If the user has not previously signed in on this device or the sign-in has expired,
             // this asynchronous branch will attempt to sign in the user silently.  Cross-device
             // single sign-on will occur in this branch.
-            showProgressDialog();
+            //showProgressDialog();
             opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
                 @Override
                 public void onResult(GoogleSignInResult googleSignInResult) {
                     hideProgressDialog();
-                    handleSignInResult(googleSignInResult);
+                    handleSignInResult(googleSignInResult);*//*
                 }
             });
         }
@@ -113,22 +92,22 @@ public class GPlusFragment extends Fragment implements GoogleApiClient.OnConnect
             }
 
         });
-       /* mGoogle.setOnClickListener(new View.OnClickListener() {
+       *//* mGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signInButton.performClick();
                 //TO DO put login method here eg : authorizefacebook();
             }
-        });*/
+        });*//*
 
-       /* mGoogle.post(new Runnable(){
+       *//* mGoogle.post(new Runnable(){
             @Override
             public void run() {
                 signInButton.performClick();
             }
         });
-*/
-/*
+*//*
+*//*
 
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,7 +122,7 @@ public class GPlusFragment extends Fragment implements GoogleApiClient.OnConnect
             }
 
         });
-*/
+*//*
 
         return v;
     }
@@ -168,11 +147,11 @@ public class GPlusFragment extends Fragment implements GoogleApiClient.OnConnect
             GoogleSignInAccount acct = result.getSignInAccount();
           //  mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
             //Similarly you can get the email and photourl using acct.getEmail() and  acct.getPhotoUrl()
-/*
+*//*
 
             if (acct.getPhotoUrl() != null)
                 new LoadProfileImage(imgProfilePic).execute(acct.getPhotoUrl().toString());
-*/
+*//*
 
             updateUI(true);
         } else {
@@ -183,16 +162,16 @@ public class GPlusFragment extends Fragment implements GoogleApiClient.OnConnect
 
 
     private void updateUI(boolean signedIn) {
-       /* if (signedIn) {
+       *//* if (signedIn) {
             signInButton.setVisibility(View.GONE);
           //  signOutButton.setVisibility(View.VISIBLE);
-        } *//*else {
+        } *//**//*else {
             mStatusTextView.setText(R.string.signed_out);
-           *//* Bitmap icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.user_default);
+           *//**//* Bitmap icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.user_default);
             imgProfilePic.setImageBitmap(ImageHelperUtil.getRoundedCornerBitmap(getContext(), icon, 200, 200, 200, false, false, false, false));
             signInButton.setVisibility(View.VISIBLE);
-            signOutButton.setVisibility(View.GONE);*//*
-        }*/
+            signOutButton.setVisibility(View.GONE);*//**//*
+        }*//*
     }
 
     @Override
@@ -202,7 +181,7 @@ public class GPlusFragment extends Fragment implements GoogleApiClient.OnConnect
         Log.d(TAG, "onConnectionFailed:" + connectionResult);
     }
 
-    private void showProgressDialog() {
+ *//*   private void showProgressDialog() {
         if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(getActivity());
             mProgressDialog.setMessage(getString(R.string.loading));
@@ -210,20 +189,20 @@ public class GPlusFragment extends Fragment implements GoogleApiClient.OnConnect
         }
 
         mProgressDialog.show();
-    }
+    }*//*
 
-    private void hideProgressDialog() {
+    *//*private void hideProgressDialog() {
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.hide();
         }
 
-    }
+    }*//*
 
 
-    /**
+    *//**
      * Background Async task to load user profile picture from url
-     */
-   /* private class LoadProfileImage extends AsyncTask<String, Void, Bitmap> {
+     *//*
+   *//* private class LoadProfileImage extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;
 
         public LoadProfileImage(ImageView bmImage) {
@@ -242,8 +221,8 @@ public class GPlusFragment extends Fragment implements GoogleApiClient.OnConnect
             }
             return mIcon11;
         }
-*/
-        /*protected void onPostExecute(Bitmap result) {
+*//*
+        *//*protected void onPostExecute(Bitmap result) {
 
             if (result != null) {
 
@@ -252,6 +231,6 @@ public class GPlusFragment extends Fragment implements GoogleApiClient.OnConnect
                 bmImage.setImageBitmap(ImageHelperUtil.getRoundedCornerBitmap(getContext(), resized, 250, 200, 200, false, false, false, false));
 
             }
-        }*/
-    //}
+        }*//*
+    //}*/
 }

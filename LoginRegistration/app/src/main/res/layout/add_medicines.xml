@@ -6,8 +6,8 @@
     >
 
     <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:fitsSystemWindows="true">
 
         <LinearLayout
@@ -24,14 +24,14 @@
             <EditText
                 android:id="@+id/edt_medicine_name"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:hint="Please insert Medicine Name"/>
 
 
             <EditText
                 android:id="@+id/edt_medicine_description"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:hint="Please insert medicine description"/>
 
             <ImageView
@@ -43,42 +43,53 @@
                 android:src="@drawable/prescription"
                 />
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                >
+                android:weightSum="4">
 
                 <android.support.v7.widget.AppCompatButton
                     android:id="@+id/btn_upload"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
                     android:background="@color/cyan"
-                    android:text="Upload"
-                    android:textColor="@color/white"/>
+                    android:text="Gallery"
+                    android:textColor="@color/white"
+
+                    />
 
                 <android.support.v7.widget.AppCompatButton
                     android:id="@+id/btn_click"
-                    android:layout_width="wrap_content"
+                    android:layout_width="70dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
                     android:background="@color/cyan"
-                    android:text="Capture"
-                    android:textColor="@color/white"/>
+                    android:text="Camera"
+                    android:textColor="@color/white"
+                    android:layout_toRightOf="@id/btn_upload"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                   />
+
 
                 <android.support.v7.widget.AppCompatButton
                     android:id="@+id/btn_save"
-                    android:layout_width="wrap_content"
-                    android:layout_height="62dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/btn_click"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:background="@color/cyan"
-                    android:text="Add and Save medicine"
+                    android:text="Upload"
                     android:textColor="@color/white"/>
-            </LinearLayout>
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/btn_saveData"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/btn_save"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:background="@color/cyan"
+                    android:text="Save"
+                    android:textColor="@color/white"/>
+
+            </RelativeLayout>
 
         </LinearLayout>
 

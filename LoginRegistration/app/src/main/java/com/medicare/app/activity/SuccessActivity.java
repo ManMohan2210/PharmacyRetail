@@ -48,6 +48,14 @@ public class SuccessActivity extends BaseActivty {
                 startActivity(intent);
             }
         });
+       /* btnSelectCity.setOnClickListener(new View.OnClickListener(
+        ) {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SuccessActivity.this, UserType.class);
+                startActivity(intent);
+            }
+        });*/
         btnNoNetwork.setOnClickListener(new View.OnClickListener(
         ) {
             @Override
@@ -69,11 +77,12 @@ public class SuccessActivity extends BaseActivty {
         ) {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(SuccessActivity.this, AddMedicineActivity.class);
-                Intent intent = new Intent(SuccessActivity.this, GoogleMapActivity.class);
+                Intent intent = new Intent(SuccessActivity.this, AddMedicineActivity.class);
+//                Intent intent = new Intent(SuccessActivity.this, GoogleMapActivity.class);
                 startActivity(intent);
             }
         });
+
     }
 
 

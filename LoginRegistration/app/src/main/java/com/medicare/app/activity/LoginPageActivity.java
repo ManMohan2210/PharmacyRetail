@@ -1,8 +1,10 @@
 package com.medicare.app.activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -20,10 +22,13 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.medicare.app.R;
 import com.medicare.app.Util.ConstantsUtil;
 import com.medicare.app.Util.StringsUtil;
-import com.medicare.app.Util.UtilityUtil;
 import com.medicare.app.fragment.FacebookFragment;
 import com.medicare.app.fragment.GPlusFragment;
 
@@ -32,7 +37,6 @@ import java.util.regex.Pattern;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-//import com.medicare.app.loginregistration.R.id.activity_login_page;
 
 
 public class LoginPageActivity extends BaseActivty {
@@ -76,15 +80,32 @@ public class LoginPageActivity extends BaseActivty {
 
     private static final int REQUEST_SIGNUP = 0;
 
+    private ProgressDialog progressDialog;
+    FirebaseAuth firebaseAuth;
+
     public void onCreate(Bundle savedInstanceState) {
+
+        //Get Firebase auth instance
+        firebaseAuth = FirebaseAuth.getInstance();
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
         layout_MainMenu = (FrameLayout) findViewById( R.id.mainmenu);
         layout_MainMenu.getForeground().setAlpha( 0);
         ButterKnife.bind(this);
 
+          progressDialog=new ProgressDialog(this);
+
         //  initView();
         initListener();
+        if(firebaseAuth.getCurrentUser() !=null)
+        {
+            //directly start the profile activity here
+            finish();
+            Intent intent = new Intent(LoginPageActivity.this, ProfileActivity.class);
+            startActivity(intent);
+        }
 
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragment_container);
@@ -108,6 +129,7 @@ public class LoginPageActivity extends BaseActivty {
 
 
         }
+
 
     }
 
@@ -141,13 +163,34 @@ public class LoginPageActivity extends BaseActivty {
         mLoginButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                String email = mEmailText.getText().toString();
+                String password = mPasswordText.getText().toString();
 
-                if (!isValidationClear()) return;
+               // if (!isValidationClear()) return;
+              //  UtilityUtil.hideKeyboardFrom(LoginPageActivity.this);
 
-                UtilityUtil.hideKeyboardFrom(LoginPageActivity.this);
+                //after auth logs in
+                progressDialog.setMessage("Logging in plz wait...");
+                progressDialog.show();
 
-                Intent intent = new Intent(LoginPageActivity.this, HomeScreenActivity.class);
-                startActivity(intent);
+                firebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(LoginPageActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        progressDialog.dismiss();
+                        if(task.isSuccessful()){
+                            //start home activity
+                            finish();
+                            Intent intent = new Intent(LoginPageActivity.this, SuccessActivity.class);
+                            startActivity(intent);
+                        }else{
+                           showToast("login failed!");
+                        }
+                    }
+                });
+
+
+               // Intent intent = new Intent(LoginPageActivity.this, HomeScreenActivity.class);
+                //startActivity(intent);
 
             }
         });
@@ -217,6 +260,7 @@ public class LoginPageActivity extends BaseActivty {
 
         }
         return true;
+
     }
 
     private void initiatePopupWindow() {
@@ -260,6 +304,7 @@ public class LoginPageActivity extends BaseActivty {
                     .setOnClickListener(new OnClickListener() {
                         public void onClick(View arg0) {
                             popupWindow.dismiss();
+                            finish();
                             layout_MainMenu.getForeground().setAlpha( 0);
 
                         }
