@@ -10,17 +10,40 @@ private     String userId;
    private  String userName;
     private String userType;
    private  String mobileNumber;
+    private String email;
+    private String password;
 
-public UserTypeModel(){
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public UserTypeModel(){
+
 
 }
 
-    public UserTypeModel(String userId, String userName, String userType,String mobileNumber) {
+
+    public UserTypeModel(String userId, String userName, String userType, String mobileNumber, String email) {
         this.userId = userId;
         this.userName = userName;
         this.userType = userType;
-        this.mobileNumber =  mobileNumber;
+        this.mobileNumber = mobileNumber;
+        this.email = email;
+
     }
+
 
     public String getUserId() {
         return userId;

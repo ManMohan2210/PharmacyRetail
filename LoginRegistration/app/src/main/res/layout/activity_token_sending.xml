@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.medicare.app.activity.TokenSending">
+
+  <RelativeLayout
+      android:layout_width="395dp"
+      android:layout_height="643dp"
+     >
+
+    <EditText
+        android:id="@+id/edt_token_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Email"
+        tools:layout_editor_absoluteX="98dp"
+        tools:layout_editor_absoluteY="200dp"
+        android:layout_above="@+id/buttonSendNotification"
+        android:layout_marginLeft="39dp"
+        android:layout_marginStart="39dp"
+        android:layout_marginBottom="80dp"/>
+
+    <Button
+        android:id="@+id/buttonSendNotification"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:text="Send Notification"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="42dp"
+        android:layout_marginEnd="42dp"/>
+
+    <Button
+        android:id="@+id/buttonRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        tools:layout_editor_absoluteX="171dp"
+        tools:layout_editor_absoluteY="297dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginStart="60dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+  </RelativeLayout>
+</android.support.constraint.ConstraintLayout>

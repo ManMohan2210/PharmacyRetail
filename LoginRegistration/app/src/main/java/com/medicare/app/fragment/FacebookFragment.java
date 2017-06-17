@@ -1,3 +1,4 @@
+/*
 package com.medicare.app.fragment;
 
 import android.content.Intent;
@@ -193,7 +194,8 @@ public class FacebookFragment extends Fragment {
       //  profilePicImageView = (ImageView) v.findViewById(R.id.profilePicture);
        // greeting = (TextView) v.findViewById(R.id.greeting);
 
-       /* postStatusUpdateButton = (Button) v.findViewById(postStatusUpdateButton);
+       */
+/* postStatusUpdateButton = (Button) v.findViewById(postStatusUpdateButton);
         postStatusUpdateButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 onClickPostStatusUpdate();
@@ -234,7 +236,8 @@ public class FacebookFragment extends Fragment {
                 request.executeAsync();
 
             }
-        });*/
+        });*//*
+
 
 
         // Can we present the share dialog for regular links?
@@ -246,7 +249,8 @@ public class FacebookFragment extends Fragment {
                 SharePhotoContent.class);
 
 
-       /* loginButton.setOnClickListener(new View.OnClickListener() {
+       */
+/* loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -285,7 +289,8 @@ public class FacebookFragment extends Fragment {
 //                request.setParameters(parameters);
 //                request.executeAsync();
             }
-        });*/
+        });*//*
+
 
 
 //        loginButton.setOnClickListener(new View.OnClickListener() {
@@ -345,7 +350,8 @@ public class FacebookFragment extends Fragment {
        // postStatusUpdateButton.setEnabled(enableButtons || canPresentShareDialog);
         //postPhotoButton.setEnabled(enableButtons || canPresentShareDialogWithPhotos);
 
-        /*Profile profile = Profile.getCurrentProfile();
+        */
+/*Profile profile = Profile.getCurrentProfile();
         if (enableButtons && profile != null) {
             new LoadProfileImage(profilePicImageView).execute(profile.getProfilePictureUri(200, 200).toString());
             greeting.setText(getString(R.string.hello_user, profile.getFirstName()));
@@ -354,7 +360,8 @@ public class FacebookFragment extends Fragment {
             profilePicImageView.setImageBitmap(ImageHelperUtil.getRoundedCornerBitmap(getContext(), icon, 200, 200, 200, false, false, false, false));
 
             greeting.setText(null);
-        }*/
+        }*//*
+
     }
 
 
@@ -365,7 +372,8 @@ public class FacebookFragment extends Fragment {
         outState.putString(PENDING_ACTION_BUNDLE_KEY, pendingAction.name());
     }
 
-  /*  private void handlePendingAction() {
+  */
+/*  private void handlePendingAction() {
         PendingAction previouslyPendingAction = pendingAction;
         // These actions may re-set pendingAction if they are still pending, but we assume they
         // will succeed.
@@ -381,9 +389,11 @@ public class FacebookFragment extends Fragment {
                 postStatusUpdate();
                 break;
         }
-    }*/
+    }*//*
 
- /*   private void onClickPostStatusUpdate() {
+
+ */
+/*   private void onClickPostStatusUpdate() {
         performPublish(PendingAction.POST_STATUS_UPDATE, canPresentShareDialog);
     }
 
@@ -402,9 +412,11 @@ public class FacebookFragment extends Fragment {
         } else {
             pendingAction = PendingAction.POST_STATUS_UPDATE;
         }
-    }*/
+    }*//*
 
-   /* private void onClickPostPhoto() {
+
+   */
+/* private void onClickPostPhoto() {
         performPublish(PendingAction.POST_PHOTO, canPresentShareDialogWithPhotos);
     }
 
@@ -427,7 +439,8 @@ public class FacebookFragment extends Fragment {
                     this,
                     Arrays.asList(PERMISSION));
         }
-    }*/
+    }*//*
+
 
     private boolean hasPublishPermission() {
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
@@ -473,9 +486,12 @@ public class FacebookFragment extends Fragment {
     }
 
 
-    /**
+    */
+/**
      * Background Async task to load user profile picture from url
-     */
+     *//*
+
+*/
 /*    private class LoadProfileImage extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;
 
@@ -506,7 +522,8 @@ public class FacebookFragment extends Fragment {
 
             }
         }
-    }*/
+    }*//*
 
 
-}
+
+}*/

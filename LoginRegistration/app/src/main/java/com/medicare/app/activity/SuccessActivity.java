@@ -69,7 +69,8 @@ public class SuccessActivity extends BaseActivty {
         ) {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SuccessActivity.this, HomeScreenActivity.class);
+//                Intent intent = new Intent(SuccessActivity.this, HomeScreenActivity.class);
+                Intent intent = new Intent(SuccessActivity.this, TokenSending.class);
                 startActivity(intent);
             }
         });

@@ -5,7 +5,8 @@
     android:id="@+id/mainmenu"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:foreground="@drawable/dimming_effect">
+    android:foreground="@drawable/dimming_effect"
+    >
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -94,28 +95,41 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:weightSum="1"
+                android:layout_gravity="center"
                 >
-                    <LinearLayout
-                        android:id="@+id/fragment_container"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        tools:context="com.medicare.activity.LoginActivity"
-                        android:layout_weight=".5"
-                        >
-                    </LinearLayout>
+                <com.google.android.gms.common.SignInButton
+                    android:id="@+id/btn_google_signin"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+                   <!-- android:visibility="gone"/>-->
+
+                <com.facebook.login.widget.LoginButton
+                    android:id="@+id/button_facebook_login"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+                   <!-- android:visibility="gone"-->
+                   <!-- />-->
+<!--
+                <ImageButton
+                    android:id="@+id/btn_custom_fb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="50dp"
+                    android:src="@mipmap/ic_facebook"
+                    android:background="@null"/>-->
+
+             <!--   <ImageButton
+                    android:id="@+id/btn_custom_gmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="50dp"
+                    android:src="@mipmap/ic_google"
+                    android:background="@null"/>-->
 
 
-                    <LinearLayout
-                        android:id="@+id/google_fragment_container"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
 
-                        tools:context="com.medicare.activity.IntegrationWithGoogleActivity"
-
-                        android:layout_weight=".5">
-                    </LinearLayout>
 
             </LinearLayout>
 

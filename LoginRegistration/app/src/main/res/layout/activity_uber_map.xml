@@ -64,26 +64,25 @@
             android:gravity="center"
             android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/locationMarkertext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rounded_corner_map"
-                android:gravity="center"
-                android:minWidth="250dp"
-                android:paddingLeft="2dp"
-                android:paddingRight="2dp"
-                android:text=" Set your Location "
-                android:textColor="@android:color/white" />
-
             <ImageView
                 android:id="@+id/imageMarker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/add_marker" />
+
+
+        <TextView
+            android:id="@+id/locationMarkertext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corner_map"
+            android:gravity="center"
+            android:minWidth="250dp"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:text=" Set your Location "
+            android:textColor="@android:color/white"/>
+
         </LinearLayout>
-
-
-
     </FrameLayout>
     </RelativeLayout>

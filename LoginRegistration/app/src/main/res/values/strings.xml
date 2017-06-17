@@ -38,8 +38,7 @@
     <string name="camera">CAMERA</string>
     <string name="gallery">GALLERY</string>
     <string name="searchMedicine">    Search your medicine here !</string>
-    <!-- facebook login -->
-    <string name="facebook_app_id">1415828248438107</string>
+
     <string name="cancelled">Cancelled</string>
     <string name="permission_not_granted">Unable to perform selected action because permissions were not granted.</string>
     <string name="hello_user">Hello %1$s!</string>
@@ -105,7 +104,7 @@
     <string name="retailer">Retailer</string>
     <string name="customer">Customer</string>
     <string name="access_token">pk.eyJ1Ijoia2Fud2FsMDAxIiwiYSI6ImNqM2JqMmVjNTAwNHUzMW83eHJ4bDgzNXQifQ.42OZllCLcdCliEjkYh0WtQ</string>
-
+    <!--4juqxR+bfCEhOEDslBTwAePpz74= facebook hash key-->
 
     <!--temp -->
 
@@ -122,11 +121,17 @@
     <string name="no_location_data_provided">No location data provided</string>
     <string name="service_not_available">Sorry, the service is not available</string>
     <string name="invalid_lat_long_used">Invalid latitude or longitude used</string>
-
+    <string name="google_web_client_id">872528045825-ldgliqnvos8tghu3b3n8rfr175r0egmv.apps.googleusercontent.com</string>
     <!--using for firebase database -->
+
+    <string name="facebook_app_id">336156680130673</string>
+    <string name="fb_login_protocol_scheme">fb336156680130673</string>
+    <!-- facebook login -->
+    <!--string name="facebook_app_id">336156680130673</string>-->
     <array name="user_type">
         <item>Customer</item>
         <item>Retailer</item>
     </array>
+    <string name="title_activity_maps1">Map</string>
 </resources>
 
