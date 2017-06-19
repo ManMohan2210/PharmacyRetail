@@ -45,9 +45,9 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.medicare.app.R;
 import com.medicare.app.Util.ConstantsUtil;
 import com.medicare.app.Util.StringsUtil;
+import com.pharma.medicare.app.R;
 
 import java.util.regex.Pattern;
 
@@ -121,7 +121,7 @@ public class LoginPageActivity extends BaseActivty {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
         layout_MainMenu = (FrameLayout) findViewById(R.id.mainmenu);
-      layout_MainMenu.getForeground().setAlpha(0);
+       layout_MainMenu.getForeground().setAlpha(0);
         ButterKnife.bind(this);
 
         progressDialog = new ProgressDialog(this);
@@ -385,7 +385,7 @@ public void onComplete(@NonNull Task<AuthResult> task){
 // google integration with firebase
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.google_web_client_id))
+                .requestIdToken(getString(R.string.server_client_id))//google_web_client_id))
                 .requestEmail()
                 .build();
 //        googleSignInButton.setScopes(gso.getScopeArray());

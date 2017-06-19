@@ -49,7 +49,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
-import com.medicare.app.R;
+import com.pharma.medicare.app.R;
 
 import org.json.JSONObject;
 
@@ -64,7 +64,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-import static com.medicare.app.R.id.map;
 
 
 public class UberMapActivity extends BaseActivty implements OnMapReadyCallback,
@@ -108,7 +107,7 @@ public class UberMapActivity extends BaseActivty implements OnMapReadyCallback,
         mContext = this;
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(map);
+                .findFragmentById(R.id.map);
 
         mLocationMarkerText = (TextView) findViewById(R.id.locationMarkertext);
         mLocationAddress = (EditText) findViewById(R.id.Address);

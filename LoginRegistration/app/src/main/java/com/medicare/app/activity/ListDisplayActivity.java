@@ -8,8 +8,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.medicare.app.R;
 import com.medicare.app.services.GPSTrackerService;
+import com.pharma.medicare.app.R;
 
 
 public class ListDisplayActivity extends BaseActivty {

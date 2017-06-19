@@ -13,8 +13,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.medicare.app.R;
 import com.medicare.app.adapters.MedicinesListAdapter;
+import com.pharma.medicare.app.R;
 
 import java.util.Collections;
 import java.util.LinkedList;

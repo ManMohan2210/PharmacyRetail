@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.medicare.app.R;
+import com.pharma.medicare.app.R;
 
 
 //import static com.medicare.app.loginregistration.R.id.postPhotoButton;

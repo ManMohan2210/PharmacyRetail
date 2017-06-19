@@ -1,6 +1,7 @@
 package com.medicare.app.activity;
-import android.content.SharedPreferences;
+
 import android.content.Context;
+import android.content.SharedPreferences;
 
 /**
  * Created by satveer on 13-06-2017.

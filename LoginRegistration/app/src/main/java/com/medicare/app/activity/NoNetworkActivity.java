@@ -6,7 +6,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.medicare.app.R;
+import com.pharma.medicare.app.R;
+
 
 /**
  * Created by satveer on 14-01-2017.

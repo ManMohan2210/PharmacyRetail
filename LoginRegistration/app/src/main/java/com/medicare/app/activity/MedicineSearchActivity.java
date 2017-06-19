@@ -5,8 +5,8 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.medicare.app.R;
 import com.medicare.app.sqlite.SqliteHandler;
+import com.pharma.medicare.app.R;
 
 
 public class MedicineSearchActivity extends BaseActivty {

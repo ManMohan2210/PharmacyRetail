@@ -14,8 +14,8 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.medicare.app.R;
 import com.medicare.app.services.MyFirebaseInstanceIDService;
+import com.pharma.medicare.app.R;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
 

@@ -10,9 +10,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-
-import com.medicare.app.R;
 import com.medicare.app.adapters.MedicinesListAdapter;
+import com.pharma.medicare.app.R;
 
 import java.util.Collections;
 import java.util.HashSet;

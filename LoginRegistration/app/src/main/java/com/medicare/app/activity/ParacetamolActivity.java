@@ -5,7 +5,8 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.medicare.app.R;
+import com.pharma.medicare.app.R;
+
 
 public class ParacetamolActivity extends BaseActivty {
 

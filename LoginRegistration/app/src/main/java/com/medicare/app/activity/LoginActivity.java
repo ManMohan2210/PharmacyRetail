@@ -4,7 +4,8 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
-import com.medicare.app.R;
+import com.pharma.medicare.app.R;
+
 
 public class LoginActivity extends AppCompatActivity {
 

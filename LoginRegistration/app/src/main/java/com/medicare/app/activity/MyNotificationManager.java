@@ -10,7 +10,7 @@ import android.graphics.BitmapFactory;
 import android.support.v4.app.NotificationCompat;
 import android.text.Html;
 
-import com.medicare.app.R;
+import com.pharma.medicare.app.R;
 
 import java.io.IOException;
 import java.io.InputStream;

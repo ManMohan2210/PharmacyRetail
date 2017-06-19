@@ -7,7 +7,7 @@ import android.widget.EditText;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.medicare.app.R;
+import com.pharma.medicare.app.R;
 
 public class UserType extends BaseActivty {
 

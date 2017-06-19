@@ -13,7 +13,7 @@ import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.medicare.app.R;
+import com.pharma.medicare.app.R;
 
 import java.io.IOException;
 import java.util.List;
@@ -38,7 +38,7 @@ public class GoogleMapActivity extends FragmentActivity {
                 getSupportFragmentManager().findFragmentById(R.id.map);
 
         // Getting a reference to the map
-        googleMap = supportMapFragment.getMap();
+//        googleMap = supportMapFragment.getMap();
 
         // Setting a click event handler for the map
         googleMap.setOnMapClickListener(new OnMapClickListener() {

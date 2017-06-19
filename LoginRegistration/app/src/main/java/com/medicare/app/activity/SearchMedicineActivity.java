@@ -14,8 +14,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.medicare.app.R;
 import com.medicare.app.sqlite.SqliteHandler;
+import com.pharma.medicare.app.R;
 
 import java.util.Map;
 

@@ -11,8 +11,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.medicare.app.R;
 import com.medicare.app.models.PrescriptionDataModel;
+import com.pharma.medicare.app.R;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;

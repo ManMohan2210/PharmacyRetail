@@ -4,9 +4,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.GridView;
 
-import com.medicare.app.R;
 import com.medicare.app.adapters.MedicineListAdaptor;
 import com.medicare.app.models.MedicineModel;
+import com.pharma.medicare.app.R;
 
 import java.util.ArrayList;
 

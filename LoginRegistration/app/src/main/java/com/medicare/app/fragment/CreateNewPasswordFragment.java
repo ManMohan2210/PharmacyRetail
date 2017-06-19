@@ -17,10 +17,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.medicare.app.R;
 import com.medicare.app.Util.ConstantsUtil;
 import com.medicare.app.Util.StringsUtil;
 import com.medicare.app.activity.BaseActivty;
+import com.pharma.medicare.app.R;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

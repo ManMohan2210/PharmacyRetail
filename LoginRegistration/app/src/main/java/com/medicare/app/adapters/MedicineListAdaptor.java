@@ -10,8 +10,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.medicare.app.R;
 import com.medicare.app.models.MedicineModel;
+import com.pharma.medicare.app.R;
 
 import java.util.ArrayList;
 

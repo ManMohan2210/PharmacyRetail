@@ -15,10 +15,10 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.medicare.app.R;
 import com.medicare.app.Util.QuickDialogsUtil;
 import com.medicare.app.Util.UtilityUtil;
 import com.medicare.app.models.PrescriptionDataModel;
+import com.pharma.medicare.app.R;
 
 import java.util.List;
 
