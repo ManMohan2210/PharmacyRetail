@@ -188,6 +188,8 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>
         </service>
+
+
         <service
             android:name="com.medicare.app.activity.FetchAddressIntentService"
             android:exported="false"/>
@@ -203,6 +205,21 @@
         </activity>
         <activity android:name="com.medicare.app.activity.ActivitySendPushNotification">
         </activity>
+
+       <!-- <activity android:name="com.medicare.app.activity.LoginActivity" />-->
+
+        <activity
+            android:name="com.medicare.app.activity.MainActivity"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name="com.medicare.app.activity.ThreadActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name="com.medicare.app.activity.SplashActivity"
+            android:theme="@style/SplashTheme">
+        </activity>
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -211,7 +228,16 @@
              sign the APK for publishing.
              You can define the keys for the debug and release targets in src/debug/ and src/release/. 
         -->
-
+<!--<!- Set custom default icon. This is used when no icon is set for incoming notification messages.
+     See README(https://goo.gl/l4GJaQ) for more. -->
+        <!--<meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_stat_ic_notification" />
+        &lt;!&ndash; Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more. &ndash;&gt;
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />-->
 
     </application>
 

@@ -28,6 +28,8 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
         getApplicationContext().sendBroadcast(new Intent(TOKEN_BROADCAST));
 storeToken(refreshedToken);
     }
+
+
 private void storeToken(String token){
     SharedPrefManager.getInstance(getApplicationContext()).storeToken(token);
 }

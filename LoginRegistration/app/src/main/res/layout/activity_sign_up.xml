@@ -33,7 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/name"
-                android:text="kanwal"
+
                 android:inputType="textPersonName"
                 android:maxLength="15"
                 android:textColor="@color/oil" />
@@ -72,7 +72,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/email"
-                    android:text="kanwal.bhohi@yahoo.in"
+
                     android:inputType="textEmailAddress"
                     android:textColor="@color/oil" />
             </android.support.design.widget.TextInputLayout>
@@ -112,7 +112,7 @@
 
 
         <RadioGroup
-            android:id="@+id/radioGroup"
+            android:id="@+id/radioGroupUserType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"

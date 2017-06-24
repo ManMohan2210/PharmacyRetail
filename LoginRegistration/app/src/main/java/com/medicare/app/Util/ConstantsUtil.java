@@ -11,9 +11,12 @@ public class ConstantsUtil {
     public static final String REGEX_MOBILE_VALIDATION = "^(?:(?:\\+|0{0,2})91(\\s*[\\-]\\s*)?|[0]?)?[789]\\d{9}$";
     public static final String EMPTY_STRING = "";
     public static final String SPACE_STRING = " ";
-    public static final String USER_TYPE_CUSTOMER = "user_type_customer";
-    public static final String USER_TYPE_Retailer = "user_type_retailer";
+    public static final String USER_TYPE_CUSTOMER = "Customer";
+    public static final String USER_TYPE_Retailer = "Retailer";
+    public static final String RETAILER = "RET";
+    public static final String CUSTOMER = "CUS";
 
+    public static final String USER_ID_EXTRA = "userIdExtra";
 
     public static interface strings {
         String ENTER_NAME = "Please enter name.";

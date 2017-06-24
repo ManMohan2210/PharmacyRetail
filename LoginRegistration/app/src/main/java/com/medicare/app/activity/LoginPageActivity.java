@@ -271,7 +271,7 @@ progressDialog.setMessage("sigin with fb");
                             String image=task.getResult().getUser().getPhotoUrl().toString();
 
                             //Create a new User and Save it in Firebase database
-                            UserTypeModel user = new UserTypeModel(uid,name,null,email,null);
+                            UserTypeModel user = new UserTypeModel(uid,name,email,null);
 
                             mRef.child(uid).setValue(user);
 

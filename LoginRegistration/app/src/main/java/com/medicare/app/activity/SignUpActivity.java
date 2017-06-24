@@ -6,13 +6,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.firebase.client.Firebase;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -21,12 +24,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.medicare.app.Util.ConstantsUtil;
 import com.medicare.app.Util.StringsUtil;
+import com.medicare.app.Util.UtilityUtil;
 import com.pharma.medicare.app.R;
 
+import java.util.UUID;
 import java.util.regex.Pattern;
 
 import butterknife.Bind;
@@ -77,13 +85,22 @@ public class SignUpActivity extends BaseActivty {
 
     @Bind(R.id.rdb_customer)
     RadioButton mRBCustomer;
+    private static final String TAG = "SignUpActivity";
+
+    @Bind(R.id.radioGroupUserType)
+    RadioGroup mRbGroup;
+
     DatabaseReference databaseMediCare;
+
+    private FirebaseDatabase mFirebaseDatabase;
+
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+    Firebase usersTimeStampsRef=null;
 
 
     private ProgressDialog progressDialog;
@@ -115,6 +132,7 @@ public class SignUpActivity extends BaseActivty {
                 // ...
             }
         };
+        addEventFirebaseListener();
     }
 
    /* private void initView() {
@@ -137,7 +155,7 @@ public class SignUpActivity extends BaseActivty {
                 final String name = mEdtName.getText().toString();
                 final String mobNum = mEdtMobNum.getText().toString();
                 final String email = mEdtEmail.getText().toString();
-                String password = mEdtPassword.getText().toString();
+                final String password = mEdtPassword.getText().toString();
                 Pattern pwd = Pattern.compile(ConstantsUtil.REGEX_PASSWORD_VALIDATION);
                 Pattern mob = Pattern.compile(ConstantsUtil.REGEX_MOBILE_VALIDATION);
                 mEdtName.setCursorVisible(false);
@@ -146,19 +164,28 @@ public class SignUpActivity extends BaseActivty {
 
                 String userTypeStr ;
 
-                userTypeStr = ConstantsUtil.EMPTY_STRING;
+                final String uniUserId =UUID.randomUUID().toString();
+                String uniUId=null;
+
+                int selectedId = mRbGroup.getCheckedRadioButtonId();
+
+                // find the radio button by returned id
+                RadioButton radioButton = (RadioButton) findViewById(selectedId);
+                userTypeStr= (String) radioButton.getText();
                 if (mRBCustomer.isSelected()) {
-                    userTypeStr = ConstantsUtil.USER_TYPE_CUSTOMER;
+
+                    uniUId=ConstantsUtil.CUSTOMER+uniUserId;
                 } else if (mRBRetailer.isSelected()) {
-                    userTypeStr = ConstantsUtil.USER_TYPE_Retailer;
+                   uniUId=ConstantsUtil.RETAILER.concat(uniUserId);
                 }
                 final String  userTypeString=userTypeStr;
-              /*  if (UtilityUtil.isNullOrEmpty(name)) {
+                final String  uniqueUserId=uniUserId;
+                if (UtilityUtil.isNullOrEmpty(name)) {
                     textInputLayoutName.setErrorEnabled(true);
                     textInputLayoutName.setError(StringsUtil.ENTER_NAME);
                     return;
-                }*/
-              /*  if (UtilityUtil.isNullOrEmpty(mobNum)) {
+                }
+                if (UtilityUtil.isNullOrEmpty(mobNum)) {
                     textInputLayoutMNum.setErrorEnabled(true);
                     textInputLayoutMNum.setError(StringsUtil.ENTER_MOBILE);
                     return;
@@ -166,7 +193,7 @@ public class SignUpActivity extends BaseActivty {
                     textInputLayoutMNum.setErrorEnabled(true);
                     textInputLayoutMNum.setError(StringsUtil.ENTER_MOBILE);
                     return;
-                }*/
+                }
                 if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     textInputLayoutEmail.setErrorEnabled(true);
                     textInputLayoutEmail.setError(StringsUtil.ENTER_EMAIL);
@@ -194,21 +221,24 @@ public class SignUpActivity extends BaseActivty {
                 progressDialog.show();
 
                 //create user
-                mAuth.createUserWithEmailAndPassword(email, password)
+
+                Task<AuthResult> authResultTask = mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
 
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 showToast("createUserWithEmail:onComplete:" + task.isSuccessful());
-                                if(task.isSuccessful()){
-                                    String id = databaseMediCare.push().getKey();
-                                    //UserTypeModel userType = new UserTypeModel(email, name, userTypeStr,mobNum);
+                                if (task.isSuccessful()) {
+                                    // String id = databaseMediCare.push().getKey();
+                                    // UserTypeModel user = new UserTypeModel(uniqueUserId,name,userTypeString,mobNum,email,password, ServerValue.TIMESTAMP);
+                                    //databaseMediCare.child("users").child(user.getUserId()).setValue(user);
 
-                                    UserTypeModel userTypeModel = new UserTypeModel.Builder().userId(id).userType(userTypeString).mobileNumber(mobNum).userName(name).build();//setUserId(""). setUserId(id).set.build();
+                                    UserTypeModel user = new UserTypeModel(uniqueUserId, name, userTypeString, mobNum, email, password);
+                                    databaseMediCare.child("users").child(user.getUserId()).setValue(user);
+//                                    usersTimeStampsRef = usersTimeStampsRef.child("users");
+//                                    usersTimeStampsRef.setValue(ServerValue.TIMESTAMP);
 
-                                    databaseMediCare.child("user").child("User Type").setValue(userTypeString);
-                                    databaseMediCare.child("user").child("name").setValue(name);
-                                    databaseMediCare.child("user").child("mobNum").child("off mob num").setValue(mobNum);
+
                                 }
                                 progressDialog.dismiss();
                                 // If sign in fails, display a message to the user. If sign in succeeds
@@ -216,7 +246,7 @@ public class SignUpActivity extends BaseActivty {
                                 // signed in user can be handled in the listener.
                                 if (!task.isSuccessful()) {
                                     showToast("Authentication failed." + task.getException());
-
+                                    Log.e("signup fail", String.valueOf(task.getException()));
                                 } else {
                                     startActivity(new Intent(SignUpActivity.this, SuccessActivity.class));
                                     finish();
@@ -307,6 +337,22 @@ public class SignUpActivity extends BaseActivty {
             }
         });
     }
+    private void addEventFirebaseListener() {
+        //Progressing
+
+        databaseMediCare.child("users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
 
 
     public Action getIndexApiAction() {

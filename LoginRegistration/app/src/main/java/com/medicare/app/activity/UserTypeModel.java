@@ -1,5 +1,8 @@
 package com.medicare.app.activity;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by satveer on 08-06-2017.
  */
@@ -12,6 +15,62 @@ private     String userId;
    private  String mobileNumber;
     private String email;
     private String password;
+    private String uniqueUId;
+    //private Timestamp signUpTime;
+    private Map<String, String> signUpTime=new HashMap<String, String>();
+    private String photoUrl;
+    private String instanceId;
+
+
+    public UserTypeModel(String userId, String userName, String userType, String mobileNumber,String email,String password) {
+        this.userId = userId;
+        this.userName = userName;
+        this.userType = userType;
+        this.mobileNumber = mobileNumber;
+        this.password = password;
+        this.email = email;
+
+    }
+
+    public UserTypeModel(String userName, String email, String userId, String photoUrl,String userType) {
+        this.userName = userName;
+        this.email = email;
+        this.userType = userType;
+        this.photoUrl = photoUrl;
+        this.userId = userId;
+    }
+
+    public String getUniqueUId() {
+        return uniqueUId;
+    }
+
+    public void setUniqueUId(String uniqueUId) {
+        this.uniqueUId = uniqueUId;
+    }
+
+    public Map<String, String> getSignUpTime() {
+        return signUpTime;
+    }
+
+    public void setSignUpTime(Map<String, String> signUpTime) {
+        this.signUpTime = signUpTime;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
+    }
+
+    public String getInstanceId() {
+        return instanceId;
+    }
+
+    public void setInstanceId(String instanceId) {
+        this.instanceId = instanceId;
+    }
 
     public String getEmail() {
         return email;
@@ -34,17 +93,32 @@ private     String userId;
 
 }
 
+    public String getuniqueUId() {
+        return uniqueUId;
+    }
 
-    public UserTypeModel(String userId, String userName, String userType, String mobileNumber, String email) {
+    public void setuniqueUId(String uniqueUId) {
+        this.uniqueUId = uniqueUId;
+    }
+
+    public UserTypeModel(String userId, String userName, String userType, String mobileNumber, String email, String password, String uniqueUId) {
         this.userId = userId;
         this.userName = userName;
         this.userType = userType;
         this.mobileNumber = mobileNumber;
         this.email = email;
+        this.password = password;
+
+        this.uniqueUId = uniqueUId;
+    }
+    public UserTypeModel(String userId, String userName, String userType, String mobileNumber) {
+        this.userId = userId;
+        this.userName = userName;
+        this.userType = userType;
+        this.mobileNumber = mobileNumber;
+
 
     }
-
-
     public String getUserId() {
         return userId;
     }
@@ -84,14 +158,23 @@ private     String userId;
         private  String mobileNumber;
         //requried
         private    String userType;
-
+        private String uniqueUId;
         public Builder() {
 
             this.userId = userId;
             this.userName = userName;
             this.mobileNumber = mobileNumber;
             this.userType = userType;
+            this.uniqueUId=uniqueUId;
+
         }
+
+        public Builder uniqueUId(String userId) {
+            this.uniqueUId = uniqueUId;
+            return this;
+        }
+
+
 
         public Builder userId(String userId) {
             this.userId = userId;
@@ -122,6 +205,7 @@ private     String userId;
         mobileNumber = builder.mobileNumber;
         userName = builder.userName;
         userType = builder.userType;
+        uniqueUId=builder.uniqueUId;
     }
 }
 

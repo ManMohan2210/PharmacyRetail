@@ -49,14 +49,15 @@ public class SuccessActivity extends BaseActivty {
                 startActivity(intent);
             }
         });
-       /* btnSelectCity.setOnClickListener(new View.OnClickListener(
+ btnSelectCity.setOnClickListener(new View.OnClickListener(
         ) {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SuccessActivity.this, UserType.class);
                 startActivity(intent);
             }
-        });*/
+        });
+
         btnNoNetwork.setOnClickListener(new View.OnClickListener(
         ) {
             @Override
@@ -71,8 +72,9 @@ public class SuccessActivity extends BaseActivty {
             @Override
             public void onClick(View v) {
 //                Intent intent = new Intent(SuccessActivity.this, HomeScreenActivity.class);
-                Intent intent = new Intent(SuccessActivity.this, TokenSending.class);
-                startActivity(intent);
+               // Intent intent = new Intent(SuccessActivity.this, TokenSending.class);
+//                Intent intent = new Intent(SuccessActivity.this, SplashActivity.class);
+//                startActivity(intent);
             }
         });
         btnAddMedicine.setOnClickListener(new View.OnClickListener(
