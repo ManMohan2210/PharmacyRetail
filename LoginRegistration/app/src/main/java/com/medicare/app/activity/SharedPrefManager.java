@@ -11,6 +11,7 @@ public class SharedPrefManager {
 
     private static final String SHARED_PREF_NAME = "fcmsharedprefdemo";
     private static final String KEY_ACCES_TOKEN = "token";
+    private static final String KEY_UUID = "uuid";
     private static Context mCtx;
     private static SharedPrefManager mInstance;
 
@@ -34,4 +35,17 @@ public class SharedPrefManager {
             SharedPreferences sharedPrefrences= mCtx.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
             return sharedPrefrences.getString(KEY_ACCES_TOKEN,null);
         }
+
+    public boolean storeUUID (String uuid){
+        SharedPreferences sharedPrefrences= mCtx.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPrefrences.edit();
+        editor.putString(KEY_UUID,uuid);
+        editor.apply();
+        return true;
+    }
+
+    public String getUUID(){
+        SharedPreferences sharedPrefrences= mCtx.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
+        return sharedPrefrences.getString(KEY_UUID,null);
+    }
 }

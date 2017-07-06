@@ -1,8 +1,4 @@
-package com.medicare.app.activity;
-
-/*
- * Created by Mahmoud on 3/13/2017.
- */
+package com.medicare.app.models;
 
 public class Message {
 

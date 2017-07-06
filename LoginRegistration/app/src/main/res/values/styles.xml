@@ -68,13 +68,7 @@
         <item name="android:layout_marginBottom">10dp</item>
         <item name="android:layout_gravity">center_horizontal</item>
     </style>
-    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">@drawable/background_splash</item>
-    </style>
 
-    <style name="SendFabTheme" parent="AppTheme">
-        <item name="colorAccent">@color/colorForeground</item>
-        <item name="android:textDirection">locale</item>
-        <item name="android:textAlignment">gravity</item>
-    </style>
+
+
 </resources>

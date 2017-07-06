@@ -33,9 +33,10 @@ repositories {
     jcenter()
     mavenCentral()
     maven {
-        url "https://jitpack.io"}
-        maven { url 'https://maven.fabric.io/public'}
-      maven{   url 'https://clojars.org/repo/'}
+        url "https://jitpack.io"
+    }
+    maven { url 'https://maven.fabric.io/public' }
+    maven { url 'https://clojars.org/repo/' }
 
 }
 dependencies {
@@ -49,16 +50,18 @@ dependencies {
     //9.2.1'//10.2.1'
 
     //compile 'com.firebase:firebase-client-android:2.5.2'
-    compile 'com.google.android.gms:play-services:9.4.0'
-    compile 'com.android.support:appcompat-v7:25.0.0'
-    compile 'com.google.android.gms:play-services-appindexing:9.4.0'
-    compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'com.android.support:design:25.0.0'
-   // compile 'com.google.android.gms:play-services-auth:9.4.0'
-   // compile 'com.google.firebase:firebase-messaging:9.0.1'
-    compile 'com.google.firebase:firebase-messaging:9.4.0'
-    compile 'com.google.android.gms:play-services-maps:9.4.0'
+    // compile 'com.google.android.gms:play-services-auth:9.4.0'
+    // compile 'com.google.firebase:firebase-messaging:9.0.1'
 
+
+    compile 'com.google.android.gms:play-services:9.4.0'
+    compile    'com.android.support:appcompat-v7:25.0.0'
+    compile    'com.google.android.gms:play-services-appindexing:9.4.0'
+    compile    'com.jakewharton:butterknife:7.0.1'
+    compile    'com.android.support:design:25.0.0'
+    compile    'com.google.firebase:firebase-messaging:9.4.0'
+    compile    'com.google.android.gms:play-services-maps:9.4.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.google.android.gms:play-services-location:9.4.0'
     compile 'com.google.firebase:firebase-auth:9.4.0'
     compile 'com.google.firebase:firebase-database:9.4.0'
@@ -66,10 +69,10 @@ dependencies {
     compile 'com.android.volley:volley:1.0.0'
     compile 'com.firebase:firebase-client-android:2.5.2'
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
-
-
     compile 'com.google.firebase:firebase-core:9.4.0'
-
+  /*  compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.squareup.okhttp:okhttp:2.4.0'
+    compile 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.0.2'*/
 }
 apply plugin: 'com.google.gms.google-services'
 

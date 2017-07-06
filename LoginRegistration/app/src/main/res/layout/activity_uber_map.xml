@@ -8,8 +8,10 @@
         android:id="@+id/container_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
 
         <LinearLayout
@@ -29,7 +31,7 @@
                       android:ellipsize="end"
                       android:padding="10dp"
                       android:singleLine="true"
-                      android:text="Enter your address"
+                      android:text="Click to change location"
                       android:textSize="@dimen/font_22" />
 
             <EditText
@@ -41,19 +43,38 @@
                 android:enabled="false"
                 android:hint="Address"
                 android:singleLine="true" />
+
+
+            <TextView
+                android:id="@+id/lat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                />
+
+            <TextView
+                android:id="@+id/lon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                />
+
+
         </LinearLayout>
     </LinearLayout>
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/fl_map"
         android:layout_below="@id/container_toolbar">
 
         <fragment
+            xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/map"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            />
+            tools:context="com.sample.sishin.maplocation.MapsActivity" />
         <LinearLayout
             android:id="@+id/locationMarker"
             android:layout_width="wrap_content"
@@ -63,25 +84,32 @@
             android:gravity="center"
             android:orientation="vertical" >
 
+            <TextView
+                android:id="@+id/locationMarkertext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corner_map"
+                android:gravity="center"
+                android:minWidth="250dp"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:text=" Set your Location "
+                android:textColor="@android:color/white"/>
+
             <ImageView
                 android:id="@+id/imageMarker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/add_marker" />
-
-
-        <TextView
-            android:id="@+id/locationMarkertext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_corner_map"
-            android:gravity="center"
-            android:minWidth="250dp"
-            android:paddingLeft="2dp"
-            android:paddingRight="2dp"
-            android:text=" Set your Location "
-            android:textColor="@android:color/white"/>
-
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btnAddLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#000000"
+                android:text="Add Location"
+                android:textColor="@color/white"
+                android:visibility="invisible"/>
         </LinearLayout>
     </FrameLayout>
-    </RelativeLayout>
+
+</RelativeLayout>

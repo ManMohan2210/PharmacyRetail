@@ -6,48 +6,60 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.medicare.app.activity.UserType">
-<RelativeLayout
-    android:layout_width="395dp"
-    android:layout_height="643dp"
- >
 
-    <EditText
-        android:id="@+id/edtName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-       android:hint="user type"
-        android:layout_below="@+id/edtUserType"
-        android:layout_alignLeft="@+id/edtUserType"
-        android:layout_alignStart="@+id/edtUserType"/>
+    <RelativeLayout
+        android:layout_width="395dp"
+        android:layout_height="643dp"
+        tools:layout_editor_absoluteX="-5dp"
+        tools:layout_editor_absoluteY="0dp">
 
-    <EditText
-        android:id="@+id/edtUserType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="43dp"
-        android:layout_marginStart="43dp"
-        android:layout_marginTop="84dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-       android:hint="name"/>
+        <EditText
+            android:id="@+id/edtName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/edtUserType"
+            android:layout_alignStart="@+id/edtUserType"
+            android:layout_below="@+id/edtUserType"
+            android:layout_marginTop="36dp"
+            android:ems="10"
+            android:hint="user type"
+            android:inputType="textPersonName"/>
+
+        <EditText
+            android:id="@+id/edtUserType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="43dp"
+            android:layout_marginStart="43dp"
+            android:layout_marginTop="84dp"
+            android:ems="10"
+            android:hint="name"
+            android:inputType="textPersonName"/>
 
 
+        <Button
+            android:id="@+id/btn_save_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/edtName"
+            android:layout_alignRight="@+id/edtName"
+            android:layout_below="@+id/edtName"
+            android:layout_marginEnd="58dp"
+            android:layout_marginRight="58dp"
+            android:layout_marginTop="66dp"
+            android:text="Save"/>
 
+        <Button
+            android:id="@+id/btn_send_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="88dp"
+            android:layout_marginRight="88dp"
+            android:text="Send"
+            android:layout_alignBaseline="@+id/btn_save_user"
+            android:layout_alignBottom="@+id/btn_save_user"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"/>
 
-    <Button
-        android:id="@+id/btn_save_user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Save"
-        android:layout_below="@+id/edtName"
-        android:layout_alignRight="@+id/edtName"
-        android:layout_alignEnd="@+id/edtName"
-        android:layout_marginRight="58dp"
-        android:layout_marginEnd="58dp"
-        android:layout_marginTop="66dp"/>
-
-</RelativeLayout>
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

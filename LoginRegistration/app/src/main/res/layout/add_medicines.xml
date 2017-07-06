@@ -21,18 +21,6 @@
             android:paddingTop="@dimen/activity_vertical_margin"
             android:weightSum="1">
 
-            <EditText
-                android:id="@+id/edt_medicine_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Please insert Medicine Name"/>
-
-
-            <EditText
-                android:id="@+id/edt_medicine_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Please insert medicine description"/>
 
             <ImageView
                 android:id="@+id/medicine_img"
@@ -62,32 +50,44 @@
                     android:id="@+id/btn_click"
                     android:layout_width="70dp"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_toRightOf="@id/btn_upload"
                     android:background="@color/cyan"
                     android:text="Camera"
                     android:textColor="@color/white"
-                    android:layout_toRightOf="@id/btn_upload"
-                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                   />
+                    />
 
 
                 <android.support.v7.widget.AppCompatButton
                     android:id="@+id/btn_save"
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/btn_click"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_toRightOf="@id/btn_click"
                     android:background="@color/cyan"
                     android:text="Upload"
                     android:textColor="@color/white"/>
+
                 <android.support.v7.widget.AppCompatButton
                     android:id="@+id/btn_saveData"
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/btn_save"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_toRightOf="@id/btn_save"
                     android:background="@color/cyan"
-                    android:text="Save"
+                    android:text="Show"
                     android:textColor="@color/white"/>
+                <GridView
+                          android:id="@+id/gridview"
+                          android:layout_width="fill_parent"
+                          android:layout_height="fill_parent"
+                          android:numColumns="auto_fit"
+                          android:verticalSpacing="10dp"
+                          android:horizontalSpacing="10dp"
+                          android:columnWidth="90dp"
+                          android:stretchMode="columnWidth"
+                          android:gravity="center"
+                    />
 
             </RelativeLayout>
 

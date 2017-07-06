@@ -238,7 +238,7 @@ public class LoginPageActivity extends BaseActivty {
 
 
     protected void setUpUser() {
-        user = new UserTypeModel();
+        user =  UserTypeModel.getInastnce();
         user.setEmail(mEmailText.getText().toString());
         user.setPassword(mPasswordText.getText().toString());
     }
@@ -271,7 +271,9 @@ progressDialog.setMessage("sigin with fb");
                             String image=task.getResult().getUser().getPhotoUrl().toString();
 
                             //Create a new User and Save it in Firebase database
-                            UserTypeModel user = new UserTypeModel(uid,name,email,null);
+
+                            UserTypeModel user = UserTypeModel.getInastnce();
+                            user.createUser(uid,name,null,null,email,null,null);//  (uid,name,email,null) ;
 
                             mRef.child(uid).setValue(user);
 

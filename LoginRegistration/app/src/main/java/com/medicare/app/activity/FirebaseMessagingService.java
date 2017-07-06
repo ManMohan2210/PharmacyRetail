@@ -1,5 +1,6 @@
 package com.medicare.app.activity;
 
+import android.content.Intent;
 import android.util.Log;
 
 import com.google.firebase.messaging.RemoteMessage;
@@ -9,9 +10,9 @@ import com.google.firebase.messaging.RemoteMessage;
  */
 
 public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
-    private static final String TAG = "firebasemessagingservice";
-    private MyNotificationManager myNotificationManager;
 
+    private MyNotificationManager myNotificationManager;
+    private static final String TAG = "firebasemessagingservice";
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         // ...
@@ -35,9 +36,13 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         // message, here is where that should be initiated. See sendNotification method below.
     }
 
+
+
+
     public void notifyUser(String  from, String notification) {
         myNotificationManager = new MyNotificationManager(getApplicationContext()) ;
-//myNotificationManager.showNotification(from, notification,new Intent(getApplicationContext(),ProfileActivity.class));
+myNotificationManager.showSmallNotification(from,notification,new Intent(getApplicationContext(),ProfileActivity.class));
+        //showNotification(from, notification,new Intent(getApplicationContext(),ProfileActivity.class));
 
     }
 

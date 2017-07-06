@@ -15,24 +15,44 @@ private     String userId;
    private  String mobileNumber;
     private String email;
     private String password;
-    private String uniqueUId;
+
+
+    private String accessToken;
+    //private String uniqueUId;
     //private Timestamp signUpTime;
     private Map<String, String> signUpTime=new HashMap<String, String>();
     private String photoUrl;
-    private String instanceId;
+   // private String instanceId;
 
+    private static UserTypeModel userTypeModel = new UserTypeModel();
 
-    public UserTypeModel(String userId, String userName, String userType, String mobileNumber,String email,String password) {
+   public static UserTypeModel getInastnce(){
+        return  userTypeModel;
+    }
+
+    public static void createUser(String userId, String userName, String userType, String mobileNumber,String email,String password,String accessToken) {
+        userTypeModel.userId = userId;
+        userTypeModel.userName = userName;
+        userTypeModel.userType = userType;
+        userTypeModel.mobileNumber = mobileNumber;
+        userTypeModel.password = password;
+        userTypeModel.email = email;
+        userTypeModel.accessToken = accessToken;
+
+    }
+
+    private UserTypeModel(String userId, String userName, String userType, String mobileNumber,String email,String password,String accessToken) {
         this.userId = userId;
         this.userName = userName;
         this.userType = userType;
         this.mobileNumber = mobileNumber;
         this.password = password;
         this.email = email;
+        this.accessToken = accessToken;
 
     }
 
-    public UserTypeModel(String userName, String email, String userId, String photoUrl,String userType) {
+    private UserTypeModel(String userName, String email, String userId, String photoUrl,String userType) {
         this.userName = userName;
         this.email = email;
         this.userType = userType;
@@ -40,13 +60,13 @@ private     String userId;
         this.userId = userId;
     }
 
-    public String getUniqueUId() {
+  /*  public String getUniqueUId() {
         return uniqueUId;
-    }
+    }*/
 
-    public void setUniqueUId(String uniqueUId) {
-        this.uniqueUId = uniqueUId;
-    }
+//    public void setUniqueUId(String uniqueUId) {
+//        this.uniqueUId = uniqueUId;
+//    }
 
     public Map<String, String> getSignUpTime() {
         return signUpTime;
@@ -62,14 +82,6 @@ private     String userId;
 
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
-    }
-
-    public String getInstanceId() {
-        return instanceId;
-    }
-
-    public void setInstanceId(String instanceId) {
-        this.instanceId = instanceId;
     }
 
     public String getEmail() {
@@ -88,20 +100,31 @@ private     String userId;
         this.password = password;
     }
 
-    public UserTypeModel(){
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
+
+
+    private UserTypeModel(){
 
 
 }
 
-    public String getuniqueUId() {
+   /* public String getuniqueUId() {
         return uniqueUId;
     }
 
     public void setuniqueUId(String uniqueUId) {
         this.uniqueUId = uniqueUId;
     }
-
-    public UserTypeModel(String userId, String userName, String userType, String mobileNumber, String email, String password, String uniqueUId) {
+*/
+/*    public UserTypeModel(String userId, String userName, String userType, String mobileNumber, String email, String password)
+    {
+        //, String uniqueUId) {
         this.userId = userId;
         this.userName = userName;
         this.userType = userType;
@@ -109,9 +132,9 @@ private     String userId;
         this.email = email;
         this.password = password;
 
-        this.uniqueUId = uniqueUId;
-    }
-    public UserTypeModel(String userId, String userName, String userType, String mobileNumber) {
+        //this.uniqueUId = uniqueUId;
+    }*/
+    private UserTypeModel(String userId, String userName, String userType, String mobileNumber) {
         this.userId = userId;
         this.userName = userName;
         this.userType = userType;
@@ -149,6 +172,9 @@ private     String userId;
 
     public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
+    }
+
+    public void setKey(String key) {
     }
 
     public static class Builder {
@@ -205,7 +231,7 @@ private     String userId;
         mobileNumber = builder.mobileNumber;
         userName = builder.userName;
         userType = builder.userType;
-        uniqueUId=builder.uniqueUId;
+       // uniqueUId=builder.uniqueUId;
     }
 }
 

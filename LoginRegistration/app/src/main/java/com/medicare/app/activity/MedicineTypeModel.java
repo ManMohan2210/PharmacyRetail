@@ -9,16 +9,47 @@ public class MedicineTypeModel {
     String medicineID;
     String medicineName;
     String description;
+    String searchMedicine;
+    long searchTime;
+
+    public MedicineTypeModel(String searchMedicine, long searchTime) {
+        this.searchMedicine = searchMedicine;
+        this.searchTime = searchTime;
+    }
+
+    public String getSearchMedicine() {
+        return searchMedicine;
+    }
+
+    public void setSearchMedicine(String searchMedicine) {
+        this.searchMedicine = searchMedicine;
+    }
+
+    public long getSearchTime() {
+        return searchTime;
+    }
+
+    public void setSearchTime(long searchTime) {
+        this.searchTime = searchTime;
+    }
+
 
 public MedicineTypeModel(String id, String medicineName, String medicineDesc){
 
 }
+
+    public MedicineTypeModel() {
+    }
 
     public MedicineTypeModel(String medicineID, String medicineName, String description, String image) {
         this.medicineID = medicineID;
         this.medicineName = medicineName;
         this.description = description;
 
+    }
+
+    public MedicineTypeModel(String medicineID) {
+        this.medicineID = medicineID;
     }
 
     public String getMedicineID() {
@@ -45,5 +76,8 @@ public MedicineTypeModel(String id, String medicineName, String medicineDesc){
         this.description = description;
     }
 
+
+    public void setKey(String key) {
+    }
 
 }

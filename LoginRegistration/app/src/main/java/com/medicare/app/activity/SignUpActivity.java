@@ -34,7 +34,6 @@ import com.medicare.app.Util.StringsUtil;
 import com.medicare.app.Util.UtilityUtil;
 import com.pharma.medicare.app.R;
 
-import java.util.UUID;
 import java.util.regex.Pattern;
 
 import butterknife.Bind;
@@ -164,7 +163,7 @@ public class SignUpActivity extends BaseActivty {
 
                 String userTypeStr ;
 
-                final String uniUserId =UUID.randomUUID().toString();
+                final String uniUserId = SharedPrefManager.getInstance(getApplicationContext()).getUUID();
                 String uniUId=null;
 
                 int selectedId = mRbGroup.getCheckedRadioButtonId();
@@ -232,8 +231,12 @@ public class SignUpActivity extends BaseActivty {
                                     // String id = databaseMediCare.push().getKey();
                                     // UserTypeModel user = new UserTypeModel(uniqueUserId,name,userTypeString,mobNum,email,password, ServerValue.TIMESTAMP);
                                     //databaseMediCare.child("users").child(user.getUserId()).setValue(user);
+                                    String accesstoken = SharedPrefManager.getInstance(getApplicationContext()).getToken();
 
-                                    UserTypeModel user = new UserTypeModel(uniqueUserId, name, userTypeString, mobNum, email, password);
+                                    FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+                                    UserTypeModel user = UserTypeModel.getInastnce();
+                                    user.createUser(firebaseUser.getUid(), name, userTypeString, mobNum, email, password,accesstoken);
                                     databaseMediCare.child("users").child(user.getUserId()).setValue(user);
 //                                    usersTimeStampsRef = usersTimeStampsRef.child("users");
 //                                    usersTimeStampsRef.setValue(ServerValue.TIMESTAMP);
