@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
 import com.medicare.app.fragment.GPlusFragment;
-import com.pharma.medicare.app.R;
+import com.medicare.launch.app.R;
 
 
 public class IntegrationWithGoogleActivity extends BaseActivty {

@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.medicare.app.models.MedicineModel;
-import com.pharma.medicare.app.R;
+import com.medicare.launch.app.R;
 
 import java.util.ArrayList;
 

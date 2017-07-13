@@ -8,7 +8,7 @@ import android.widget.ListView;
 
 import com.medicare.app.adapters.MedicinesListAdapter;
 import com.medicare.app.sqlite.SqliteHandler;
-import com.pharma.medicare.app.R;
+import com.medicare.launch.app.R;
 
 import java.util.ArrayList;
 

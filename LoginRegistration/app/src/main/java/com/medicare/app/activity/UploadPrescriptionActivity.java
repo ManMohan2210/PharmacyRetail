@@ -12,8 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-
-import com.pharma.medicare.app.R;
+import com.medicare.launch.app.R;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -11,7 +11,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.medicare.app.activity.AppUtils;
-import com.pharma.medicare.app.R;
+import com.medicare.launch.app.R;
 
 import java.io.IOException;
 import java.util.ArrayList;

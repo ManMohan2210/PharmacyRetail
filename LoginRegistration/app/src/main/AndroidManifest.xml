@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.pharma.medicare.app">
+          package="com.medicare.launch.app">
 
     <permission
         android:name="com.medicare.app.permission.MAPS_RECEIVE"
@@ -30,14 +30,14 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppTheme.Light.NoActionBar">
+        <meta-data android:name="com.facebook.sdk.ApplicationId"
+                   android:value="@string/facebook_app_id"/>
+
+    <!--
         <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
-        <!--
-            <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-        -->
+        android:name="com.google.android.gms.version"
+        android:value="@integer/google_play_services_version" />
+    -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version"/>
@@ -76,6 +76,8 @@
         -->
         <activity android:name="com.medicare.app.activity.UserType">
         </activity>
+        <activity android:name="com.medicare.app.activity.MyNotificationManager"/>
+        <activity android:name="com.medicare.app.activity.NotificationView"/>
         <activity android:name="com.medicare.app.activity.GoogleMapActivity">
         </activity>
         <activity android:name="com.medicare.app.activity.UberMapActivity">
@@ -140,6 +142,9 @@
             android:name="com.medicare.app.activity.PasswordChangeActivity"
             android:windowSoftInputMode="stateHidden"/>
         <activity android:name="com.medicare.app.activity.SuccessActivity"/>
+        <activity
+            android:name="com.medicare.app.activity.DirectionsMapActivity"
+            android:label="Map"/>
         <activity android:name="com.medicare.app.activity.IntegrationWithGoogleActivity">
 
             <!--
@@ -154,6 +159,17 @@
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"/>
+
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
 
         <provider
             android:name="com.facebook.FacebookContentProvider"
@@ -208,6 +224,8 @@
         <activity android:name="com.medicare.app.activity.ImageDetail">
         </activity>
         <activity android:name="com.medicare.app.activity.ViewDatabase">
+        </activity>
+        <activity android:name="com.medicare.app.activity.ConfirmMedicine">
         </activity>
     </application>
 

@@ -3,25 +3,22 @@ package com.medicare.app.activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -30,13 +27,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
-import com.pharma.medicare.app.R;
+import com.google.firebase.storage.UploadTask;
+import com.medicare.launch.app.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class AddMedicineActivity extends BaseActivty implements View.OnClickListener {
@@ -54,7 +52,7 @@ public class AddMedicineActivity extends BaseActivty implements View.OnClickList
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference myRef;
     private String userID;
-    private Uri filePath = null;
+    private Uri filePath;
     String encodedImage;
     private ListView mListView;
     private static final String TAG = "AddMedicine";
@@ -79,17 +77,7 @@ public class AddMedicineActivity extends BaseActivty implements View.OnClickList
         mBtnSave.setOnClickListener(this);
         mBtnClick.setOnClickListener(this);
         mBtnSaveData.setOnClickListener(this);
-        GridView gridView = (GridView) findViewById(R.id.gridview);
-        gridView.setAdapter(new ImageAdapter(this));
-
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent,
-                                    View v, int position, long id) {
-                Toast.makeText(getBaseContext(),
-                        "pic" + (position + 1) + " selected",
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
+    ;
     }
 
 
@@ -168,13 +156,14 @@ public class AddMedicineActivity extends BaseActivty implements View.OnClickList
             }
             mImgMed.setImageBitmap(bitmap);
         } else if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
-            filePath = data.getData();
+
             Bitmap photo = (Bitmap) data.getExtras().get("data");
             mImgMed.setImageBitmap(photo);
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            photo.compress(Bitmap.CompressFormat.JPEG.JPEG, 100, stream);
-            byte[] byteFormat = stream.toByteArray();
-            String encodedImage = Base64.encodeToString(byteFormat, Base64.NO_WRAP);
+            filePath = data.getData();
+           // ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            //photo.compress(Bitmap.CompressFormat.JPEG.JPEG, 100, stream);
+           // byte[] byteFormat = stream.toByteArray();
+           //  encodedImage = Base64.encodeToString(byteFormat, Base64.NO_WRAP);
 
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -212,11 +201,36 @@ public class AddMedicineActivity extends BaseActivty implements View.OnClickList
 
     }
 
-
     private void uploadImage() {
-//        String medicineDesc = mEdtMedicineDesc.getText().toString().trim();
-        // if(!TextUtils.isEmpty(medicineName)&&!TextUtils.isEmpty(medicineDesc) && filePath != null){
-        progressDialog.setMessage("Details Saving...");
+
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        String user = firebaseAuth.getCurrentUser().getUid();
+        if(filePath!=null) {
+            progressDialog.setTitle("file is uploading...");
+            progressDialog.show();
+        StorageReference riversRef = mStorageRef.child("medicine").child(user).child("mediCareImages/medicine.jpg");
+
+        riversRef.putFile(filePath)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        progressDialog.dismiss();
+                        showToast("file uploaded");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        progressDialog.dismiss();
+                        showToast(exception.getMessage());
+                    }
+                }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                                             @Override
+                                             public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                                                 double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                                                 progressDialog.setMessage(((int) progress) + "% uploaded");
+                                             }});}}
+       /* progressDialog.setMessage("Details Saving...");
         progressDialog.show();
         long timestamp = new Date().getTime();
         String id = mDatabase.push().getKey();
@@ -231,47 +245,10 @@ public class AddMedicineActivity extends BaseActivty implements View.OnClickList
         progressDialog.setMessage("Details Saved...");
         // Intent intent = new Intent(AddMedicineActivity.this, LoginPageActivity.class);
         //startActivity(intent);
-        progressDialog.dismiss();
+        progressDialog.dismiss();*/
 
-    }
+   // }
 
-
-    public class ImageAdapter extends BaseAdapter {
-        private Context context;
-
-        public ImageAdapter(Context c) {
-            context = c;
-        }
-
-        //---returns the number of images---
-        public int getCount() {
-           return medicineData.size();
-        }
-
-        //---returns the ID of an item---
-        public Object getItem(int position) {
-            return position;
-        }
-
-        public long getItemId(int position) {
-            return position;
-        }
-
-        //---returns an ImageView view---
-        public View getView(int position, View convertView, ViewGroup parent) {
-            ImageView imageView;
-            if (convertView == null) {
-                imageView = new ImageView(context);
-                imageView.setLayoutParams(new GridView.LayoutParams(185, 185));
-                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                imageView.setPadding(5, 5, 5, 5);
-            } else {
-                imageView = (ImageView) convertView;
-            }
-           // imageView.setImageResource(medicineData.get(position));
-            return imageView;
-        }
-    }
 
 }
 

@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.medicare.app.adapters.MedicinesListAdapter;
-import com.pharma.medicare.app.R;
+import com.medicare.launch.app.R;
 
 import java.util.Collections;
 import java.util.LinkedList;

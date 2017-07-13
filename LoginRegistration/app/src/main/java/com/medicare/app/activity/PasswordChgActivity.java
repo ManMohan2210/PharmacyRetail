@@ -9,7 +9,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.medicare.app.fragment.CreateNewPasswordFragment;
-import com.pharma.medicare.app.R;
+import com.medicare.launch.app.R;
+
 
 public class PasswordChgActivity extends BaseActivty {
 

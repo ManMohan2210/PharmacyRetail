@@ -13,7 +13,7 @@ import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.pharma.medicare.app.R;
+import com.medicare.launch.app.R;
 
 import java.io.IOException;
 import java.util.List;

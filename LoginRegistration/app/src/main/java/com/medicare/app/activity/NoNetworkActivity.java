@@ -6,7 +6,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.pharma.medicare.app.R;
+import com.medicare.launch.app.R;
 
 
 /**

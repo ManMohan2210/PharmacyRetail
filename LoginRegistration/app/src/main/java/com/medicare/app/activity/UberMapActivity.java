@@ -49,17 +49,19 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.pharma.medicare.app.R;
+import com.medicare.launch.app.R;
 
 import java.util.List;
 import java.util.Locale;
 
-import static com.pharma.medicare.app.R.id.lon;
-import static com.pharma.medicare.app.R.id.map;
+import static com.medicare.launch.app.R.id.lon;
+import static com.medicare.launch.app.R.id.map;
 
 
 public class UberMapActivity extends BaseActivty implements
@@ -77,9 +79,10 @@ public class UberMapActivity extends BaseActivty implements
     LocationManager locationManager;
     private AddressResultReceiver mResultReceiver;
     private ImageView mMarker;
-
+    Location mLastLocation;
     DatabaseReference databaseMediCare;
-
+    //GoogleApiClient mGoogleApiClient;
+    Marker mCurrLocationMarker;
     /**
      * The formatted location address.
      */
@@ -298,7 +301,7 @@ FirebaseAuth auth;
         mGoogleApiClient.connect();
     }
 
-    @Override
+/*    @Override
     public void onLocationChanged(Location location) {
         try {
             if (location != null)
@@ -309,8 +312,33 @@ FirebaseAuth auth;
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
+@Override
+public void onLocationChanged(Location location) {
 
+    mLastLocation = location;
+    String fullAddress;
+    if (mCurrLocationMarker != null) {
+        mCurrLocationMarker.remove();
+    }
+    //Place current location marker
+    LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+    MarkerOptions markerOptions = new MarkerOptions();
+    markerOptions.position(latLng);
+   // markerOptions.title("Current Position");
+   // markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+    mCurrLocationMarker = mMap.addMarker(markerOptions);
+
+    //move map camera
+    mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+    mMap.animateCamera(CameraUpdateFactory.zoomTo(9));
+    fullAddress =getCompleteAddressString(location.getLatitude(),location.getLongitude());
+    mLocationMarkerText.setText(fullAddress);
+    //stop location updates
+    if (mGoogleApiClient != null) {
+        LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+    }
+}
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
 
@@ -584,13 +612,13 @@ FirebaseAuth auth;
                 Address returnedAddress = addresses.get(0);
                 StringBuilder strReturnedAddress = new StringBuilder("");
 
-                for (int i = 0; i < returnedAddress.getMaxAddressLineIndex(); i++) {
+                for (int i = 0; i <= returnedAddress.getMaxAddressLineIndex(); i++) {
                     strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n");
                 }
                 strAdd = strReturnedAddress.toString();
-                //Log.w("My Current loction address", "" + strReturnedAddress.toString());
+                Log.w("My Current loction address", "" + strReturnedAddress.toString());
             } else {
-//                Log.w("My Current loction address", "No Address returned!");
+                Log.w("My Current loction address", "No Address returned!");
             }
         } catch (Exception e) {
             e.printStackTrace();

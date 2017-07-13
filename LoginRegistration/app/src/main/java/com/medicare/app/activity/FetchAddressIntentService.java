@@ -10,7 +10,7 @@ import android.os.ResultReceiver;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.pharma.medicare.app.R;
+import com.medicare.launch.app.R;
 
 import java.io.IOException;
 import java.util.ArrayList;

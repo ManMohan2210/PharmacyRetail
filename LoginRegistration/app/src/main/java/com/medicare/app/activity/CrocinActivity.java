@@ -5,7 +5,8 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.pharma.medicare.app.R;
+import com.medicare.launch.app.R;
+
 
 /**
  * Created by satveer on 25-01-2017.

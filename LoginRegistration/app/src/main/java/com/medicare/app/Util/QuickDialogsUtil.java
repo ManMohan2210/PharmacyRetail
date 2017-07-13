@@ -5,7 +5,7 @@ import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.view.WindowManager.BadTokenException;
 
-import com.pharma.medicare.app.R;
+import com.medicare.launch.app.R;
 
 
 public class QuickDialogsUtil {

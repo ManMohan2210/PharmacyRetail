@@ -8,7 +8,8 @@ import android.widget.Button;
 
 import com.medicare.app.fragment.EmailFragment;
 import com.medicare.app.fragment.OtpFragment;
-import com.pharma.medicare.app.R;
+import com.medicare.launch.app.R;
+
 
 public class PasswordChangeActivity extends BaseActivty {
 

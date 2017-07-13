@@ -98,7 +98,8 @@
     <!-- TODO(user): replace with your real server client ID -->
     <!-- Server Client ID.  This should be a valid Web OAuth 2.0 Client ID obtained
          from https://console.developers.google.com/ -->
-    <string name="server_client_id">23760741748-ch16b2nhk77q76o34b1a76f7s0s9fccp.apps.googleusercontent.com</string>
+    <string name="server_client_id">52739468341-4lnsms8nvqdo3mfd9v69sgikq3kfjl8o.apps.googleusercontent.com</string>
+       <!-- 23760741748-ch16b2nhk77q76o34b1a76f7s0s9fccp.apps.googleusercontent.com</string>-->
     <string name="sha_key">FA:98:F4:EA:E5:87:99:EC:8A:15:44:06:5D:07:C4:4C:94:FF:4F:FF</string>
     <string name="choose_type">Choose user type</string>
     <string name="retailer">Retailer</string>
@@ -127,8 +128,12 @@
 
     <!--using for firebase database -->
 
-    <string name="facebook_app_id">336156680130673</string>
-    <string name="fb_login_protocol_scheme">fb336156680130673</string>
+   <!-- <string name="facebook_app_id">336156680130673</string>
+    <string name="fb_login_protocol_scheme">fb336156680130673</string>-->
+
+    <string name="facebook_app_id">708639629338857</string>
+    <string name="fb_login_protocol_scheme">fb708639629338857</string>
+
     <!-- facebook login -->
     <!--string name="facebook_app_id">336156680130673</string>-->
     <array name="user_type">
@@ -149,5 +154,22 @@
     <string name="error_sending_messages">Couldn\'t send message, please retry</string>
     <string name="message_message_copied">Copied to clipboard</string>
     <string name="clipboard_title_copied_message">Copied message</string>
+
+    <!--added for notification-->
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="notificationtitle">Android Notification Tutorial</string>
+    <string name="notificationtext">Notification Text</string>
+    <string name="notificationticker">Notification Ticker</string>
+    <string name="customnotificationtitle">MediCare</string>
+    <string name="customnotificationtext">Hey! I am searching this medicine</string>
+    <!--Custom Notification Text</string>-->
+    <string name="customnotificationticker">Custom Notification Ticker</string>
+    <string name="notification">Notification</string>
+    <string name="customnotification">Custom Notification</string>
+
+
+
+
 </resources>
 

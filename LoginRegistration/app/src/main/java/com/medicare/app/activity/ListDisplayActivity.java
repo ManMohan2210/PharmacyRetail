@@ -9,7 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.medicare.app.services.GPSTrackerService;
-import com.pharma.medicare.app.R;
+import com.medicare.launch.app.R;
 
 
 public class ListDisplayActivity extends BaseActivty {

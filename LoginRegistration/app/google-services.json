@@ -1,82 +1,35 @@
 {
   "project_info": {
-    "project_number": "23760741748",
-    "firebase_url": "https://medicare-b3328.firebaseio.com",
-    "project_id": "medicare-b3328",
-    "storage_bucket": "medicare-b3328.appspot.com"
+    "project_number": "52739468341",
+    "firebase_url": "https://medicare-b5a7b.firebaseio.com",
+    "project_id": "medicare-b5a7b",
+    "storage_bucket": "medicare-b5a7b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:23760741748:android:09990bbab0892db2",
+        "mobilesdk_app_id": "1:52739468341:android:ed520eb5d78d26f4",
         "android_client_info": {
-          "package_name": "com.medicare.app"
+          "package_name": "com.medicare.launch.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "23760741748-ch16b2nhk77q76o34b1a76f7s0s9fccp.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "23760741748-r9hq40r599c1mov7k8cl6ai5b76vtle9.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDkttwJpX24Aq-845pYhMo79SOnP99KoLk"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:23760741748:android:ea8a38bf0172232c",
-        "android_client_info": {
-          "package_name": "com.pharma.medicare.app"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "23760741748-e0bohcubog2av5cgm5qitsppo1p36ele.apps.googleusercontent.com",
+          "client_id": "52739468341-eqkf2vanptee41dfggihmtldhdvtehaa.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.pharma.medicare.app",
-            "certificate_hash": "d3b6e968ab39c8dff92e6cfcedd612862385e18c"
-          }
-        },
-        {
-          "client_id": "23760741748-ch16b2nhk77q76o34b1a76f7s0s9fccp.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "23760741748-96hf80ofdo66sfb10gdgm65dd4ug636l.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.pharma.medicare.app",
+            "package_name": "com.medicare.launch.app",
             "certificate_hash": "bf1b742b232d4871ee99045263f56bb3b5d5cb74"
           }
         },
         {
-          "client_id": "23760741748-r9hq40r599c1mov7k8cl6ai5b76vtle9.apps.googleusercontent.com",
+          "client_id": "52739468341-4lnsms8nvqdo3mfd9v69sgikq3kfjl8o.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDkttwJpX24Aq-845pYhMo79SOnP99KoLk"
+          "current_key": "AIzaSyCjg_RsAEt0iR1uP-uvUGVrt_ByhIvM_gw"
         }
       ],
       "services": {
@@ -87,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "23760741748-ch16b2nhk77q76o34b1a76f7s0s9fccp.apps.googleusercontent.com",
+              "client_id": "52739468341-4lnsms8nvqdo3mfd9v69sgikq3kfjl8o.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

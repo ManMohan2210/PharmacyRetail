@@ -75,6 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context="com.sample.sishin.maplocation.MapsActivity" />
+
         <LinearLayout
             android:id="@+id/locationMarker"
             android:layout_width="wrap_content"
@@ -82,7 +83,7 @@
             android:layout_gravity="center"
             android:layout_marginBottom="30dp"
             android:gravity="center"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/locationMarkertext"
@@ -100,7 +101,8 @@
                 android:id="@+id/imageMarker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/add_marker" />
+                android:src="@drawable/add_marker"/>
+
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btnAddLocation"
                 android:layout_width="wrap_content"

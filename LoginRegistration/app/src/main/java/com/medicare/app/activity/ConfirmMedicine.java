@@ -1,9 +1,10 @@
 package com.medicare.app.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
-import com.pharma.medicare.app.R;
+import com.medicare.launch.app.R;
+
 
 public class ConfirmMedicine extends AppCompatActivity {
 

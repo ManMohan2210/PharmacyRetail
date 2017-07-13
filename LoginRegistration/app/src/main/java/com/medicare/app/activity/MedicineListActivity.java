@@ -6,7 +6,7 @@ import android.widget.GridView;
 
 import com.medicare.app.adapters.MedicineListAdaptor;
 import com.medicare.app.models.MedicineModel;
-import com.pharma.medicare.app.R;
+import com.medicare.launch.app.R;
 
 import java.util.ArrayList;
 

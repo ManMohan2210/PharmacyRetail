@@ -1,7 +1,6 @@
 package com.medicare.app.activity;
 
-import com.google.firebase.messaging.RemoteMessage;
-
+/*
 
 public class MessagingService extends FirebaseMessagingService {
 
@@ -11,3 +10,4 @@ public class MessagingService extends FirebaseMessagingService {
     }
 
 }
+*/

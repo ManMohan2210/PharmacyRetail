@@ -79,4 +79,18 @@
         android:layout_alignParentEnd="true"
         android:layout_marginRight="49dp"
         android:layout_marginEnd="49dp"/>
+
+
+    <Button
+        android:id="@+id/btn_show_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/cyan"
+        android:text="show notification"
+        android:textColor="@color/white"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/btn_add_medicine"
+        android:layout_alignRight="@+id/btn_no_network"
+        android:layout_alignEnd="@+id/btn_no_network"/>
+
 </RelativeLayout>

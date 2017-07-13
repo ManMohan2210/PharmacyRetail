@@ -21,7 +21,7 @@ import com.medicare.app.Util.ConstantsUtil;
 import com.medicare.app.Util.StringsUtil;
 import com.medicare.app.Util.UtilityUtil;
 import com.medicare.app.activity.BaseActivty;
-import com.pharma.medicare.app.R;
+import com.medicare.launch.app.R;
 
 import java.util.regex.Pattern;
 
@@ -52,7 +52,7 @@ private Button btnEmail;
         btnEmail = (Button) view.findViewById(R.id.btn_email);
         edtRgEmail = (EditText) view.findViewById(R.id.edtRegEmail);
         textInputLayoutRegEmail=(TextInputLayout) view.findViewById(R.id.ll_input_reg_email);
-
+        //progressDialog = new ProgressDialog(this);
         auth = FirebaseAuth.getInstance();
             btnEmail.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -85,13 +85,11 @@ private Button btnEmail;
                             transaction.addToBackStack(null);
                     // Commit the transaction
                             transaction.commit();
-                    progressDialog.setMessage("Wait plzz...");
-                    progressDialog.show();
+                  //  progressDialog.setMessage("Wait plzz...");
+                   // progressDialog.show();
+
                     auth.sendPasswordResetEmail(etEmail)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
-
-
-
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
@@ -100,9 +98,10 @@ private Button btnEmail;
                                         Toast.makeText(baseActivity,"Failed to send reset mail!",Toast.LENGTH_SHORT).show();
                                     }
 
-                                    progressDialog.dismiss();
+                                   // progressDialog.dismiss();
                                 }
                             });
+
                         }});
         edtRgEmail.setOnClickListener(new View.OnClickListener() {
             @Override

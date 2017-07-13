@@ -16,7 +16,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.medicare.app.Util.UtilityUtil;
 import com.medicare.app.models.Message;
-import com.pharma.medicare.app.R;
+import com.medicare.launch.app.R;
 
 import java.util.ArrayList;
 import java.util.Date;

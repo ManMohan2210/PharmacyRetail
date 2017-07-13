@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.medicare.app.sqlite.SqliteHandler;
-import com.pharma.medicare.app.R;
+import com.medicare.launch.app.R;
 
 
 public class MedicineSearchActivity extends BaseActivty {

@@ -15,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
@@ -47,12 +48,15 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.medicare.app.Util.ConstantsUtil;
 import com.medicare.app.Util.StringsUtil;
-import com.pharma.medicare.app.R;
+import com.medicare.launch.app.R;
 
 import java.util.regex.Pattern;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+import static com.medicare.launch.app.R.layout.popup;
 
 
 public class LoginPageActivity extends BaseActivty {
@@ -88,6 +92,13 @@ public class LoginPageActivity extends BaseActivty {
 
     @Bind(R.id.ll_input_password)
     TextInputLayout textInputLayoutPassword;
+
+    @Bind(R.id.btn_custom_fb)
+    ImageButton customFb;
+
+    @Bind(R.id.btn_custom_gmail)
+    ImageButton customGmail;
+
     Firebase mRef;
     private static final int REQUEST_SIGNUP = 0;
     private static final int RC_SIGN_IN = 123;
@@ -129,7 +140,7 @@ public class LoginPageActivity extends BaseActivty {
         //  initView();
         initListener();
 
-// ...
+
         FirebaseUser mUser = firebaseAuth.getCurrentUser();
         if (mUser != null) {
             // User is signed in
@@ -168,6 +179,7 @@ public class LoginPageActivity extends BaseActivty {
         mCallbackManager = CallbackManager.Factory.create();
         LoginButton loginButton = (LoginButton) findViewById(R.id.button_facebook_login);
         loginButton.setReadPermissions("email", "public_profile");
+
         loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -184,6 +196,7 @@ public class LoginPageActivity extends BaseActivty {
             public void onError(FacebookException error) {
                 Log.d(TAG, "facebook:onError", error);
             }
+
         });
     }
 
@@ -227,6 +240,9 @@ public class LoginPageActivity extends BaseActivty {
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
             } else {
+                Log.d(TAG, "google login failed:requestCode " + requestCode);
+                Log.d(TAG, "google login failed:resultCode " + resultCode);
+                Log.d(TAG, "google login failed:data " + data);
                 // Google Sign In failed, update UI appropriately
                 // ...
             }
@@ -269,18 +285,18 @@ progressDialog.setMessage("sigin with fb");
                             String name=task.getResult().getUser().getDisplayName();
                             String email=task.getResult().getUser().getEmail();
                             String image=task.getResult().getUser().getPhotoUrl().toString();
-
+                            Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                            //intent.putExtra("user_id",uid);
+                           // intent.putExtra("profile_picture",image);
+                            startActivity(intent);
                             //Create a new User and Save it in Firebase database
 
-                            UserTypeModel user = UserTypeModel.getInastnce();
-                            user.createUser(uid,name,null,null,email,null,null);//  (uid,name,email,null) ;
+                           // UserTypeModel user = UserTypeModel.getInastnce();
+                           // user.createUser(uid,name,null,null,email,null,null);//  (uid,name,email,null) ;
 
-                            mRef.child(uid).setValue(user);
+                           // mRef.child(uid).setValue(user);
 
-                            Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-                            intent.putExtra("user_id",uid);
-                            intent.putExtra("profile_picture",image);
-                            startActivity(intent);
+
                             finish();
                         }
                         progressDialog.dismiss();
@@ -306,6 +322,8 @@ progressDialog.setMessage("sigin with fb");
                             // Sign in success, update UI with the signed-in user's information
 //                              information information Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = firebaseAuth.getCurrentUser();
+                            Intent intent = new Intent(LoginPageActivity.this, ProfileActivity.class);
+                            startActivity(intent);
                             //updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
@@ -467,15 +485,15 @@ public void onComplete(@NonNull Task<AuthResult> task){
             }
         });
 
-        txtForgotPwd.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                //loginLinearLayout.setAlpha(100);
-                initiatePopupWindow();
-
-            }
-        });
+//        txtForgotPwd.setOnClickListener(new OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                //loginLinearLayout.setAlpha(100);
+//                initiatePopupWindow();
+//
+//            }
+//        });
 
         mEmailText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -492,7 +510,16 @@ public void onComplete(@NonNull Task<AuthResult> task){
                 textInputLayoutPassword.setError(null);
             }
         });
-
+        customFb.setOnClickListener(new View.OnClickListener()   {
+            public void onClick(View v)  {
+                if (v == customFb) {
+                   // loginButton.performClick();
+                }}});
+        customGmail.setOnClickListener(new View.OnClickListener()   {
+            public void onClick(View v)  {
+                if (v == customFb) {
+                   // googleSignInButton.performClick();
+                }}});
     }
 
     private boolean isValidationClear() {
@@ -522,16 +549,17 @@ public void onComplete(@NonNull Task<AuthResult> task){
         return true;
 
     }
-
-    private void initiatePopupWindow() {
+    @OnClick(R.id.txtForgotPwd)
+    public void initiatePopupWindow() {
         try {
 // We need to get the instance of the LayoutInflater
 
             LayoutInflater inflater = (LayoutInflater) LoginPageActivity.this
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             layout_MainMenu.getForeground().setAlpha(220);
-            View popupView = inflater.inflate(R.layout.popup, null);
+            View popupView = inflater.inflate(popup, null);
             final PopupWindow popupWindow = new PopupWindow(popupView, 800, 600, true);
+            popupWindow.setOutsideTouchable(false);
             popupWindow.setTouchable(true);
             popupWindow.setFocusable(true);
             popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);

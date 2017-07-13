@@ -32,7 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.medicare.app.Util.ConstantsUtil;
 import com.medicare.app.Util.StringsUtil;
 import com.medicare.app.Util.UtilityUtil;
-import com.pharma.medicare.app.R;
+import com.medicare.launch.app.R;
 
 import java.util.regex.Pattern;
 
