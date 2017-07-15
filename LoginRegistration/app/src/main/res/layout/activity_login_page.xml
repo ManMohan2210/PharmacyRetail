@@ -5,7 +5,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
-            android:foreground="@drawable/dimming_effect"
     >
 
 
@@ -93,21 +92,21 @@
             android:weightSum="1"
             >
 
-            <com.google.android.gms.common.SignInButton
+           <!-- <com.google.android.gms.common.SignInButton
                 android:id="@+id/btn_google_signin"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-             android:visibility="gone"/>
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+            &lt;!&ndash; android:visibility="gone"/>&ndash;&gt;
 
             <com.facebook.login.widget.LoginButton
                 android:id="@+id/button_facebook_login"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-             android:visibility="gone"
-             />
-            <ImageButton
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"/>-->
+            <!-- android:visibility="gone"
+             />-->
+          <ImageButton
                 android:id="@+id/btn_custom_fb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

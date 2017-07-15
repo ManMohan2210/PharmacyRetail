@@ -99,7 +99,7 @@
     <!-- Server Client ID.  This should be a valid Web OAuth 2.0 Client ID obtained
          from https://console.developers.google.com/ -->
     <string name="server_client_id">52739468341-4lnsms8nvqdo3mfd9v69sgikq3kfjl8o.apps.googleusercontent.com</string>
-       <!-- 23760741748-ch16b2nhk77q76o34b1a76f7s0s9fccp.apps.googleusercontent.com</string>-->
+    <!-- 23760741748-ch16b2nhk77q76o34b1a76f7s0s9fccp.apps.googleusercontent.com</string>-->
     <string name="sha_key">FA:98:F4:EA:E5:87:99:EC:8A:15:44:06:5D:07:C4:4C:94:FF:4F:FF</string>
     <string name="choose_type">Choose user type</string>
     <string name="retailer">Retailer</string>
@@ -128,7 +128,7 @@
 
     <!--using for firebase database -->
 
-   <!-- <string name="facebook_app_id">336156680130673</string>
+    <!-- <string name="facebook_app_id">336156680130673</string>
     <string name="fb_login_protocol_scheme">fb336156680130673</string>-->
 
     <string name="facebook_app_id">708639629338857</string>
@@ -167,8 +167,6 @@
     <string name="customnotificationticker">Custom Notification Ticker</string>
     <string name="notification">Notification</string>
     <string name="customnotification">Custom Notification</string>
-
-
 
 
 </resources>

@@ -544,12 +544,12 @@ showToast("saved");
         for(DataSnapshot ds : dataSnapshot.getChildren()){
             UserInformation uInfo = new UserInformation();
             uInfo.setName(ds.child(userID).getValue(UserInformation.class).getName()); //set the name
-            uInfo.setEmail(ds.child(userID).getValue(UserInformation.class).getEmail()); //set the email
+            uInfo.setEmail(ds.child(userID).getValue(UserInformation.class).getEmail()); //set the EXTRA_EMAIL
             uInfo.setPhone_num(ds.child(userID).getValue(UserInformation.class).getPhone_num()); //set the phone_num
 
             //display all the information
             Log.d(TAG, "showData: name: " + uInfo.getName());
-            Log.d(TAG, "showData: email: " + uInfo.getEmail());
+            Log.d(TAG, "showData: EXTRA_EMAIL: " + uInfo.getEmail());
             Log.d(TAG, "showData: phone_num: " + uInfo.getPhone_num());
 
             ArrayList<String> array  = new ArrayList<>();

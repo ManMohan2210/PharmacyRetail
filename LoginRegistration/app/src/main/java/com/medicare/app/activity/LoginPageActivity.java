@@ -15,7 +15,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
@@ -46,7 +45,10 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.medicare.app.Util.ConstantsUtil;
+import com.medicare.app.Util.IntentConstants;
 import com.medicare.app.Util.StringsUtil;
 import com.medicare.launch.app.R;
 
@@ -93,11 +95,11 @@ public class LoginPageActivity extends BaseActivty {
     @Bind(R.id.ll_input_password)
     TextInputLayout textInputLayoutPassword;
 
-    @Bind(R.id.btn_custom_fb)
+  /*  @Bind(R.id.btn_custom_fb)
     ImageButton customFb;
 
     @Bind(R.id.btn_custom_gmail)
-    ImageButton customGmail;
+    ImageButton customGmail;*/
 
     Firebase mRef;
     private static final int REQUEST_SIGNUP = 0;
@@ -108,7 +110,7 @@ public class LoginPageActivity extends BaseActivty {
     FirebaseAuth.AuthStateListener mAuthListener;
     LoginButton loginButton;
     CallbackManager mCallbackManager;
-
+    DatabaseReference databaseReference;
 //signInButton.setSize(SignInButton.SIZE_STANDARD);
 
     private ProgressDialog progressDialog;
@@ -134,7 +136,7 @@ public class LoginPageActivity extends BaseActivty {
         layout_MainMenu = (FrameLayout) findViewById(R.id.mainmenu);
        layout_MainMenu.getForeground().setAlpha(0);
         ButterKnife.bind(this);
-
+        databaseReference = FirebaseDatabase.getInstance().getReference();
         progressDialog = new ProgressDialog(this);
 
         //  initView();
@@ -262,7 +264,7 @@ public class LoginPageActivity extends BaseActivty {
 
 
 
-    private void signInWithFacebook(AccessToken token) {
+    private void signInWithFacebook(final AccessToken token) {
         Log.d(TAG, "signInWithFacebook:" + token);
 progressDialog.setMessage("sigin with fb");
         progressDialog.dismiss();
@@ -281,21 +283,24 @@ progressDialog.setMessage("sigin with fb");
                             Toast.makeText(LoginPageActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }else{
-                            String uid=task.getResult().getUser().getUid();
-                            String name=task.getResult().getUser().getDisplayName();
-                            String email=task.getResult().getUser().getEmail();
-                            String image=task.getResult().getUser().getPhotoUrl().toString();
-                            Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-                            //intent.putExtra("user_id",uid);
-                           // intent.putExtra("profile_picture",image);
-                            startActivity(intent);
                             //Create a new User and Save it in Firebase database
 
-                           // UserTypeModel user = UserTypeModel.getInastnce();
-                           // user.createUser(uid,name,null,null,email,null,null);//  (uid,name,email,null) ;
 
-                           // mRef.child(uid).setValue(user);
+                            String uid=task.getResult().getUser().getUid();
+                            String userName=task.getResult().getUser().getDisplayName();
+                            String email=task.getResult().getUser().getEmail();
+                            String image=task.getResult().getUser().getPhotoUrl().toString();
+                            Intent intent = new Intent(getApplicationContext(), AddExtraUserDeatils.class);
+                            intent.putExtra(IntentConstants.EXTRA_USER_NAME,userName);
+                            intent.putExtra(IntentConstants.EXTRA_EMAIL,email);
+                            intent.putExtra(IntentConstants.EXTRA_USER_ID,uid);
+                            intent.putExtra(IntentConstants.EXTRA_ACCESS_TOKEN,token.getToken());
+                            UserTypeModel user = new UserTypeModel(uid,email,userName);
+                           //intent.putExtra("profile_picture",image);
+                            databaseReference.child("users").child(uid).setValue(user);
+                           // databaseMediCare.child("users").child(user.getUserId()).setValue(user);
 
+                            startActivity(intent);
 
                             finish();
                         }
@@ -322,7 +327,7 @@ progressDialog.setMessage("sigin with fb");
                             // Sign in success, update UI with the signed-in user's information
 //                              information information Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = firebaseAuth.getCurrentUser();
-                            Intent intent = new Intent(LoginPageActivity.this, ProfileActivity.class);
+                            Intent intent = new Intent(LoginPageActivity.this, AddExtraUserDeatils.class);
                             startActivity(intent);
                             //updateUI(user);
                         } else {
@@ -366,7 +371,7 @@ public void onComplete(@NonNull Task<AuthResult> task){
 //                            Log.d(TAG, "signInWithCredential:success");
         FirebaseUser user=firebaseAuth.getCurrentUser();
 //                            updateUI(user);
-            Intent intent = new Intent(LoginPageActivity.this, ProfileActivity.class);
+            Intent intent = new Intent(LoginPageActivity.this, AddExtraUserDeatils.class);
             startActivity(intent);
         }else{
         //showToast("Authentication failed.");
@@ -419,6 +424,13 @@ public void onComplete(@NonNull Task<AuthResult> task){
         googleSignInButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 signIn();
+                /*mFirebaseAuth.signOut();
+                Auth.GoogleSignInApi.signOut(mGoogleApiClient);
+                mFirebaseUser = null;
+                mUsername = null;
+                mPhotoUrl = null;
+                startActivity(new Intent(this, SignInActivity.class));
+                finish();*/
             }
         });
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -426,14 +438,14 @@ public void onComplete(@NonNull Task<AuthResult> task){
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if (firebaseAuth.getCurrentUser() != null) {
-                    startActivity(new Intent(LoginPageActivity.this, ProfileActivity.class));
+                    startActivity(new Intent(LoginPageActivity.this, AddExtraUserDeatils.class));
                 }
             }
         };
         if (firebaseAuth.getCurrentUser() != null) {
             //directly start the profile activity here
             finish();
-            Intent intent = new Intent(LoginPageActivity.this, ProfileActivity.class);
+            Intent intent = new Intent(LoginPageActivity.this, AddExtraUserDeatils.class);
             startActivity(intent);
         }
         mLoginButton.setOnClickListener(new View.OnClickListener() {
@@ -510,7 +522,7 @@ public void onComplete(@NonNull Task<AuthResult> task){
                 textInputLayoutPassword.setError(null);
             }
         });
-        customFb.setOnClickListener(new View.OnClickListener()   {
+/*        customFb.setOnClickListener(new View.OnClickListener()   {
             public void onClick(View v)  {
                 if (v == customFb) {
                    // loginButton.performClick();
@@ -519,7 +531,7 @@ public void onComplete(@NonNull Task<AuthResult> task){
             public void onClick(View v)  {
                 if (v == customFb) {
                    // googleSignInButton.performClick();
-                }}});
+                }}});*/
     }
 
     private boolean isValidationClear() {

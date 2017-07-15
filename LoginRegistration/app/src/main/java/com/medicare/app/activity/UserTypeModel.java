@@ -41,7 +41,7 @@ private     String userId;
 
     }
 
-    private UserTypeModel(String userId, String userName, String userType, String mobileNumber,String email,String password,String accessToken) {
+    public UserTypeModel(String userId, String userName, String userType, String mobileNumber,String email,String password,String accessToken) {
         this.userId = userId;
         this.userName = userName;
         this.userType = userType;
@@ -52,14 +52,22 @@ private     String userId;
 
     }
 
-    private UserTypeModel(String userName, String email, String userId, String photoUrl,String userType) {
+    public UserTypeModel(String userName, String email, String userId, String photoUrl, String userType) {
         this.userName = userName;
         this.email = email;
         this.userType = userType;
         this.photoUrl = photoUrl;
         this.userId = userId;
     }
-
+    public UserTypeModel(String userId,String email, String userName) {
+        this.userName = userName;
+        this.email = email;
+        this.userId = userId;
+    }
+    public UserTypeModel(String mobileNumber, String userType) {
+        this.mobileNumber = mobileNumber;
+        this.userType = userType;
+    }
   /*  public String getUniqueUId() {
         return uniqueUId;
     }*/

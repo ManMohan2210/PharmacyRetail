@@ -231,7 +231,6 @@ public class FacebookFragment extends Fragment {
                             }
                         });
                 Bundle parameters = new Bundle();
-                parameters.putString("fields", "id,name,link,email,favorite_athletes,favorite_teams");
                 request.setParameters(parameters);
                 request.executeAsync();
 

@@ -23,11 +23,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
 import android.provider.Settings;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -91,7 +91,7 @@ public class UberMapActivity extends BaseActivty implements
     protected String mAreaOutput;
     protected String mCityOutput;
     protected String mStateOutput;
-    EditText mLocationAddress;
+    TextView mLocationAddress;
     TextView mLocationText;
     private static final int REQUEST_CODE_AUTOCOMPLETE = 1;
     private Button mAddLocation;
@@ -109,15 +109,15 @@ FirebaseAuth auth;
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(map);
-
+        Intent intent = getIntent();
         mLocationMarkerText = (TextView) findViewById(R.id.locationMarkertext);
-        mLocationAddress = (EditText) findViewById(R.id.Address);
+        mLocationAddress = (TextView) findViewById(R.id.Address);
         mMarker= (ImageView)findViewById(R.id.imageMarker);
-          mLocationText = (TextView) findViewById(R.id.Locality);
-        mAddLocation=(Button) findViewById(R.id.btnAddLocation);
+         // mLocationText = (TextView) findViewById(R.id.Locality);
+      //  mAddLocation=(Button) findViewById(R.id.btnAddLocation);
         mLat=(TextView) findViewById(R.id.lat);
         mLon=(TextView) findViewById(lon);
-        mLocationText.setOnClickListener(new View.OnClickListener() {
+        /*mLocationText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -125,7 +125,26 @@ FirebaseAuth auth;
 
             }
 
+        });*/
+
+        FloatingActionButton myFab = (FloatingActionButton)findViewById(R.id.myFAB);
+        myFab.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                FirebaseAuth  firebaseAuth = FirebaseAuth.getInstance();
+                FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+
+                String user = firebaseAuth.getCurrentUser().getUid();
+                String address = mLocationAddress.getText().toString().trim();
+                String lon = mLon.getText().toString().trim();
+                String lat = mLat.getText().toString().trim();
+                UserDetails userDetail = new UserDetails(address, lon, lat);
+                databaseMediCare.child("users").child(user).child("geocordinates").setValue(userDetail);
+                //databaseMediCare.child("users").child(UtilityUtil.UUID).child("geocordinates").setValue(userDetail);
+                showToast("added succesfully!");
+
+            }
         });
+
         mapFragment.getMapAsync(this);
         mResultReceiver = new AddressResultReceiver(new Handler());
 
@@ -157,33 +176,6 @@ FirebaseAuth auth;
         } else {
             Toast.makeText(mContext, "Location not supported in this device", Toast.LENGTH_SHORT).show();
         }
-        mMarker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                mAddLocation.setVisibility(View.VISIBLE);
-
-            }
-        });
-
-                mAddLocation.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        FirebaseAuth  firebaseAuth = FirebaseAuth.getInstance();
-                        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-
-                        String user = firebaseAuth.getCurrentUser().getUid();
-                        String address = mLocationAddress.getText().toString().trim();
-                        String lon = mLon.getText().toString().trim();
-                        String lat = mLat.getText().toString().trim();
-                        UserDetails userDetail = new UserDetails(address, lon, lat);
-              databaseMediCare.child("users").child(user).child("geocordinates").setValue(userDetail);
-                     //databaseMediCare.child("users").child(UtilityUtil.UUID).child("geocordinates").setValue(userDetail);
-                        showToast("added succesfully!");
-
-
-                    }
-        });
       }
 
 
@@ -224,6 +216,7 @@ FirebaseAuth auth;
 
                     fullAddress =getCompleteAddressString(mLocation.getLatitude(),mLocation.getLongitude());
                     mLocationMarkerText.setText(fullAddress);
+                    mLocationAddress.setText(fullAddress);
                     //mLocationMarkerText.setText("Lat : " + mCent   //double lat =(String)mCenterLatLong.latitude;
                     String lat = Double.toString(mCenterLatLong.latitude);
                     String lon = Double.toString(mCenterLatLong.longitude);
@@ -334,6 +327,7 @@ public void onLocationChanged(Location location) {
     mMap.animateCamera(CameraUpdateFactory.zoomTo(9));
     fullAddress =getCompleteAddressString(location.getLatitude(),location.getLongitude());
     mLocationMarkerText.setText(fullAddress);
+    mLocationAddress.setText(fullAddress);
     //stop location updates
     if (mGoogleApiClient != null) {
         LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
@@ -431,6 +425,7 @@ public void onLocationChanged(Location location) {
             mLocationMarkerText.setText("Lat : " + location.getLatitude() + "," + "Long : " + location.getLongitude());
             fullAddress =getCompleteAddressString(location.getLatitude(),location.getLongitude());
             mLocationMarkerText.setText(fullAddress);
+            mLocationAddress.setText(fullAddress);
             startIntentService(location);
             // showToast("hii" + getCompleteAddressString(location.getLatitude(),location.getLongitude()));
 
@@ -492,10 +487,10 @@ public void onLocationChanged(Location location) {
         // mLocationAddressTextView.setText(mAddressOutput);
         try {
             if (mAreaOutput != null)
-                mLocationText.setText(mAreaOutput+ "");
+               // mLocationText.setText(mAreaOutput+ "");
 
             mLocationAddress.setText(mAddressOutput);
-            mLocationText.setText(mAreaOutput);
+          //  mLocationText.setText(mAreaOutput);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -572,7 +567,7 @@ public void onLocationChanged(Location location) {
 
                 latLong = place.getLatLng();
 
-                mLocationText.setText(place.getName() + "");
+                //mLocationText.setText(place.getName() + "");
 
                 CameraPosition cameraPosition = new CameraPosition.Builder()
                         .target(latLong).zoom(19f).tilt(70).build();
@@ -622,8 +617,10 @@ public void onLocationChanged(Location location) {
             }
         } catch (Exception e) {
             e.printStackTrace();
-//            Log.w("My Current loction address", "Canont get Address!");
-        }
+          Log.w("My Current loction address", "Canont get Address!");
+
+            Log.w("exception",e.getMessage());
+    }
         return strAdd;
     }
 

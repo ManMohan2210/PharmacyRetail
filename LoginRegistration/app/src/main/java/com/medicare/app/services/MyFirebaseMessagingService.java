@@ -71,12 +71,13 @@ import android.util.Log;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.medicare.app.activity.LoginPageActivity;
+import com.medicare.app.activity.MyNotificationManager;
 import com.medicare.launch.app.R;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "MyFirebaseMsgService";
-
+MyNotificationManager notification =  new MyNotificationManager();
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         //Displaying data in log

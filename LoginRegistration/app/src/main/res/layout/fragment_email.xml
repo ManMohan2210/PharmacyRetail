@@ -31,7 +31,7 @@
             android:inputType="textEmailAddress"
             android:textColor="@color/oil"/>
     </android.support.design.widget.TextInputLayout>
-    <!-- send email Button-->
+    <!-- send EXTRA_EMAIL Button-->
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btn_email"
         android:layout_width="fill_parent"

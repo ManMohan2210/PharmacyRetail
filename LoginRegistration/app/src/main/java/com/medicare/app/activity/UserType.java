@@ -78,8 +78,8 @@ public class UserType extends BaseActivty implements TextWatcher {
                     UserTypeModel currentUser = UserTypeModel.getInastnce();
                     long timestamp = new Date().getTime();
                     String body = "Value Changed for notify";
-                    String from="13CeeFlO7UR1YzO5aMVegoabWgi1";//currentUser.getUserId();
-                    String to ="Bv98mqVC5DfEtuXKkSdmCaXLpV42";//mReceiver.getUserId();
+                    String from="cRscPZIgt4ZqMdSodWaBWMw01z62";//currentUser.getUserId();
+                    String to ="zqWuVhcLJjdBUNABcSUo2Ua5oYH2";//mReceiver.getUserId();
                     long dayTimestamp = UtilityUtil.getDayTimestamp(timestamp);
                     //String ownerUid = owner.getUid();
                    // String userUid = user.getUid();

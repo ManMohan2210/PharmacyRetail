@@ -82,7 +82,7 @@ public class ActivitySendPushNotification extends AppCompatActivity implements R
 
                                 for (int i = 0; i < jsonUsers.length(); i++) {
                                     JSONObject d = jsonUsers.getJSONObject(i);
-                                    users.add(d.getString("email"));
+                                    users.add(d.getString("EXTRA_EMAIL"));
                                 }
 
                                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
@@ -190,7 +190,7 @@ public class ActivitySendPushNotification extends AppCompatActivity implements R
                 if (!TextUtils.isEmpty(image))
                     params.put("image", image);
 
-                params.put("email", email);
+                params.put("EXTRA_EMAIL", email);
                 return params;
             }
         };

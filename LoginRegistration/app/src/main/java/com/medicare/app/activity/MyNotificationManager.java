@@ -1,5 +1,202 @@
 package com.medicare.app.activity;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
+import android.view.View;
+
+import com.medicare.launch.app.R;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+
+public class MyNotificationManager extends BaseActivty {
+
+    private final static String sample_url = "https://firebasestorage.googleapis.com/v0/b/medicare-b3328.appspot.com/o/gallery.png?alt=media&token=904d44dd-4cf6-4097-bbbc-77d696c898ec";
+
+    private final static int NORMAL = 0x00;
+    private final static int BIG_PICTURE_STYLE = 0x02;
+    private static NotificationManager mNotificationManager;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.notificationmain);
+        mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+    }
+
+    public void setNormalStyle(View view) {
+        new CreateNotification(NORMAL).execute();
+    }
+
+
+
+    public void setBigPictureStyle(View view) {
+        new CreateNotification(BIG_PICTURE_STYLE).execute();
+    }
+
+
+    /**
+     * Notification AsyncTask to create and return the
+     * requested notification.
+     *
+     * @see CreateNotification#CreateNotification(int)
+     */
+    public class CreateNotification extends AsyncTask<Void, Void, Void> {
+
+        int style = NORMAL;
+
+        /**
+         * Main constructor for AsyncTask that accepts the parameters below.
+         *
+         * @param style {@link #NORMAL},  {@link #BIG_PICTURE_STYLE}
+         * @see #doInBackground
+         */
+        public CreateNotification(int style) {
+            this.style = style;
+        }
+
+        /**
+         * Creates the notification object.
+         *
+         * @see #setNormalNotification
+         * @see #setBigPictureStyleNotification
+         */
+        @Override
+        protected Void doInBackground(Void... params) {
+            Notification noti = new Notification();
+            NotificationCompat.Builder mBuilder =
+                    new NotificationCompat.Builder(MyNotificationManager.this);
+            switch (style)
+            {
+                case NORMAL:
+                    noti = setNormalNotification();
+                    break;
+
+                case BIG_PICTURE_STYLE:
+                    noti = setBigPictureStyleNotification();
+                    break;
+
+            }
+
+            noti.defaults |= Notification.DEFAULT_LIGHTS;
+            noti.defaults |= Notification.DEFAULT_VIBRATE;
+            noti.defaults |= Notification.DEFAULT_SOUND;
+
+            noti.flags |= Notification.FLAG_ONLY_ALERT_ONCE;
+            mBuilder.getNotification().flags |= Notification.FLAG_AUTO_CANCEL;
+            mNotificationManager.notify(0, noti);
+
+            return null;
+
+        }
+    }
+
+    /**
+     * Normal Notification
+     *
+     * @return Notification
+     * @see CreateNotification
+     */
+    private Notification setNormalNotification() {
+        Bitmap remote_picture = null;
+
+        try {
+            remote_picture = BitmapFactory.decodeStream((InputStream) new URL(sample_url).getContent());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // Setup an explicit intent for an ResultActivity to receive.
+        Intent resultIntent = new Intent(this, DirectionsMapActivity.class);
+
+        // TaskStackBuilder ensures that the back button follows the recommended convention for the back key.
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+
+        // Adds the back stack for the Intent (but not the Intent itself).
+        stackBuilder.addParentStack(DirectionsMapActivity.class);
+
+        // Adds the Intent that starts the Activity to the top of the stack.
+        stackBuilder.addNextIntent(resultIntent);
+        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        return new NotificationCompat.Builder(this)
+                .setSmallIcon(R.mipmap.med)
+                .setAutoCancel(true)
+                .setLargeIcon(remote_picture)
+                .setContentIntent(resultPendingIntent)
+                .addAction(R.mipmap.med, "Cancel", resultPendingIntent)
+                .addAction(R.mipmap.med, "Ok", resultPendingIntent)
+                .setContentTitle("Yes, I have the mentioned medicine.")
+                .setContentText("You can check the map for directions").setColor(Color.CYAN).build();
+
+    }
+
+
+    /**
+     * Big Picture Style Notification
+     *
+     * @return Notification
+     * @see CreateNotification
+     */
+    private Notification setBigPictureStyleNotification() {
+        Bitmap remote_picture = null;
+
+        // Create the style object with BigPictureStyle subclass.
+        NotificationCompat.BigPictureStyle notiStyle = new NotificationCompat.BigPictureStyle();
+        notiStyle.setBigContentTitle("Hey, I am searching for this medicine!");
+        notiStyle.setSummaryText("medicine name");
+
+        try {
+            remote_picture = BitmapFactory.decodeStream((InputStream) new URL(sample_url).getContent());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Add the big picture to the style.
+        notiStyle.bigPicture(remote_picture);
+
+        // Creates an explicit intent for an ResultActivity to receive.
+        Intent resultIntent = new Intent(this, ConfirmMedicine.class);
+
+        // This ensures that the back button follows the recommended convention for the back key.
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+
+        // Adds the back stack for the Intent (but not the Intent itself).
+        stackBuilder.addParentStack(ConfirmMedicine.class);
+
+        // Adds the Intent that starts the Activity to the top of the stack.
+        stackBuilder.addNextIntent(resultIntent);
+        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        return new NotificationCompat.Builder(this)
+                .setSmallIcon(R.mipmap.med)
+                .setAutoCancel(true)
+                .setLargeIcon(remote_picture)
+                .setContentIntent(resultPendingIntent)
+                .addAction(R.mipmap.med, "Cancel", resultPendingIntent)
+                .addAction(R.mipmap.med, "Reply", resultPendingIntent)
+                .setContentTitle("Hey, I am searching for this medicine!")
+                .setContentText("medicine name").setColor(Color.CYAN)
+                .setStyle(notiStyle).build();
+
+    }
+
+
+
+}
+/*
+package com.medicare.app.activity;
+
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -137,13 +334,16 @@ public class MyNotificationManager extends BaseActivty  {
 
     }
 
-  /*  @Override
+  */
+/*  @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
-    }*/
-}/*
+    }*//*
+
+}*/
+/*
 package com.medicare.app.activity;
 
 import com.medicare.app.R;
@@ -162,10 +362,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 
+*//*
+
 */
 /**
  * Created by satveer on 13-06-2017.
  *//*
+*/
+/*
 
 
 public class MyNotificationManager {
@@ -281,3 +485,4 @@ public class MyNotificationManager {
         }
     }
 }*/
+
