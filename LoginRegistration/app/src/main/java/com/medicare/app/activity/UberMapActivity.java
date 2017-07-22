@@ -220,6 +220,7 @@ FirebaseAuth auth;
                     //mLocationMarkerText.setText("Lat : " + mCent   //double lat =(String)mCenterLatLong.latitude;
                     String lat = Double.toString(mCenterLatLong.latitude);
                     String lon = Double.toString(mCenterLatLong.longitude);
+
                     //double lon= mCenterLatLong.longitude;
                     mLat.setText(lat);
                     mLon.setText(lon);
@@ -323,8 +324,9 @@ public void onLocationChanged(Location location) {
     mCurrLocationMarker = mMap.addMarker(markerOptions);
 
     //move map camera
-    mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-    mMap.animateCamera(CameraUpdateFactory.zoomTo(9));
+    //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+    //mMap.animateCamera(CameraUpdateFactory.zoomTo(9));
+    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,12));
     fullAddress =getCompleteAddressString(location.getLatitude(),location.getLongitude());
     mLocationMarkerText.setText(fullAddress);
     mLocationAddress.setText(fullAddress);
@@ -419,6 +421,7 @@ public void onLocationChanged(Location location) {
             mMap.getUiSettings().setMyLocationButtonEnabled(true);
             mMap.animateCamera(CameraUpdateFactory
                     .newCameraPosition(cameraPosition));
+
 
             //mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(new LatLng(20.5937,78.9629) , 19f) );
 
@@ -632,7 +635,8 @@ public void onLocationChanged(Location location) {
 
         LatLng latLong = new
                 LatLng(mLocation.getLatitude(),mLocation.getLongitude());
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLong,2));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLong,12));
+
 
     }
 

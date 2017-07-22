@@ -1,5 +1,6 @@
 package com.medicare.app.activity;
 
+import android.location.Location;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,6 +36,7 @@ public class UserType extends BaseActivty implements TextWatcher {
     EditText userType;
     Button btnSave;
     Button btnSend;
+    Button btnGeoCodes;
     UserTypeModel mSender;
     UserTypeModel mReceiver;
     private static final String TAG = "UserType";
@@ -49,7 +52,7 @@ public class UserType extends BaseActivty implements TextWatcher {
         userType = (EditText) findViewById(R.id.edtUserType);
         btnSave = (Button) findViewById(R.id.btn_save_user);
         btnSend = (Button) findViewById(R.id.btn_send_data);
-
+        btnGeoCodes=(Button) findViewById(R.id.btn_geo_codes);
 //        myRef = mFirebaseDatabase.getReference("medicare");
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,22 +67,22 @@ public class UserType extends BaseActivty implements TextWatcher {
                 if (mSender != null) {
 
 
-                   /* FirebaseAuth  firebaseAuth = FirebaseAuth.getInstance();
-                    FirebaseUser  user = firebaseAuth.getCurrentUser();
+                    FirebaseAuth  firebaseAuth = FirebaseAuth.getInstance();
+                    FirebaseUser user = firebaseAuth.getCurrentUser();
 
                     UserTypeModel currentUser = UserTypeModel.getInastnce();
-                    String from=currentUser.getUserId();
+                    String from=mSender.getUserId();
                     String to =mReceiver.getUserId();
                     String body="Value Changed for notify";
 
-                    Message message = new Message(from,to,body);
+                   // Message message = new Message(from,to,body);
 
-                    databaseMediCare.child("messages").setValue(message);*/
-                    UserTypeModel currentUser = UserTypeModel.getInastnce();
+                    //databaseMediCare.child("users").child(to).child("messages").setValue(message);
+                    //UserTypeModel currentUser = UserTypeModel.getInastnce();
                     long timestamp = new Date().getTime();
-                    String body = "Value Changed for notify";
-                    String from="cRscPZIgt4ZqMdSodWaBWMw01z62";//currentUser.getUserId();
-                    String to ="zqWuVhcLJjdBUNABcSUo2Ua5oYH2";//mReceiver.getUserId();
+                   // String body = "Value Changed for notify";
+                   // String from="cRscPZIgt4ZqMdSodWaBWMw01z62";//currentUser.getUserId();
+                   // String to ="zqWuVhcLJjdBUNABcSUo2Ua5oYH2";//mReceiver.getUserId();
                     long dayTimestamp = UtilityUtil.getDayTimestamp(timestamp);
                     //String ownerUid = owner.getUid();
                    // String userUid = user.getUid();
@@ -104,31 +107,66 @@ public class UserType extends BaseActivty implements TextWatcher {
                                 .push()
                                 .setValue(message);
                     }
-                  //  inputEditText.setText("");
 
-                 //   databaseMediCare.child("messages").child(currentUser.getUserId()).child("to").setValue(to);
-
-//                    databaseMediCare.child("users").child(mReceiver.getUserId()).child("notifydata").child("from").setValue(mSender.getUserId());
-//                    databaseMediCare.chilmessaged("users").child(mReceiver.getUserId()).child("notifydata").child("to").setValue(mSender.getUserId());
-
-                  //  databaseMediCare.child("messages").child(currentUser.getUserId()).child("body").setValue(body);
                 }
             }
         });
-    }
-/*    private long getDayTimestamp(long timestamp) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(timestamp);
-        calendar.set(Calendar.MILLISECOND, 0);
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        return calendar.getTimeInMillis();
-    }*/
+
+    btnGeoCodes.setOnClickListener(new View.OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            databaseMediCare.child("users").orderByChild("userType").equalTo("Customer").
+                    addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                List<UserDetails> data = new ArrayList<>();
+
+
+                                if (dataSnapshot.exists()) {
+                                    for (DataSnapshot snapshot :
+                                            dataSnapshot.getChildren()) {
+                                        UserDetails userDetails = snapshot.child("geocordinates").getValue(UserDetails.class);
+                                        data.add(userDetails);
+
+                                    }
+                                    for (UserDetails userDetails : data) {
+
+                                        //Log.i(TAG, "geocordinates " + userDetails.getUid());
+                                        Log.i(TAG, "user lan: " + userDetails.getLan());
+                                        Log.i(TAG, "user lon: " + userDetails.getLon());
+
+                                        Location mylocation = new Location("");
+                                        Location dest_location = new Location("");
+                            String lat = userDetails.getLan();
+                            String lon = userDetails.getLon();
+                            dest_location.setLatitude(Double.parseDouble(lat));
+                            dest_location.setLongitude(Double.parseDouble(lon));
+                            Double my_loc = 0.00;
+                            mylocation.setLatitude(my_loc);
+                            mylocation.setLongitude(my_loc);
+                            float distance = mylocation.distanceTo(dest_location);//in meters
+                            showToast("Distance"+Double.toString(distance));
+                                        showToast("Distance in meter"+distance);
+                                    }
+
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                Log.i(TAG, "loadPost:onCancelled", databaseError.toException());
+                            }
+                        });
+            }
+
+});}
     private void getUsers() {
         //  addUserType();
 
-        databaseMediCare.child("users").orderByChild("userType").equalTo("Customer").addValueEventListener(new ValueEventListener() {
+        databaseMediCare.child("users").orderByChild("userType").equalTo("Customer").
+                addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 List<UserTypeModel> data = new ArrayList<>();

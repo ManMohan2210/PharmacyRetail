@@ -27,6 +27,7 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.firebase.client.Firebase;
@@ -52,6 +53,7 @@ import com.medicare.app.Util.IntentConstants;
 import com.medicare.app.Util.StringsUtil;
 import com.medicare.launch.app.R;
 
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 import butterknife.Bind;
@@ -134,7 +136,7 @@ public class LoginPageActivity extends BaseActivty {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
         layout_MainMenu = (FrameLayout) findViewById(R.id.mainmenu);
-       layout_MainMenu.getForeground().setAlpha(0);
+//       layout_MainMenu.getForeground().setAlpha(0);
         ButterKnife.bind(this);
         databaseReference = FirebaseDatabase.getInstance().getReference();
         progressDialog = new ProgressDialog(this);
@@ -146,7 +148,7 @@ public class LoginPageActivity extends BaseActivty {
         FirebaseUser mUser = firebaseAuth.getCurrentUser();
         if (mUser != null) {
             // User is signed in
-            Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+            Intent intent = new Intent(getApplicationContext(), SuccessActivity.class);
             String uid = firebaseAuth.getCurrentUser().getUid();
 
             String image= firebaseAuth.getCurrentUser().getPhotoUrl() != null ? firebaseAuth.getCurrentUser().getPhotoUrl().toString() : null;
@@ -228,7 +230,32 @@ public class LoginPageActivity extends BaseActivty {
     }
 
 
+    public void fbLogin(View view)
+    {
+        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("user_photos", "email", "public_profile", "user_posts" , "AccessToken"));
+        LoginManager.getInstance().logInWithPublishPermissions(this, Arrays.asList("publish_actions"));
+        LoginManager.getInstance().registerCallback(mCallbackManager,
+                new FacebookCallback<LoginResult>()
+                {
+                    @Override
+                    public void onSuccess(LoginResult loginResult)
+                    {
+                        // App code
+                    }
 
+                    @Override
+                    public void onCancel()
+                    {
+                        // App code
+                    }
+
+                    @Override
+                    public void onError(FacebookException exception)
+                    {
+                        // App code
+                    }
+                });
+    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -568,7 +595,7 @@ public void onComplete(@NonNull Task<AuthResult> task){
 
             LayoutInflater inflater = (LayoutInflater) LoginPageActivity.this
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            layout_MainMenu.getForeground().setAlpha(220);
+         //   layout_MainMenu.getForeground().setAlpha(220);
             View popupView = inflater.inflate(popup, null);
             final PopupWindow popupWindow = new PopupWindow(popupView, 800, 600, true);
             popupWindow.setOutsideTouchable(false);
@@ -592,7 +619,7 @@ public void onComplete(@NonNull Task<AuthResult> task){
                             }
 
                             popupWindow.dismiss();
-                            layout_MainMenu.getForeground().setAlpha(0);
+                            //layout_MainMenu.getForeground().setAlpha(0);
                             Intent intent = new Intent(getBaseContext(), PasswordChangeActivity.class);
                             intent.putExtra("selection", selection);
                             startActivity(intent);
@@ -605,7 +632,7 @@ public void onComplete(@NonNull Task<AuthResult> task){
                         public void onClick(View arg0) {
                             popupWindow.dismiss();
                             finish();
-                            layout_MainMenu.getForeground().setAlpha(0);
+                           // layout_MainMenu.getForeground().setAlpha(0);
 
                         }
 
