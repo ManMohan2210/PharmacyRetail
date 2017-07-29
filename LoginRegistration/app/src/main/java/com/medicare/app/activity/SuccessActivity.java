@@ -78,8 +78,8 @@ public class SuccessActivity extends AppCompatActivity {
         ) {
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(SuccessActivity.this, DirectionsMapActivity.class);
-                Intent intent = new Intent(SuccessActivity.this, ProfileActivity.class);
+                Intent intent = new Intent(SuccessActivity.this, DirectionsMapActivity.class);
+               // Intent intent = new Intent(SuccessActivity.this, ProfileActivity.class);
 //                Intent intent = new Intent(SuccessActivity.this, SplashActivity.class);
                 startActivity(intent);
             }
@@ -98,7 +98,8 @@ public class SuccessActivity extends AppCompatActivity {
         ) {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SuccessActivity.this, MyNotificationManager.class);
+              //  Intent intent = new Intent(SuccessActivity.this, MyNotificationManager.class);
+                Intent intent = new Intent(SuccessActivity.this, DrawerMain.class);
                 startActivity(intent);
             }
         });

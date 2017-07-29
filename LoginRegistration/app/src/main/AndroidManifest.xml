@@ -77,6 +77,8 @@
         -->
         <activity android:name="com.medicare.app.activity.UserType">
         </activity>
+        <activity android:name="com.medicare.app.activity.DrawerMain">
+        </activity>
         <activity android:name="com.medicare.app.activity.MyNotificationManager"/>
         <activity android:name="com.medicare.app.activity.NotificationView"/>
         <activity android:name="com.medicare.app.activity.GoogleMapActivity">
@@ -204,8 +206,6 @@
             </intent-filter>
         </service>
 
-        <activity android:name="com.medicare.app.activity.ProfileActivity">
-        </activity>
         <activity android:name="com.medicare.app.activity.TokenSending">
         </activity>
         <activity android:name="com.medicare.app.activity.ActivitySendPushNotification">

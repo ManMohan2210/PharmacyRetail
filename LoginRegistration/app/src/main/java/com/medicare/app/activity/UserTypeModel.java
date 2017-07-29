@@ -1,5 +1,7 @@
 package com.medicare.app.activity;
 
+import com.google.firebase.database.Exclude;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -68,14 +70,53 @@ private     String userId;
         this.mobileNumber = mobileNumber;
         this.userType = userType;
     }
-  /*  public String getUniqueUId() {
-        return uniqueUId;
-    }*/
 
-//    public void setUniqueUId(String uniqueUId) {
-//        this.uniqueUId = uniqueUId;
-//    }
+    private     Double geocordinates;
+    private  String address;
+    private double latitude ;
+    private double longitude ;
 
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("latitude", latitude);
+        result.put("longitude ", longitude );
+        result.put("address", address);
+
+        return result;
+    }
+    public double getlatitude() {
+        return latitude;
+    }
+
+    public void setlatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getlongitude () {
+        return longitude ;
+    }
+
+    public void setlongitude (double longitude ) {
+        this.longitude  = longitude ;
+    }
+
+    public Double getGeocordinates() {
+        return geocordinates;
+    }
+
+    public void setGeocordinates(Double geocordinates) {
+        this.geocordinates = geocordinates;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
     public Map<String, String> getSignUpTime() {
         return signUpTime;
     }

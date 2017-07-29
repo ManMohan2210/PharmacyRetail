@@ -167,7 +167,12 @@
     <string name="customnotificationticker">Custom Notification Ticker</string>
     <string name="notification">Notification</string>
     <string name="customnotification">Custom Notification</string>
-
+    <string-array name="navigation_drawer_items_array">
+        <item>Home</item>
+        <item>Add Location</item>
+        <item>Search Medicine</item>
+        <item>Logout</item>
+    </string-array>>
 
 </resources>
 

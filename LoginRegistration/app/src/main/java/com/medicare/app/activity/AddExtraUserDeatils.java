@@ -49,6 +49,7 @@ public class AddExtraUserDeatils extends AppCompatActivity {
     private String emailId;
     private String userId;
     private String accessToken;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +60,7 @@ public class AddExtraUserDeatils extends AppCompatActivity {
         emailId =  intent.getStringExtra(IntentConstants.EXTRA_EMAIL);
         userId = intent.getStringExtra(IntentConstants.EXTRA_USER_ID);
         accessToken = intent.getStringExtra(IntentConstants.EXTRA_ACCESS_TOKEN);
+        final boolean loginViaSocial  = true;
          databaseMediCare = FirebaseDatabase.getInstance().getReference();
          mNextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,8 +92,13 @@ public class AddExtraUserDeatils extends AppCompatActivity {
                 UserTypeModel userDetail = new UserTypeModel(userId,userName,userType,mobNum,emailId,null,accessToken);
                 databaseMediCare.child("users").child(uid).setValue(userDetail);
                 // start map activity
-                Intent intent = new Intent(AddExtraUserDeatils.this, UberMapActivity.class);
-                startActivity(intent);
+                if (userType.equals("Retailer")) {
+                    Intent intent = new Intent(AddExtraUserDeatils.this, UberMapActivity.class);
+                    startActivity(intent);
+                }else{
+                    Intent intent = new Intent(AddExtraUserDeatils.this, DrawerMain.class);
+                    startActivity(intent);
+                }
             }
         });
     }

@@ -28,7 +28,7 @@
             android:layout_marginTop="8dp"
             >
 
-            <com.medicare.app.Util.CustomPTSansEditTextViewUtil
+            <EditText
                 android:id="@+id/editViewEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -93,20 +93,27 @@
             >
 
             <com.google.android.gms.common.SignInButton
-            android:id="@+id/btn_google_signin"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
-            <!-- android:visibility="gone"/>-->
-
+                android:id="@+id/btn_google_signin"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"/>
+            <!--  android:visibility="gone"/>
+ -->
             <com.facebook.login.widget.LoginButton
                 android:id="@+id/button_facebook_login"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
-           <!-- android:visibility="gone"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="9dp"/>
+
+
+
+        <!--    android:visibility="gone"
             />-->
-         <!-- <ImageButton
+   <!--       <ImageButton
                 android:id="@+id/btn_custom_fb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -122,8 +129,8 @@
 android:layout_marginRight="100dp"
                 android:layout_marginLeft="30dp"
                 android:src="@mipmap/ic_google"
-                android:background="@null"/>-->
-
+                android:background="@null"/>
+-->
 
         </LinearLayout>
 

@@ -60,6 +60,7 @@ import com.medicare.launch.app.R;
 import java.util.List;
 import java.util.Locale;
 
+import static com.medicare.launch.app.R.id.lat;
 import static com.medicare.launch.app.R.id.lon;
 import static com.medicare.launch.app.R.id.map;
 
@@ -115,7 +116,7 @@ FirebaseAuth auth;
         mMarker= (ImageView)findViewById(R.id.imageMarker);
          // mLocationText = (TextView) findViewById(R.id.Locality);
       //  mAddLocation=(Button) findViewById(R.id.btnAddLocation);
-        mLat=(TextView) findViewById(R.id.lat);
+        mLat=(TextView) findViewById(lat);
         mLon=(TextView) findViewById(lon);
         /*mLocationText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,13 +136,14 @@ FirebaseAuth auth;
 
                 String user = firebaseAuth.getCurrentUser().getUid();
                 String address = mLocationAddress.getText().toString().trim();
-                String lon = mLon.getText().toString().trim();
-                String lat = mLat.getText().toString().trim();
-                UserDetails userDetail = new UserDetails(address, lon, lat);
+                String longitude = mLon.getText().toString().trim();
+                String latitude = mLat.getText().toString().trim();
+                UserTypeModel userDetail = new UserTypeModel(address, longitude, latitude);
                 databaseMediCare.child("users").child(user).child("geocordinates").setValue(userDetail);
                 //databaseMediCare.child("users").child(UtilityUtil.UUID).child("geocordinates").setValue(userDetail);
                 showToast("added succesfully!");
-
+                Intent intent = new Intent(UberMapActivity.this, DrawerMain.class);
+                startActivity(intent);
             }
         });
 
@@ -218,12 +220,12 @@ FirebaseAuth auth;
                     mLocationMarkerText.setText(fullAddress);
                     mLocationAddress.setText(fullAddress);
                     //mLocationMarkerText.setText("Lat : " + mCent   //double lat =(String)mCenterLatLong.latitude;
-                    String lat = Double.toString(mCenterLatLong.latitude);
-                    String lon = Double.toString(mCenterLatLong.longitude);
+                    String latitude = Double.toString(mCenterLatLong.latitude);
+                    String longitude = Double.toString(mCenterLatLong.longitude);
 
                     //double lon= mCenterLatLong.longitude;
-                    mLat.setText(lat);
-                    mLon.setText(lon);
+                    mLat.setText(latitude);
+                    mLon.setText(longitude);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
