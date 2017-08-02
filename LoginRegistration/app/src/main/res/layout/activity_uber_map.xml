@@ -28,7 +28,7 @@
                       android:layout_height="wrap_content"
                       android:text="Add address for medicine pickup location (Example- Your shop or store address.)"
                       android:textSize="@dimen/font_22"
-                  android:textColor="@color/cyan500"/>
+                  android:textColor="@color/dark_cyan"/>
 
             <TextView
                 android:id="@+id/Address"

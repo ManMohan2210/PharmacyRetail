@@ -89,6 +89,10 @@ public class SignUpActivity extends BaseActivty {
     @Bind(R.id.radioGroupUserType)
     RadioGroup mRbGroup;
 
+    @Bind(R.id.btnLater)
+    Button mBtnLater;
+
+
     DatabaseReference databaseMediCare;
 
     private FirebaseDatabase mFirebaseDatabase;
@@ -134,20 +138,21 @@ public class SignUpActivity extends BaseActivty {
         addEventFirebaseListener();
     }
 
-   /* private void initView() {
-        edtName = (EditText) findViewById(edtName);
-        edtPassword = (EditText) findViewById(R.id.edtNewPassword);
-        btnSignUp = (Button) findViewById(btnSignUp);
-        txtViewSignUp = (TextView) findViewById(R.id.txtViewSignUp);
-        txtViewTerm = (TextView) findViewById(R.id.txtViewTerm);
-        edtEmail = (EditText) findViewById(edtEmail);
-        edtMobNum = (EditText) findViewById(edtMobNum);
-        chbSignIn = (CheckBox) findViewById(chbSignIn) ;
-       // checkBoxShowPwd = (CheckBox) findViewById(R.id.cbShowPwd);
-        txtViewTerm.setPaintFlags(txtViewTerm.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-    }*/
+
 
     private void initListener() {
+        mRBRetailer.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v){
+                mBtnLater.setVisibility(View.INVISIBLE);
+            }
+        } );
+        mRBCustomer.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v){
+                mBtnLater.setVisibility(View.VISIBLE);
+            }
+        } );
+
+
 
         mBtnSignUp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -164,21 +169,22 @@ public class SignUpActivity extends BaseActivty {
                 String userTypeStr ;
 
                 final String uniUserId = SharedPrefManager.getInstance(getApplicationContext()).getUUID();
-                String uniUId=null;
+                //String uniUId=null;
 
                 int selectedId = mRbGroup.getCheckedRadioButtonId();
 
                 // find the radio button by returned id
                 RadioButton radioButton = (RadioButton) findViewById(selectedId);
                 userTypeStr= (String) radioButton.getText();
-                if (mRBCustomer.isSelected()) {
-
-                    uniUId=ConstantsUtil.CUSTOMER+uniUserId;
-                } else if (mRBRetailer.isSelected()) {
-                   uniUId=ConstantsUtil.RETAILER.concat(uniUserId);
-                }
+                /*if (mRBRetailer.isSelected()) {
+                    mBtnLater.setVisibility(View.INVISIBLE);
+                    //uniUId=ConstantsUtil.CUSTOMER+uniUserId;
+                } else {
+                    mBtnLater.setVisibility(View.VISIBLE);
+                   //uniUId=ConstantsUtil.RETAILER.concat(uniUserId);
+                }*/
                 final String  userTypeString=userTypeStr;
-                final String  uniqueUserId=uniUserId;
+                //final String  uniqueUserId=uniUserId;
                 if (UtilityUtil.isNullOrEmpty(name)) {
                     textInputLayoutName.setErrorEnabled(true);
                     textInputLayoutName.setError(StringsUtil.ENTER_NAME);
@@ -251,7 +257,11 @@ public class SignUpActivity extends BaseActivty {
                                     showToast("Authentication failed." + task.getException());
                                     Log.e("signup fail", String.valueOf(task.getException()));
                                 } else {
-                                    startActivity(new Intent(SignUpActivity.this, SuccessActivity.class));
+                                    if (userTypeString.equals(ConstantsUtil.USER_TYPE_Retailer)) {
+                                        startActivity(new Intent(SignUpActivity.this, UberMapActivity.class));
+                                    }else{
+                                        startActivity(new Intent(SignUpActivity.this, HomeScreenSearchActivity.class));
+                                    }
                                     finish();
                                 }
                             }
@@ -279,13 +289,16 @@ public class SignUpActivity extends BaseActivty {
 
 
 
-       /* mtxtViewTerm.setOnClickListener(new View.OnClickListener() {
-                                          public void onClick(View v) {
-                                              showSnackBar(StringsUtil.WIP,5);
-                                          }
-                                      }
+        mBtnLater.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
 
-        );*/
+                        Intent intent = new Intent(SignUpActivity.this, HomeScreenSearchActivity.class);
+                        startActivity(intent);
+
+            }
+        }
+
+        );
         mtxtViewTerm.setOnClickListener(new View.OnClickListener() {
                                             public void onClick(View v) {
                                                 showSnackBar(StringsUtil.WIP, "OK", null); //StringsUtil.WIP,"ok",);

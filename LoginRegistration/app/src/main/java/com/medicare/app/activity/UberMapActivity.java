@@ -142,7 +142,7 @@ FirebaseAuth auth;
                 databaseMediCare.child("users").child(user).child("geocordinates").setValue(userDetail);
                 //databaseMediCare.child("users").child(UtilityUtil.UUID).child("geocordinates").setValue(userDetail);
                 showToast("added succesfully!");
-                Intent intent = new Intent(UberMapActivity.this, DrawerMain.class);
+                Intent intent = new Intent(UberMapActivity.this, HomeScreenSearchActivity.class);
                 startActivity(intent);
             }
         });

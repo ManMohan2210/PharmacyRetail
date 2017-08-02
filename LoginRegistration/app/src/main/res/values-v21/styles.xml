@@ -7,11 +7,12 @@
         <item name="colorAccent">@color/cyan</item>
         <item name="android:colorBackground">?android:attr/colorControlActivated</item>
         <item name="android:colorForeground">@color/cyan_light</item>
-        <item name="android:navigationBarColor">@color/cyan</item>
+        <item name="android:navigationBarColor">@color/dark_cyan</item>
         <item name="android:textColorPrimary">@color/oil</item>
         <item name="android:textColorPrimaryInverse">@android:color/holo_red_dark</item>
         <item name="android:textColorSecondary">@color/cyan</item>
         <item name="android:textColorSecondaryInverse">@color/colorPrimaryDark</item>
         <item name="android:windowBackground">@color/cyan_light</item>
+        <item name="android:statusBarColor">@color/dark_cyan</item>
     </style>
 </resources>

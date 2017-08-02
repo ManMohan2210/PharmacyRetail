@@ -7,7 +7,7 @@
     <string name="TnC">Terms n Conditions</string>
     <string name="already">Already have an account?</string>
     <string name="mob">10 Digit Mobile Number</string>
-    <string name="signup">SIGN UP</string>
+    <string name="signup">Sign Up</string>
     <string name="email">Email Address</string>
     <string name="name">Name</string>
     <string name="password">Password</string>
@@ -32,11 +32,12 @@
     <string name="textForLocation">We will need your location data to show your services available in your area.</string>
     <string name="topCity">Top Cities</string>
     <string name="autoDetect">Auto-detect Current Location</string>
-    <string name="send">Send to Chemist</string>
+    <string name="continues">Continue</string>
     <string name="choseOpt">Choose an option to upload</string>
-    <string name="existing">EXISTING</string>
-    <string name="camera">CAMERA</string>
-    <string name="gallery">GALLERY</string>
+    <string name="prescription">My Prescriptions</string>
+    <string name="uploadPrescription">Upload Prescription</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
     <string name="searchMedicine">    Search your medicine here !</string>
 
     <string name="cancelled">Cancelled</string>
@@ -72,7 +73,7 @@
     <string name="loading">Loading…</string>
     <string name="auth_code_fmt">Auth Code: %s</string>
     <string name="id_token_fmt">ID Token: %s</string>
-
+    <string name="later">Later</string>
     <!-- Google Play Services error for Toast -->
     <string name="play_services_error_fmt">Google Play Services Error: %i</string>
 
@@ -167,12 +168,17 @@
     <string name="customnotificationticker">Custom Notification Ticker</string>
     <string name="notification">Notification</string>
     <string name="customnotification">Custom Notification</string>
+    <string name="home">Home</string>
+    <string name="search_medicine">Search Medicine</string>
+    <string name="add_location">Add Location</string>
+    <string name="logout">Logout</string>
     <string-array name="navigation_drawer_items_array">
         <item>Home</item>
         <item>Add Location</item>
         <item>Search Medicine</item>
         <item>Logout</item>
-    </string-array>>
+    </string-array>
+    >
 
 </resources>
 
