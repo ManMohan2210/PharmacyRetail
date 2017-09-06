@@ -140,12 +140,12 @@ public class DrawerMain extends BaseActivty implements View.OnClickListener{
                 break;
             case 1:
                 showToast("Add Location");
-                 intent = new Intent(DrawerMain.this, UberMapActivity.class);
+                 intent = new Intent(DrawerMain.this, RetailerMapActivity.class);
                 startActivity(intent);
                 break;
             case 2:
                 showToast("search medicine");
-                intent = new Intent(DrawerMain.this, UploadPrescriptionActivity.class);
+                intent = new Intent(DrawerMain.this, HomeScreenSearchActivity.class);
                 startActivity(intent);
                 break;
             case 3:

@@ -70,7 +70,7 @@ public class SuccessActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Intent intent = new Intent(SuccessActivity.this, NoNetworkActivity.class);
-                Intent intent = new Intent(SuccessActivity.this, UberMapActivity.class);
+                Intent intent = new Intent(SuccessActivity.this, RetailerMapActivity.class);
                 startActivity(intent);
             }
         });

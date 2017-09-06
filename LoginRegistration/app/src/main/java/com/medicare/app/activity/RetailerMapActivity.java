@@ -32,6 +32,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.geofire.GeoFire;
+import com.firebase.geofire.GeoLocation;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -65,7 +67,7 @@ import static com.medicare.launch.app.R.id.lon;
 import static com.medicare.launch.app.R.id.map;
 
 
-public class UberMapActivity extends BaseActivty implements
+public class RetailerMapActivity extends BaseActivty implements
         OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
     private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
@@ -97,7 +99,7 @@ public class UberMapActivity extends BaseActivty implements
     private static final int REQUEST_CODE_AUTOCOMPLETE = 1;
     private Button mAddLocation;
     private TextView mLat;
-FirebaseAuth auth;
+    FirebaseAuth auth;
     private TextView mLon;
 
     @Override
@@ -105,7 +107,7 @@ FirebaseAuth auth;
         auth = FirebaseAuth.getInstance();
         databaseMediCare = FirebaseDatabase.getInstance().getReference();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_uber_map);
+        setContentView(R.layout.activity_retailer_map);
         mContext = this;
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -114,8 +116,8 @@ FirebaseAuth auth;
         mLocationMarkerText = (TextView) findViewById(R.id.locationMarkertext);
         mLocationAddress = (TextView) findViewById(R.id.Address);
         mMarker= (ImageView)findViewById(R.id.imageMarker);
-         // mLocationText = (TextView) findViewById(R.id.Locality);
-      //  mAddLocation=(Button) findViewById(R.id.btnAddLocation);
+        // mLocationText = (TextView) findViewById(R.id.Locality);
+        //  mAddLocation=(Button) findViewById(R.id.btnAddLocation);
         mLat=(TextView) findViewById(lat);
         mLon=(TextView) findViewById(lon);
         /*mLocationText.setOnClickListener(new View.OnClickListener() {
@@ -136,13 +138,15 @@ FirebaseAuth auth;
 
                 String user = firebaseAuth.getCurrentUser().getUid();
                 String address = mLocationAddress.getText().toString().trim();
-                String longitude = mLon.getText().toString().trim();
-                String latitude = mLat.getText().toString().trim();
+                String lon = mLon.getText().toString().trim();
+                String lat = mLat.getText().toString().trim();
+                double longitude = Double.parseDouble(lon);
+                double latitude = Double.parseDouble(lat);
                 UserTypeModel userDetail = new UserTypeModel(address, longitude, latitude);
                 databaseMediCare.child("users").child(user).child("geocordinates").setValue(userDetail);
-                //databaseMediCare.child("users").child(UtilityUtil.UUID).child("geocordinates").setValue(userDetail);
+
                 showToast("added succesfully!");
-                Intent intent = new Intent(UberMapActivity.this, HomeScreenSearchActivity.class);
+                Intent intent = new Intent(RetailerMapActivity.this, HomeScreenSearchActivity.class);
                 startActivity(intent);
             }
         });
@@ -178,7 +182,7 @@ FirebaseAuth auth;
         } else {
             Toast.makeText(mContext, "Location not supported in this device", Toast.LENGTH_SHORT).show();
         }
-      }
+    }
 
 
 
@@ -232,16 +236,11 @@ FirebaseAuth auth;
             }
         });
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return;
         }
-//        mMap.setMyLocationEnabled(true);
+        buildGoogleApiClient();
+     mMap.setMyLocationEnabled(true);
+
 //        mMap.getUiSettings().setMyLocationButtonEnabled(true);
 //
 //        // Add a marker in current location and move the camera
@@ -254,13 +253,6 @@ FirebaseAuth auth;
     @Override
     public void onConnected(Bundle bundle) {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return;
         }
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
@@ -280,7 +272,7 @@ FirebaseAuth auth;
         try {
             LocationRequest mLocationRequest = new LocationRequest();
             mLocationRequest.setInterval(10000);
-            mLocationRequest.setFastestInterval(5000);
+            mLocationRequest.setFastestInterval(1000);
             mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
             LocationServices.FusedLocationApi.requestLocationUpdates(
                     mGoogleApiClient, mLocationRequest, this);
@@ -297,51 +289,55 @@ FirebaseAuth auth;
         mGoogleApiClient.connect();
     }
 
-/*    @Override
+    /*    @Override
+        public void onLocationChanged(Location location) {
+            try {
+                if (location != null)
+                    changeMap(location);
+                LocationServices.FusedLocationApi.removeLocationUpdates(
+                        mGoogleApiClient, this);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }*/
+    @Override
     public void onLocationChanged(Location location) {
-        try {
-            if (location != null)
-                changeMap(location);
-            LocationServices.FusedLocationApi.removeLocationUpdates(
-                    mGoogleApiClient, this);
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        mLastLocation = location;
+        String fullAddress;
+        if (mCurrLocationMarker != null) {
+            mCurrLocationMarker.remove();
         }
-    }*/
-@Override
-public void onLocationChanged(Location location) {
+        //Place current location marker
+        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(latLng);
+        mCurrLocationMarker = mMap.addMarker(markerOptions);
 
-    mLastLocation = location;
-    String fullAddress;
-    if (mCurrLocationMarker != null) {
-        mCurrLocationMarker.remove();
-    }
-    //Place current location marker
-    LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-    MarkerOptions markerOptions = new MarkerOptions();
-    markerOptions.position(latLng);
-   // markerOptions.title("Current Position");
-   // markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
-    mCurrLocationMarker = mMap.addMarker(markerOptions);
+        //move map camera
 
-    //move map camera
-    //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-    //mMap.animateCamera(CameraUpdateFactory.zoomTo(9));
-    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,12));
-    fullAddress =getCompleteAddressString(location.getLatitude(),location.getLongitude());
-    mLocationMarkerText.setText(fullAddress);
-    mLocationAddress.setText(fullAddress);
-    //stop location updates
-    if (mGoogleApiClient != null) {
-        LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,12));
+        fullAddress =getCompleteAddressString(location.getLatitude(),location.getLongitude());
+        mLocationMarkerText.setText(fullAddress);
+        mLocationAddress.setText(fullAddress);
+        //stop location updates
+        if (mGoogleApiClient != null) {
+            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+        }
+
+        // start of code for geofire
+        String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("retialerAvailable");
+        GeoFire geoFire = new GeoFire(ref);
+        geoFire.setLocation(user_id, new GeoLocation(location.getLatitude(),location.getLongitude()));
+
+        //end of code for geofire
     }
-}
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
 
     }
-
 
     protected synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -366,7 +362,14 @@ public void onLocationChanged(Location location) {
     protected void onStop() {
         super.onStop();
         try {
-
+            // un comment if needed TODO
+//            // start of code for geofire
+//            String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+//            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("retialerAvailable");
+//            GeoFire geoFire = new GeoFire(ref);
+//            geoFire.removeLocation(user_id);
+//
+//            //end of code for geofire
         } catch (RuntimeException e) {
             e.printStackTrace();
         }
@@ -421,7 +424,7 @@ public void onLocationChanged(Location location) {
 
             mMap.setMyLocationEnabled(true);
             mMap.getUiSettings().setMyLocationButtonEnabled(true);
-            mMap.animateCamera(CameraUpdateFactory
+            mMap.moveCamera(CameraUpdateFactory
                     .newCameraPosition(cameraPosition));
 
 
@@ -492,10 +495,10 @@ public void onLocationChanged(Location location) {
         // mLocationAddressTextView.setText(mAddressOutput);
         try {
             if (mAreaOutput != null)
-               // mLocationText.setText(mAreaOutput+ "");
+                // mLocationText.setText(mAreaOutput+ "");
 
-            mLocationAddress.setText(mAddressOutput);
-          //  mLocationText.setText(mAreaOutput);
+                mLocationAddress.setText(mAddressOutput);
+            //  mLocationText.setText(mAreaOutput);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -589,7 +592,7 @@ public void onLocationChanged(Location location) {
                     return;
                 }
                 mMap.setMyLocationEnabled(true);
-                mMap.animateCamera(CameraUpdateFactory
+                mMap.moveCamera(CameraUpdateFactory
                         .newCameraPosition(cameraPosition));
 
 
@@ -622,22 +625,22 @@ public void onLocationChanged(Location location) {
             }
         } catch (Exception e) {
             e.printStackTrace();
-          Log.w("My Current loction address", "Canont get Address!");
+            Log.w("My Current loction address", "Canont get Address!");
 
             Log.w("exception",e.getMessage());
-    }
+        }
         return strAdd;
     }
 
 
 
     void getCurrentLocation(Location mLocation) {
-       double lat= mLocation.getLatitude();
+        double lat= mLocation.getLatitude();
         double lon=mLocation.getLongitude();
 
         LatLng latLong = new
                 LatLng(mLocation.getLatitude(),mLocation.getLongitude());
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLong,12));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLong,12));
 
 
     }

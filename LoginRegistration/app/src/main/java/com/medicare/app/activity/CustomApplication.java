@@ -1,6 +1,5 @@
 package com.medicare.app.activity;
 
-import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.firebase.client.Firebase;
 
@@ -15,7 +14,7 @@ public class CustomApplication extends android.app.Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        FacebookSdk.sdkInitialize(getApplicationContext());
+        //FacebookSdk.sdkInitialize(getApplicationContext());
         Firebase.setAndroidContext(this);
 
         if(null != SharedPrefManager.getInstance(getApplicationContext()).getUUID()){

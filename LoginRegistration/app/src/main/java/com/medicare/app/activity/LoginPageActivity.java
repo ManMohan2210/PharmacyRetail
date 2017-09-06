@@ -88,9 +88,8 @@ public class LoginPageActivity extends BaseActivty {
         FirebaseUser mUser = firebaseAuth.getCurrentUser();
         if (mUser != null) {
             // User is signed in
-            Intent intent = new Intent(getApplicationContext(), DrawerMain.class);
+            Intent intent = new Intent(getApplicationContext(), HomeScreenSearchActivity.class);
             String uid = firebaseAuth.getCurrentUser().getUid();
-
 
             startActivity(intent);
             finish();
@@ -166,6 +165,7 @@ public class LoginPageActivity extends BaseActivty {
                             finish();
                             Intent intent = new Intent(LoginPageActivity.this, DrawerMain.class);
                             startActivity(intent);
+
                         } else {
                             showToast("login failed!");
                         }
@@ -173,6 +173,10 @@ public class LoginPageActivity extends BaseActivty {
                 });
 
 
+            }
+            public void onBackPressed() {
+                // Disable going back to the MainActivity
+                moveTaskToBack(true);
             }
         });
 

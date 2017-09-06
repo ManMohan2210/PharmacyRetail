@@ -93,7 +93,7 @@ public class AddExtraUserDeatils extends AppCompatActivity {
                 databaseMediCare.child("users").child(uid).setValue(userDetail);
                 // start map activity
                 if (userType.equals("Retailer")) {
-                    Intent intent = new Intent(AddExtraUserDeatils.this, UberMapActivity.class);
+                    Intent intent = new Intent(AddExtraUserDeatils.this, RetailerMapActivity.class);
                     startActivity(intent);
                 }else{
                     Intent intent = new Intent(AddExtraUserDeatils.this, DrawerMain.class);

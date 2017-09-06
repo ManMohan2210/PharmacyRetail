@@ -2,6 +2,8 @@
 package com.medicare.app.activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -10,22 +12,36 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.firebase.client.Firebase;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.medicare.app.adapters.MedicinesListAdapter;
+import com.medicare.app.models.UploadImage;
 import com.medicare.launch.app.R;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
@@ -39,11 +55,11 @@ public class HomeScreenSearchActivity extends BaseActivty implements OnItemClick
     private Set<String> history;
     Map<String, Integer> mapIndex;
     //ListView mLvMedicines;
-
+    private UserTypeModel user ;
     //@Bind(R.id.auto_search)
     AutoCompleteTextView mAutoTextView;
+    private DatabaseReference mDatabase;
 
-    private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
    // @Bind(R.id.iv_selected_image)
     ImageView mSelectedImage;
@@ -53,9 +69,16 @@ public class HomeScreenSearchActivity extends BaseActivty implements OnItemClick
    RelativeLayout mGalleryLayout;
   //  @Bind(R.id.layoutPrescription)
   RelativeLayout mPrescriptionLayout;
+    Button mBtnContinue;
     private static final int CAMERA_REQUEST = 1111;
     private static final int GALLERY_REQUEST = 2222;
     private ArrayAdapter<String> adapter;
+    Firebase ref = new Firebase("https://medicare-b5a7b.firebaseio.com/");
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReferenceFromUrl("gs://medicare-b5a7b.appspot.com/medicine images");
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+
+    Uri uri;
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
@@ -67,8 +90,11 @@ mSelectedImage = (ImageView) findViewById(R.id.iv_selected_image);
         mCameraLayout=(RelativeLayout)findViewById(R.id.layoutCamera);
         mGalleryLayout=(RelativeLayout)findViewById(R.id.layoutGallery);
         mPrescriptionLayout=(RelativeLayout)findViewById(R.id.layoutPrescription);
-        initListener();
+        mBtnContinue=(Button)findViewById(R.id.btn_continue);
         firebaseAuth =FirebaseAuth.getInstance();
+
+
+
         mAutoTextView.setOnKeyListener(new View.OnKeyListener()
         {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -86,6 +112,7 @@ mSelectedImage = (ImageView) findViewById(R.id.iv_selected_image);
         mCameraLayout.setOnClickListener(this);
         mPrescriptionLayout.setOnClickListener( this);
         mGalleryLayout.setOnClickListener( this);
+        mBtnContinue.setOnClickListener(this);
         setAutoCompleteSource();
         // Set the "Enter" event on the search input
 navigation();
@@ -116,12 +143,14 @@ navigation();
                                 startActivity(intent);
                                 break;
                             case R.id.action_add_location:
-                                intent = new Intent(HomeScreenSearchActivity.this, UberMapActivity.class);
+                                intent = new Intent(HomeScreenSearchActivity.this, RetailerMapActivity.class);
                                 startActivity(intent);
                                 break;
                             case R.id.action_logout:
                                 showToast("Logout");
                                 firebaseAuth.signOut();
+                                intent = new Intent(HomeScreenSearchActivity.this, LoginPageActivity.class);
+                                startActivity(intent);
                                 break;
                         }
                         return false;
@@ -143,12 +172,16 @@ navigation();
                 startActivityForResult(cameraIntent, CAMERA_REQUEST);
                 break;
             case R.id.layoutPrescription:
-//TODO
+                startActivity(new Intent(this, ShowImagesActivity.class));
                 break;
             case R.id.layoutGallery:
                 Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 intent.setType("image/*");
                 startActivityForResult(intent, GALLERY_REQUEST);
+                break;
+            case R.id.btn_continue:
+                Intent continu = new Intent(HomeScreenSearchActivity.this, ShapeRibbleActivity.class);
+                startActivity(continu);
                 break;
         }
     }
@@ -167,11 +200,12 @@ navigation();
     }
 
     private void handleGallaryResult(Intent data) {
-        Uri uri = data.getData();
+         uri = data.getData();
 
             try {
                 Bitmap photo = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
                 mSelectedImage.setImageBitmap(photo);
+                saveImageToFirebase(photo);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -179,29 +213,75 @@ navigation();
 
     }
 
+
+
     private void handleCameraResult(Intent data) {
         Bitmap photo = (Bitmap) data.getExtras().get("data");
         mSelectedImage.setImageBitmap(photo);
-
+        saveImageToFirebase(photo);
     }
+    public String getFileExtension(Uri uri) {
+        ContentResolver cR = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(uri));
+    }
+    public void saveImageToFirebase(Bitmap bitmap) {
+       final String userId = firebaseAuth.getCurrentUser().getUid();
+        if (uri != null) {
+        final long timestamp = new Date().getTime();
+        final String uploadId = ref.push().getKey();
+        StorageReference ImagesRef = storageRef.child("images/" +uploadId  + timestamp +".jpg" );
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos);
+        byte[] data = baos.toByteArray();
+        UploadTask uploadTask = ImagesRef.putBytes(data);
+        //displaying progress dialog while image is uploading
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Uploading");
+        progressDialog.show();
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                showToast("Oops ! something went wrong, please try again.");
+                // Handle unsuccessful uploads
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                Log.d("downloadUrl-->", "" + downloadUrl);
+
+                //creating the upload object to store uploaded image details
+                UploadImage upload = new UploadImage(uploadId,downloadUrl.toString(),timestamp);
+
+                //adding an upload to firebase database
+               // String uploadId = mDatabase.push().getKey();
+                ref.child("users").child(userId).child("imageUrl").child(uploadId).setValue(upload);
+
+            }
+        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                //displaying the upload progress
+                double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
+                progressDialog.dismiss();
+            }
+
+        });}
+        else{
+            //TODO
+        }
+}
+
     private void setAutoCompleteSource() {
-       // AutoCompleteTextView mAutoTextView  = (AutoCompleteTextView) findViewById(R.id.auto_search);
-        /*//AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.textInput);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_list_item_1, history.toArray(new String[history.size()]));
-        textView.setAdapter(adapter);*/
-     //   ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-//                this, android.R.layout.simple_list_item_1, history.toArray(new String[history.size()]));
-     //   mAutoTextView.setAdapter(adapter);
         LinkedList<String> mLinked = new LinkedList<String>();
         for (int i = 0; i < item.length; i++) {
             mLinked.add(item[i]);
         }
         Collections.sort(mLinked);
         MedicinesListAdapter medicinesListAdapter = new MedicinesListAdapter(this, mLinked);
-        // mLvMedicines = (ListView) findViewById(R.id.lv_medicines);
-        //mLvMedicines.setFastScrollEnabled(true);
-        //  mLvMedicines.setAdapter(medicinesListAdapter);
         settings = getSharedPreferences(PREFS_NAME, 0);
         history = settings.getStringSet(PREFS_SEARCH_HISTORY, new HashSet<String>());
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, item);

@@ -18,7 +18,10 @@ private     String userId;
     private String email;
     private String password;
 
-
+    private     Double geocordinates;
+    private  String address;
+    private double latitude ;
+    private double longitude ;
     private String accessToken;
     //private String uniqueUId;
     //private Timestamp signUpTime;
@@ -28,7 +31,13 @@ private     String userId;
 
     private static UserTypeModel userTypeModel = new UserTypeModel();
 
-   public static UserTypeModel getInastnce(){
+    public UserTypeModel(String address, double longitude, double latitude) {
+        this.address = address;
+        this.longitude = longitude;
+        this.latitude = latitude;
+    }
+
+    public static UserTypeModel getInastnce(){
         return  userTypeModel;
     }
 
@@ -54,27 +63,9 @@ private     String userId;
 
     }
 
-    public UserTypeModel(String userName, String email, String userId, String photoUrl, String userType) {
-        this.userName = userName;
-        this.email = email;
-        this.userType = userType;
-        this.photoUrl = photoUrl;
-        this.userId = userId;
-    }
-    public UserTypeModel(String userId,String email, String userName) {
-        this.userName = userName;
-        this.email = email;
-        this.userId = userId;
-    }
-    public UserTypeModel(String mobileNumber, String userType) {
-        this.mobileNumber = mobileNumber;
-        this.userType = userType;
-    }
 
-    private     Double geocordinates;
-    private  String address;
-    private double latitude ;
-    private double longitude ;
+
+
 
 
     @Exclude

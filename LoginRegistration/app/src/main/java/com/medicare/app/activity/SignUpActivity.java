@@ -125,13 +125,19 @@ public class SignUpActivity extends BaseActivty {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
+               /* if (user != null) {
                     // User is signed in
-                    // Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                        Intent intent = new Intent(getApplicationContext(), HomeScreenSearchActivity.class);
+                     //   String uid = firebaseAuth.getCurrentUser().getUid();
+                        startActivity(intent);
+                        finish();
                 } else {
                     // User is signed out
-                    //  Log.d(TAG, "onAuthStateChanged:signed_out");
-                }
+                    Intent intent = new Intent(getApplicationContext(), LoginPageActivity.class);
+                  //  String uid = firebaseAuth.getCurrentUser().getUid();
+                    startActivity(intent);
+                    finish();
+                }*/
                 // ...
             }
         };
@@ -258,7 +264,7 @@ public class SignUpActivity extends BaseActivty {
                                     Log.e("signup fail", String.valueOf(task.getException()));
                                 } else {
                                     if (userTypeString.equals(ConstantsUtil.USER_TYPE_Retailer)) {
-                                        startActivity(new Intent(SignUpActivity.this, UberMapActivity.class));
+                                        startActivity(new Intent(SignUpActivity.this, RetailerMapActivity.class));
                                     }else{
                                         startActivity(new Intent(SignUpActivity.this, HomeScreenSearchActivity.class));
                                     }

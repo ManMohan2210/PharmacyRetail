@@ -4,7 +4,7 @@
     <string name="welcome">Welcome!</string>
     <string name="account">Dont have an account yet?</string>
     <string name="agree">By signing up, you agree to our</string>
-    <string name="TnC">Terms n Conditions</string>
+    <string name="TnC">Terms &amp; Conditions</string>
     <string name="already">Already have an account?</string>
     <string name="mob">10 Digit Mobile Number</string>
     <string name="signup">Sign Up</string>
@@ -34,7 +34,7 @@
     <string name="autoDetect">Auto-detect Current Location</string>
     <string name="continues">Continue</string>
     <string name="choseOpt">Choose an option to upload</string>
-    <string name="prescription">My Prescriptions</string>
+    <string name="prescription">Prescriptions History</string>
     <string name="uploadPrescription">Upload Prescription</string>
     <string name="camera">Camera</string>
     <string name="gallery">Gallery</string>

@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/email"
                 android:inputType="textEmailAddress"
-                android:text="star@gmail.com"
+                android:text="sender@test.com"
                 android:textColor="@color/oil"/>
         </android.support.design.widget.TextInputLayout>
 
@@ -70,6 +70,7 @@
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:background="@color/cyan"
             android:padding="12dp"
+            android:textSize="@dimen/button_font_size"
             android:text="@string/login"
             android:textColor="@color/white"/>
         <!--forgot password label-->
