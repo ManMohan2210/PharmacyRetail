@@ -57,18 +57,16 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.medicare.app.Util.MyLocation;
 import com.medicare.launch.app.R;
 
 import java.util.List;
 import java.util.Locale;
-
-import static com.medicare.launch.app.R.id.lat;
-import static com.medicare.launch.app.R.id.lon;
 import static com.medicare.launch.app.R.id.map;
 
 
 public class RetailerMapActivity extends BaseActivty implements
-        OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
+        OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener, MyLocation.LocationResult {
     private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
@@ -83,6 +81,7 @@ public class RetailerMapActivity extends BaseActivty implements
     private AddressResultReceiver mResultReceiver;
     private ImageView mMarker;
     Location mLastLocation;
+    Location mLocation;
     DatabaseReference databaseMediCare;
     //GoogleApiClient mGoogleApiClient;
     Marker mCurrLocationMarker;
@@ -98,9 +97,7 @@ public class RetailerMapActivity extends BaseActivty implements
     TextView mLocationText;
     private static final int REQUEST_CODE_AUTOCOMPLETE = 1;
     private Button mAddLocation;
-    private TextView mLat;
     FirebaseAuth auth;
-    private TextView mLon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,23 +109,12 @@ public class RetailerMapActivity extends BaseActivty implements
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(map);
-        Intent intent = getIntent();
         mLocationMarkerText = (TextView) findViewById(R.id.locationMarkertext);
         mLocationAddress = (TextView) findViewById(R.id.Address);
         mMarker= (ImageView)findViewById(R.id.imageMarker);
-        // mLocationText = (TextView) findViewById(R.id.Locality);
-        //  mAddLocation=(Button) findViewById(R.id.btnAddLocation);
-        mLat=(TextView) findViewById(lat);
-        mLon=(TextView) findViewById(lon);
-        /*mLocationText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                openAutocompleteActivity();
-
-            }
-
-        });*/
+        final MyLocation myLocation = new MyLocation();
+        myLocation.getLocation(this,this);
 
         FloatingActionButton myFab = (FloatingActionButton)findViewById(R.id.myFAB);
         myFab.setOnClickListener(new View.OnClickListener() {
@@ -138,10 +124,13 @@ public class RetailerMapActivity extends BaseActivty implements
 
                 String user = firebaseAuth.getCurrentUser().getUid();
                 String address = mLocationAddress.getText().toString().trim();
-                String lon = mLon.getText().toString().trim();
-                String lat = mLat.getText().toString().trim();
-                double longitude = Double.parseDouble(lon);
-                double latitude = Double.parseDouble(lat);
+                double longitude = 0;
+                double latitude = 0;
+                if(mLocation!=null){
+                    latitude = mLocation.getLatitude();
+                    longitude =mLocation.getLongitude();
+                }
+
                 UserTypeModel userDetail = new UserTypeModel(address, longitude, latitude);
                 databaseMediCare.child("users").child(user).child("geocordinates").setValue(userDetail);
 
@@ -201,40 +190,34 @@ public class RetailerMapActivity extends BaseActivty implements
         Log.d(TAG, "OnMapReady");
         mMap = googleMap;
 
-        mMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
+        mMap.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
             @Override
-            public void onCameraChange(CameraPosition cameraPosition) {
-                //Log.d("Camera postion change" + "", cameraPosition + "");
+            public void onCameraIdle() {
+                CameraPosition cameraPosition = mMap.getCameraPosition();
                 mCenterLatLong = cameraPosition.target;
                 String fullAddress = "";
-
                 mMap.clear();
-
                 try {
-
-                    Location mLocation = new Location("");
                     mLocation.setLatitude(mCenterLatLong.latitude);
                     mLocation.setLongitude(mCenterLatLong.longitude);
 
                     startIntentService(mLocation);
-                    // handleNewLocation(mLocation);
-                    //getCurrentLocation(mLocation);
-
                     fullAddress =getCompleteAddressString(mLocation.getLatitude(),mLocation.getLongitude());
                     mLocationMarkerText.setText(fullAddress);
                     mLocationAddress.setText(fullAddress);
-                    //mLocationMarkerText.setText("Lat : " + mCent   //double lat =(String)mCenterLatLong.latitude;
-                    String latitude = Double.toString(mCenterLatLong.latitude);
-                    String longitude = Double.toString(mCenterLatLong.longitude);
-
-                    //double lon= mCenterLatLong.longitude;
-                    mLat.setText(latitude);
-                    mLon.setText(longitude);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
+
+        mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
+            @Override
+            public void onCameraMove() {
+
+            }
+        });
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
@@ -445,6 +428,15 @@ public class RetailerMapActivity extends BaseActivty implements
 
     }
 
+    @Override
+    public void gotLocation(Location location) {
+        mLocation = location;
+        double lat= location.getLatitude();
+        double lon=location.getLongitude();
+
+        LatLng latLong = new LatLng(lat,lon);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLong,12));
+    }
 
 
     /**
@@ -619,13 +611,13 @@ public class RetailerMapActivity extends BaseActivty implements
                     strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n");
                 }
                 strAdd = strReturnedAddress.toString();
-                Log.w("My Current loction address", "" + strReturnedAddress.toString());
+                Log.w("My", "" + strReturnedAddress.toString());
             } else {
-                Log.w("My Current loction address", "No Address returned!");
+                Log.w("My ", "No Address returned!");
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Log.w("My Current loction address", "Canont get Address!");
+            Log.w("My ", "Canont get Address!");
 
             Log.w("exception",e.getMessage());
         }

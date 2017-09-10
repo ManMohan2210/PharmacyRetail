@@ -179,6 +179,7 @@
         <item>Logout</item>
     </string-array>
     >
+    <string name="add_medical_address">Add your medical store address</string>
 
 </resources>
 

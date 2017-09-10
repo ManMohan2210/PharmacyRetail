@@ -249,13 +249,20 @@ private FrameLayout mMainContainer;
                 .make(mMainContainer, msg, Snackbar.LENGTH_LONG)
                 .setAction(callBackAction, callBackListener);
         snackbar.show();*/
-        CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.snackbarCoordinatorLayout);
-        Snackbar snackbar = Snackbar.make(coordinatorLayout, msg, Snackbar.LENGTH_LONG);
-        View view = snackbar.getView();
+//        CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.snackbarCoordinatorLayout);
+//        Snackbar snackbar = Snackbar.make(coordinatorLayout, msg, Snackbar.LENGTH_LONG);
+//        View view = snackbar.getView();
+//        CoordinatorLayout.LayoutParams params =(CoordinatorLayout.LayoutParams)view.getLayoutParams();
+//        params.gravity = Gravity.TOP;
+//        view.setLayoutParams(params);
+//        snackbar.show();
+        CoordinatorLayout viewParent = (CoordinatorLayout)findViewById(R.id.snackbarCoordinatorLayout);
+        Snackbar snack = Snackbar.make(viewParent, msg, Snackbar.LENGTH_LONG);
+        View view = snack.getView();
         CoordinatorLayout.LayoutParams params =(CoordinatorLayout.LayoutParams)view.getLayoutParams();
         params.gravity = Gravity.TOP;
         view.setLayoutParams(params);
-        snackbar.show();
+        snack.show();
     }
 
 }

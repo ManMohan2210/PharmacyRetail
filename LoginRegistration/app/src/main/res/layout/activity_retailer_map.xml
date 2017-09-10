@@ -1,108 +1,69 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/white"
-                android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/container_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
 
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/address_container_height"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
             android:orientation="vertical">
-              <TextView android:gravity="center_vertical"
-                      android:id="@+id/add_address"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:text="Add address for medicine pickup location (Example- Your shop or store address.)"
-                      android:textSize="@dimen/font_22"
-                  android:textColor="@color/cyan"/>
+
+            <TextView
+                android:id="@+id/add_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/add_medical_address"
+                android:textColor="@color/cyan"
+                android:textSize="@dimen/text_size_primary" />
 
             <TextView
                 android:id="@+id/Address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/add_address"
                 android:layout_marginTop="5dp"
                 android:ellipsize="end"
                 android:enabled="false"
                 android:hint="Address"
                 android:textColor="@color/oil"
-                android:textSize="@dimen/font_22"
-                android:layout_below="@id/add_address"
-                />
-          <!--  <TextView android:gravity="center_vertical"
-                      android:id="@+id/Locality"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:drawableLeft="@drawable/ic_btn_current_location"
-                      android:drawablePadding="@dimen/list_row_padding"
-                      android:ellipsize="end"
-                      android:padding="10dp"
-                      android:singleLine="true"
-                      android:text="Click to change location"
-                      android:textSize="@dimen/font_22" />-->
-
-
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/myFAB"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_add_white_48dp"
-                app:elevation="4dp"
-
-                android:layout_alignTop="@+id/Address"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginRight="11dp"
-                android:layout_marginEnd="11dp"/>
-
-            <TextView
-                android:id="@+id/lat"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                />
-
-            <TextView
-                android:id="@+id/lon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                />
-
-
+                android:textSize="@dimen/text_size_secondary" />
         </RelativeLayout>
     </LinearLayout>
-    <FrameLayout
+
+    <RelativeLayout
+        android:id="@+id/fl_map"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/fl_map"
         android:layout_below="@id/container_toolbar">
 
         <fragment
-            xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/map"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context="com.sample.sishin.maplocation.MapsActivity" />
+            android:layout_height="match_parent" />
 
         <LinearLayout
             android:id="@+id/locationMarker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:layout_gravity="center"
             android:layout_marginBottom="30dp"
             android:gravity="center"
@@ -118,13 +79,13 @@
                 android:paddingLeft="2dp"
                 android:paddingRight="2dp"
                 android:text=" Set your Location "
-                android:textColor="@android:color/white"/>
+                android:textColor="@android:color/white" />
 
             <ImageView
                 android:id="@+id/imageMarker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/add_marker"/>
+                android:src="@drawable/add_marker" />
 
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btnAddLocation"
@@ -133,12 +94,21 @@
                 android:background="#000000"
                 android:text="Add Location"
                 android:textColor="@color/white"
-                android:visibility="invisible"/>
+                android:visibility="invisible" />
         </LinearLayout>
 
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/myFAB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginRight="@dimen/activity_vertical_margin"
+            android:src="@drawable/ic_add_white_48dp"
+            app:elevation="@dimen/elevation" />
 
-
-
-    </FrameLayout>
+    </RelativeLayout>
 
 </RelativeLayout>
