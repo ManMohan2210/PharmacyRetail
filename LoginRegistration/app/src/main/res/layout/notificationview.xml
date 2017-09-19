@@ -9,16 +9,16 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/lbltitle" />
+        android:layout_toRightOf="@+id/tv_title" />
 
     <TextView
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/title"
-        android:layout_toRightOf="@+id/lbltext" />
+        android:layout_toRightOf="@+id/tv_text" />
     <TextView
-        android:id="@+id/lbltitle"
+        android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="MediCare"
@@ -27,10 +27,10 @@
         android:layout_marginTop="@dimen/activity_vertical_margin"/>
 
     <TextView
-        android:id="@+id/lbltext"
+        android:id="@+id/tv_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/lbltitle"
+        android:layout_below="@+id/tv_title"
         android:textColor="@color/colorRed"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
@@ -47,8 +47,8 @@
         android:textColor="@color/white"
         android:layout_alignBaseline="@+id/btn_show_notif"
         android:layout_alignBottom="@+id/btn_show_notif"
-        android:layout_alignLeft="@+id/lbltext"
-        android:layout_alignStart="@+id/lbltext"
+        android:layout_alignLeft="@+id/tv_text"
+        android:layout_alignStart="@+id/tv_text"
         android:layout_marginLeft="48dp"
         android:layout_marginStart="48dp"/>
     <Button
@@ -60,9 +60,9 @@
         android:layout_marginTop="67dp"
         android:layout_marginRight="54dp"
         android:layout_marginEnd="54dp"
-        android:layout_below="@+id/lbltext"
-        android:layout_alignRight="@+id/lbltext"
-        android:layout_alignEnd="@+id/lbltext"/>
+        android:layout_below="@+id/tv_text"
+        android:layout_alignRight="@+id/tv_text"
+        android:layout_alignEnd="@+id/tv_text"/>
 
 
 

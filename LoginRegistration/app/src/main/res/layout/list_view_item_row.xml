@@ -6,7 +6,7 @@
                 android:padding="10dp" >
 
     <ImageView
-        android:id="@+id/imageViewIcon"
+        android:id="@+id/imageview_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -14,11 +14,11 @@
         android:paddingRight="10dp" />
 
     <TextView
-        android:id="@+id/textViewName"
+        android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/imageViewIcon"
+        android:layout_toRightOf="@+id/imageview_icon"
         android:paddingRight="10dp"
         android:text="Item Name"
         android:textColor="@android:color/black"

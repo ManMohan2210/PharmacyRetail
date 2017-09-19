@@ -21,7 +21,7 @@
         android:layout_alignParentStart="true">
 
         <RelativeLayout
-            android:id="@+id/layoutCamera"
+            android:id="@+id/layout_camera"
             android:layout_width="333.3dp"
             android:layout_height="match_parent"
             android:layout_weight="0.33"
@@ -33,7 +33,7 @@
             android:layout_marginRight="1dp">
 
             <ImageView
-                android:id="@+id/imageViewCamera"
+                android:id="@+id/imageview_camera"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/camera"
@@ -53,7 +53,7 @@
             android:id="@+id/layoutExisting"
             android:layout_width="333.3dp"
             android:layout_height="match_parent"
-            android:layout_alignLeft="@id/layoutCamera"
+            android:layout_alignLeft="@id/layout_camera"
             android:layout_weight="0.33"
             android:background="@drawable/background_with_shadow"
             android:layout_marginRight="1dp">
@@ -78,7 +78,7 @@
 
 
         <RelativeLayout
-            android:id="@+id/layoutGallery"
+            android:id="@+id/layout_gallery"
             android:layout_width="333.3dp"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@id/layoutExisting"
@@ -86,7 +86,7 @@
             android:background="@drawable/background_with_shadow">
 
             <ImageView
-                android:id="@+id/imageViewGallery"
+                android:id="@+id/image_view_gallery"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                  android:src="@drawable/gallery"
@@ -101,8 +101,8 @@
                 android:text="@string/gallery"
                 android:layout_marginBottom="19dp"
                 android:layout_alignParentBottom="true"
-                android:layout_alignLeft="@+id/imageViewGallery"
-                android:layout_alignStart="@+id/imageViewGallery" />
+                android:layout_alignLeft="@+id/image_view_gallery"
+                android:layout_alignStart="@+id/image_view_gallery" />
 
 
         </RelativeLayout>
@@ -111,7 +111,7 @@
 
     <TextView
 
-        android:id="@+id/choseOpt"
+        android:id="@+id/chose_opt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/choseOpt"

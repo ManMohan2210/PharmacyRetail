@@ -42,17 +42,7 @@ import butterknife.ButterKnife;
 
 public class SignUpActivity extends BaseActivty {
 
-    // private Button btnLogin;
-    //  public final int CODE_SIGNUP = 1111;
-    // private EditText edtName;
-    //private EditText edtEmail;
-    //private EditText edtPassword;
-    //private Button btnSignUp;
-    // private TextView txtViewSignUp;
-    // private EditText edtMobNum;
-    // private TextView txtViewTerm;
-    //private CheckBox chbSignIn;
-    // private CheckBox checkBoxShowPwd;
+
     @Bind(R.id.edtName)
     EditText mEdtName;
     @Bind(R.id.edtMobNum)
@@ -93,7 +83,7 @@ public class SignUpActivity extends BaseActivty {
     Button mBtnLater;
 
 
-    DatabaseReference databaseMediCare;
+    private DatabaseReference databaseMediCare;
 
     private FirebaseDatabase mFirebaseDatabase;
 
@@ -103,7 +93,7 @@ public class SignUpActivity extends BaseActivty {
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
-    Firebase usersTimeStampsRef=null;
+    private  Firebase usersTimeStampsRef = null;
 
 
     private ProgressDialog progressDialog;
@@ -125,39 +115,24 @@ public class SignUpActivity extends BaseActivty {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-               /* if (user != null) {
-                    // User is signed in
-                        Intent intent = new Intent(getApplicationContext(), HomeScreenSearchActivity.class);
-                     //   String uid = firebaseAuth.getCurrentUser().getUid();
-                        startActivity(intent);
-                        finish();
-                } else {
-                    // User is signed out
-                    Intent intent = new Intent(getApplicationContext(), LoginPageActivity.class);
-                  //  String uid = firebaseAuth.getCurrentUser().getUid();
-                    startActivity(intent);
-                    finish();
-                }*/
-                // ...
+
             }
         };
         addEventFirebaseListener();
     }
 
 
-
     private void initListener() {
         mRBRetailer.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v){
+            public void onClick(View v) {
                 mBtnLater.setVisibility(View.INVISIBLE);
             }
-        } );
+        });
         mRBCustomer.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v){
+            public void onClick(View v) {
                 mBtnLater.setVisibility(View.VISIBLE);
             }
-        } );
-
+        });
 
 
         mBtnSignUp.setOnClickListener(new View.OnClickListener() {
@@ -172,25 +147,18 @@ public class SignUpActivity extends BaseActivty {
                 mEdtMobNum.setCursorVisible(false);
                 mEdtEmail.setCursorVisible(false);
 
-                String userTypeStr ;
+                String userTypeStr;
 
                 final String uniUserId = SharedPrefManager.getInstance(getApplicationContext()).getUUID();
-                //String uniUId=null;
+
 
                 int selectedId = mRbGroup.getCheckedRadioButtonId();
 
-                // find the radio button by returned id
+
                 RadioButton radioButton = (RadioButton) findViewById(selectedId);
-                userTypeStr= (String) radioButton.getText();
-                /*if (mRBRetailer.isSelected()) {
-                    mBtnLater.setVisibility(View.INVISIBLE);
-                    //uniUId=ConstantsUtil.CUSTOMER+uniUserId;
-                } else {
-                    mBtnLater.setVisibility(View.VISIBLE);
-                   //uniUId=ConstantsUtil.RETAILER.concat(uniUserId);
-                }*/
-                final String  userTypeString=userTypeStr;
-                //final String  uniqueUserId=uniUserId;
+                userTypeStr = (String) radioButton.getText();
+                final String userTypeString = userTypeStr;
+
                 if (UtilityUtil.isNullOrEmpty(name)) {
                     textInputLayoutName.setErrorEnabled(true);
                     textInputLayoutName.setError(StringsUtil.ENTER_NAME);
@@ -200,7 +168,7 @@ public class SignUpActivity extends BaseActivty {
                     textInputLayoutMNum.setErrorEnabled(true);
                     textInputLayoutMNum.setError(StringsUtil.ENTER_MOBILE);
                     return;
-                } else if (Pattern.matches(mob.pattern(),mobNum) == false) {
+                } else if (Pattern.matches(mob.pattern(), mobNum) == false) {
                     textInputLayoutMNum.setErrorEnabled(true);
                     textInputLayoutMNum.setError(StringsUtil.ENTER_MOBILE);
                     return;
@@ -240,19 +208,14 @@ public class SignUpActivity extends BaseActivty {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 showToast("createUserWithEmail:onComplete:" + task.isSuccessful());
                                 if (task.isSuccessful()) {
-                                    // String id = databaseMediCare.push().getKey();
-                                    // UserTypeModel user = new UserTypeModel(uniqueUserId,name,userTypeString,mobNum,email,password, ServerValue.TIMESTAMP);
-                                    //databaseMediCare.child("users").child(user.getUserId()).setValue(user);
+
                                     String accesstoken = SharedPrefManager.getInstance(getApplicationContext()).getToken();
 
                                     FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
                                     UserTypeModel user = UserTypeModel.getInastnce();
-                                    user.createUser(firebaseUser.getUid(), name, userTypeString, mobNum, email, password,accesstoken);
+                                    user.createUser(firebaseUser.getUid(), name, userTypeString, mobNum, email, password, accesstoken);
                                     databaseMediCare.child("users").child(user.getUserId()).setValue(user);
-//                                    usersTimeStampsRef = usersTimeStampsRef.child("users");
-//                                    usersTimeStampsRef.setValue(ServerValue.TIMESTAMP);
-
 
                                 }
                                 progressDialog.dismiss();
@@ -265,16 +228,13 @@ public class SignUpActivity extends BaseActivty {
                                 } else {
                                     if (userTypeString.equals(ConstantsUtil.USER_TYPE_Retailer)) {
                                         startActivity(new Intent(SignUpActivity.this, RetailerMapActivity.class));
-                                    }else{
+                                    } else {
                                         startActivity(new Intent(SignUpActivity.this, HomeScreenSearchActivity.class));
                                     }
                                     finish();
                                 }
                             }
                         });
-
-                //  Intent intent = new Intent(SignUpActivity.this, SuccessActivity.class);
-                //  startActivity(intent);
 
 
             }
@@ -293,29 +253,20 @@ public class SignUpActivity extends BaseActivty {
         });
 
 
-
-
         mBtnLater.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+                                         public void onClick(View v) {
 
-                        Intent intent = new Intent(SignUpActivity.this, HomeScreenSearchActivity.class);
-                        startActivity(intent);
+                                             Intent intent = new Intent(SignUpActivity.this, HomeScreenSearchActivity.class);
+                                             startActivity(intent);
 
-            }
-        }
+                                         }
+                                     }
 
         );
         mtxtViewTerm.setOnClickListener(new View.OnClickListener() {
                                             public void onClick(View v) {
                                                 showSnackBar(StringsUtil.WIP, "OK", null); //StringsUtil.WIP,"ok",);
 
-                                              /*CoordinatorLayout   coordinatorLayout = (CoordinatorLayout) findViewById(R.id.snackbarCoordinatorLayout);
-                                              Snackbar snackbar = Snackbar.make(coordinatorLayout, "Text", Snackbar.LENGTH_LONG);
-                                              View view = snackbar.getView();
-                                              CoordinatorLayout.LayoutParams params =(CoordinatorLayout.LayoutParams)view.getLayoutParams();
-                                              params.gravity = Gravity.TOP;
-                                              view.setLayoutParams(params);
-                                              snackbar.show();*/
 
                                             }
                                         }
@@ -359,6 +310,7 @@ public class SignUpActivity extends BaseActivty {
             }
         });
     }
+
     private void addEventFirebaseListener() {
         //Progressing
 
@@ -373,8 +325,6 @@ public class SignUpActivity extends BaseActivty {
             }
         });
     }
-
-
 
 
     public Action getIndexApiAction() {

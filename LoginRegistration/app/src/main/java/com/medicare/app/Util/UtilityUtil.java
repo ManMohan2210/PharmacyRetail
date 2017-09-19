@@ -6,6 +6,8 @@ import android.graphics.Typeface;
 import android.view.inputmethod.InputMethodManager;
 
 import java.util.Calendar;
+import java.util.Collection;
+
 /**
  * Created by satveer on 15-01-2017.
  */
@@ -46,5 +48,13 @@ public class UtilityUtil {
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MINUTE, 0);
         return calendar.getTimeInMillis();
+    }
+
+    public static boolean isCollectionNullOrEmpty(Collection collection) {
+        boolean isNullOrEmpty = true;
+        if (collection != null && collection.size() > 0) {
+            isNullOrEmpty = false;
+        }
+        return isNullOrEmpty;
     }
 }

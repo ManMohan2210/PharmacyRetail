@@ -19,8 +19,8 @@ import java.util.Set;
 
 public class MedicinesListAdapter extends ArrayAdapter<String> implements SectionIndexer {
 
-    HashMap<String, Integer> alphaIndexer;
-    String[] sections;
+    private HashMap<String, Integer> alphaIndexer;
+    private  String[] sections;
 
     public MedicinesListAdapter(Context context, LinkedList<String> items) {
         super(context, R.layout.list_item, items);

@@ -28,23 +28,20 @@ import java.util.Map;
 public class TokenSending extends BaseActivty implements View.OnClickListener {
     private BroadcastReceiver broadcastReceiver;
     private EditText edtToken;
-//    private Button btnToken;
+
     private ProgressDialog progressDialog;
-   // private static  final String URL_STORE_TOKEN = "http://192.168.201.2/mediCare/sendSinglePush.php";
 
     private Button buttonSendPush;
     private Button buttonRegister;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_token_sending);
-        edtToken = (EditText)findViewById(R.id.edt_token_email);
-//        btnToken= (Button)findViewById(R.id.btn_token);
-        //adding listener to view
-//        btnToken.setOnClickListener(this);
+        edtToken = (EditText) findViewById(R.id.edt_token_email);
 
         //getting views from xml
-       buttonRegister = (Button) findViewById(R.id.buttonRegister);
+        buttonRegister = (Button) findViewById(R.id.buttonRegister);
         buttonSendPush = (Button) findViewById(R.id.buttonSendNotification);
 
         //adding listener to view
@@ -107,83 +104,8 @@ public class TokenSending extends BaseActivty implements View.OnClickListener {
         }
 
         //starting send notification activity
-        if(view == buttonSendPush){
+        if (view == buttonSendPush) {
             startActivity(new Intent(this, ActivitySendPushNotification.class));
         }
     }
 }
-/*
-
-public class TokenSending extends BaseActivty {
-    private BroadcastReceiver broadcastReceiver;
-    private EditText edtToken;
-    private Button btnToken;
-    private static  final String URL_STORE_TOKEN = "192.168.201.2/mediCare/StoreFCMToken.php";
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_token_sending);
-        edtToken = (EditText)findViewById(R.id.edt_token_email);
-        btnToken= (Button)findViewById(R.id.btn_token);
-
-        btnToken.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendTokenToServer();
-            }
-        });
-
-
-        broadcastReceiver= new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-
-
-            }
-        };
-
-        if (SharedPrefManager.getInstance(this).getToken()!= null)
-        {
-
-            Log.d("my firebaseToken",SharedPrefManager.getInstance(this).getToken());}
-        registerReceiver(broadcastReceiver, new IntentFilter(MyFirebaseInstanceIDService.TOKEN_BROADCAST));}
-
-
-    public void sendTokenToServer(){
-        final String email = edtToken.getText().toString().trim();
-        if(TextUtils.isEmpty(email)){
-        showToast("enter value");}else{
-            if(SharedPrefManager.getInstance(this).getToken()!= null){
-                StringRequest stringRequest= new StringRequest(Request.Method.POST,URL_STORE_TOKEN,
-                        new Response.Listener<String>(){
-                            public void onResponse(String response){
-                                try {
-                                    JSONObject obj = new JSONObject(response);
-                                    showToast(obj.getString("message"));
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-
-                            }
-                        }, new Response.ErrorListener()
-                {
-                    public void onErrorResponse(VolleyError error){
-showToast(error.getMessage());
-                    }
-                }){
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        Map<String, String> params = new HashMap<>();
-                        params.put("token", SharedPrefManager.getInstance(getApplicationContext()).getToken());
-                        params.put("email",email);
-                        return params;
-                    }
-                };
-                RequestQueue requestQueue= Volley.newRequestQueue(this);
-                requestQueue.add(stringRequest);
-            }else{
-            showToast("Token not generted");}
-        }
-    }
-}
-*/

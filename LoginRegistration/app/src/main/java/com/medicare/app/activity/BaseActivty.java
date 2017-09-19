@@ -42,7 +42,7 @@ public class BaseActivty extends AppCompatActivity {
 //        super.setContentView(layoutResID);
 //    }
     static final   String item[] = {
-        "Allegra", "Asprin", "Azithromycin", "Combiflame", "CrocinActivity","Disprin", "ParacetamolActivity",  "Pudinhara",
+        "Allegra", "Asprin", "Azithromycin", "Combiflame", "Crocin","Disprin", "ParacetamolActivity",  "Pudinhara",
         "VicksAction-500", "Vomikind", "Benadryl","Afghanistan", "Albania",
             "Algeria", "American Samoa", "Andorra", "Angola", "Anguilla",
             "Antarctica", "Antigua and Barbuda", "Argentina", "Armenia",

@@ -18,9 +18,9 @@ import com.medicare.launch.app.R;
 
 public class DrawerItemCustomAdapter extends ArrayAdapter<DataModel> {
 
-    Context mContext;
-    int layoutResourceId;
-    DataModel data[] = null;
+    private Context mContext;
+    private int layoutResourceId;
+    private  DataModel data[] = null;
 
     public DrawerItemCustomAdapter(Context mContext, int layoutResourceId, DataModel[] data) {
 
@@ -38,8 +38,8 @@ public class DrawerItemCustomAdapter extends ArrayAdapter<DataModel> {
         LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
         listItem = inflater.inflate(layoutResourceId, parent, false);
 
-        ImageView imageViewIcon = (ImageView) listItem.findViewById(R.id.imageViewIcon);
-        TextView textViewName = (TextView) listItem.findViewById(R.id.textViewName);
+        ImageView imageViewIcon = (ImageView) listItem.findViewById(R.id.imageview_icon);
+        TextView textViewName = (TextView) listItem.findViewById(R.id.tv_name);
 
         DataModel folder = data[position];
 

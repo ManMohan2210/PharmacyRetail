@@ -6,7 +6,7 @@
 
 
     <ImageView
-        android:id="@+id/imageViewMedi"
+        android:id="@+id/imageview_medi"
         android:layout_width="300dp"
         android:layout_height="400dp"
         android:src="@drawable/prescription"
@@ -14,24 +14,24 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="37dp"/>
     <TextView
-        android:id="@+id/txtName"
+        android:id="@+id/txt_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Medicine Name"
-        android:layout_above="@+id/txtDesc"
-        android:layout_alignLeft="@+id/imageViewMedi"
-        android:layout_alignStart="@+id/imageViewMedi"
+        android:layout_above="@+id/txt_desc"
+        android:layout_alignLeft="@+id/imageview_medi"
+        android:layout_alignStart="@+id/imageview_medi"
         android:layout_marginLeft="21dp"
         android:layout_marginStart="21dp"
         android:layout_marginBottom="21dp"/>
     <TextView
-        android:id="@+id/txtDesc"
+        android:id="@+id/txt_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Medicine description"
         android:layout_marginBottom="42dp"
-        android:layout_above="@+id/imageViewMedi"
-        android:layout_alignLeft="@+id/txtName"
-        android:layout_alignStart="@+id/txtName"/>
+        android:layout_above="@+id/imageview_medi"
+        android:layout_alignLeft="@+id/txt_name"
+        android:layout_alignStart="@+id/txt_name"/>
 
 </RelativeLayout>

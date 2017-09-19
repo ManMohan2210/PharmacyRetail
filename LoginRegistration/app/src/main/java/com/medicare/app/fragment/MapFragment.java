@@ -9,8 +9,6 @@ import android.view.ViewGroup;
 import com.medicare.launch.app.R;
 
 
-//import static com.medicare.app.loginregistration.R.id.postPhotoButton;
-//import static com.medicare.app.loginregistration.R.id.postStatusUpdateButton;
 
 
 public class MapFragment extends Fragment {

@@ -10,8 +10,6 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 
-import com.google.android.gms.location.LocationServices;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -74,8 +72,8 @@ public class MyLocation {
         public void onLocationChanged(Location location) {
             timer1.cancel();
             locationResult.gotLocation(location);
-            lm.removeUpdates(this);
-            lm.removeUpdates(locationListenerNetwork);
+//            lm.removeUpdates(this);
+//            lm.removeUpdates(locationListenerNetwork);
         }
 
         public void onProviderDisabled(String provider) {
@@ -92,8 +90,8 @@ public class MyLocation {
         public void onLocationChanged(Location location) {
             timer1.cancel();
             locationResult.gotLocation(location);
-            lm.removeUpdates(this);
-            lm.removeUpdates(locationListenerGps);
+//            lm.removeUpdates(this);
+//            lm.removeUpdates(locationListenerGps);
         }
 
         public void onProviderDisabled(String provider) {

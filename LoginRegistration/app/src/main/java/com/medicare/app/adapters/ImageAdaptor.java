@@ -19,21 +19,20 @@ import com.medicare.launch.app.R;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.TimeZone;
 
 /**
  * Created by satveer on 11-08-2017.
  */
 
-public class ImageAdaptor extends RecyclerView.Adapter<ImageAdaptor.ViewHolder>  {
+public class ImageAdaptor extends RecyclerView.Adapter<ImageAdaptor.ViewHolder> {
 
     private Context context;
-    private ArrayList<UploadImage> uploads;
-    public  ArrayList<UploadImage> checkedImages=new ArrayList<>();
+    private List<UploadImage> uploads;
 
 
-    public ImageAdaptor(Context context, ArrayList<UploadImage> uploads) {
+    public ImageAdaptor(Context context, List<UploadImage> uploads) {
         this.uploads = uploads;
         this.context = context;
     }
@@ -52,25 +51,20 @@ public class ImageAdaptor extends RecyclerView.Adapter<ImageAdaptor.ViewHolder> 
         UploadImage upload = uploads.get(position);
         String date = getDate(upload.getTimeStamp());
         holder.posTxt.setText(uploads.get(position).getPosition());
-        holder.textViewName.setText( date);
+        holder.textViewName.setText(date);
+        holder.chk.setChecked(upload.isChecked());
 
         Glide.with(context).load(upload.getUrl()).into(holder.imageView);
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onItemClick(View v, int pos) {
-                CheckBox chk= (CheckBox) v;
-
-                //CKE IF ITS CHECKED OR NOT
-                if(chk.isChecked())
-                {
-                    checkedImages.add(uploads.get(pos));
-                }else  if(!chk.isChecked())
-                {
-                    checkedImages.remove(uploads.get(pos));
-                }
+                CheckBox chk = (CheckBox) v;
+                UploadImage uploadImage = uploads.get(pos);
+                uploadImage.setChecked(chk.isChecked());
             }
         });
     }
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     private String getDate(long timeStamp) {
         DateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy' 'HH:mm:ss");
@@ -81,14 +75,15 @@ public class ImageAdaptor extends RecyclerView.Adapter<ImageAdaptor.ViewHolder> 
         sdf.setTimeZone(tz);
         return sdf.format(calendar.getTime());
     }
+
     @Override
     public int getItemCount() {
         return uploads.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public TextView textViewName,posTxt;
+        public TextView textViewName, posTxt;
         public ImageView imageView;
         ItemClickListener itemClickListener;
         CheckBox chk;
@@ -96,21 +91,21 @@ public class ImageAdaptor extends RecyclerView.Adapter<ImageAdaptor.ViewHolder> 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            textViewName = (TextView) itemView.findViewById(R.id.textViewName);
-            imageView = (ImageView) itemView.findViewById(R.id.imageView);
-            posTxt= (TextView) itemView.findViewById(R.id.posTxt);
-            chk= (CheckBox) itemView.findViewById(R.id.chk);
+            textViewName = (TextView) itemView.findViewById(R.id.tv_name);
+            imageView = (ImageView) itemView.findViewById(R.id.imgview_image);
+            posTxt = (TextView) itemView.findViewById(R.id.tv_postext);
+            chk = (CheckBox) itemView.findViewById(R.id.chk);
 
             chk.setOnClickListener(this);
         }
-       public void setItemClickListener(ItemClickListener ic)
-        {
-            this.itemClickListener=ic;
+
+        public void setItemClickListener(ItemClickListener ic) {
+            this.itemClickListener = ic;
         }
 
         @Override
         public void onClick(View v) {
-         this.itemClickListener.onItemClick(v,getLayoutPosition());
+            this.itemClickListener.onItemClick(v, getLayoutPosition());
         }
     }
 }

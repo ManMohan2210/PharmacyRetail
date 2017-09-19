@@ -23,9 +23,9 @@ import java.util.ArrayList;
 
 public class MedicineImageAdapterNew extends ArrayAdapter<PrescriptionDataModel>{
 
-        Context context;
+    private Context context;
 
-        int layoutResourceId;
+    private    int layoutResourceId;
 
                 // BcardImage data[] = null;
 

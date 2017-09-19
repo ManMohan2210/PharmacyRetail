@@ -44,9 +44,9 @@ public class MedicineListAdaptor extends BaseAdapter {
         if(row == null){
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = inflater.inflate(layout,null);
-            holder.txtName = (TextView) row.findViewById(R.id.txtName);
-            holder.txtDesc = (TextView) row.findViewById(R.id.txtDesc);
-            holder.imageViewMedi = (ImageView) row.findViewById(R.id.imageViewMedi);
+            holder.txtName = (TextView) row.findViewById(R.id.txt_name);
+            holder.txtDesc = (TextView) row.findViewById(R.id.txt_desc);
+            holder.imageViewMedi = (ImageView) row.findViewById(R.id.imageview_medi);
             row.setTag(holder);
         }
         else{

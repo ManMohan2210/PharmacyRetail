@@ -7,37 +7,30 @@ import com.google.firebase.database.IgnoreExtraProperties;
  */
 
 @IgnoreExtraProperties
-public class UploadImage{
+public class UploadImage {
 
-    public String name;
-    public String url,position;
-
-public long timeStamp;
+    private String name;
+    private String url;
+    private String position;
+    private boolean isChecked;
+    private long timeStamp;
     // Default constructor required for calls to
-
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
     // DataSnapshot.getValue(User.class)
     public UploadImage() {
     }
 
 
-    public UploadImage(String name, String url,long timestamp) {
+    public UploadImage(String name, String url, long timestamp) {
         this.name = name;
-        this.url= url;
-        this.timeStamp=timestamp;
+        this.url = url;
+        this.timeStamp = timestamp;
     }
-    public UploadImage(String name, String url,long timestamp, String position) {
+
+    public UploadImage(String name, String url, long timestamp, String position) {
         this.name = name;
-        this.url= url;
-        this.timeStamp=timestamp;
-        this.position= position;
+        this.url = url;
+        this.timeStamp = timestamp;
+        this.position = position;
     }
 
     public void setName(String name) {
@@ -46,6 +39,15 @@ public long timeStamp;
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
     }
 
     public long getTimeStamp() {
@@ -57,12 +59,19 @@ public long timeStamp;
     }
 
 
-
     public String getName() {
         return name;
     }
 
     public String getUrl() {
         return url;
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
     }
 }

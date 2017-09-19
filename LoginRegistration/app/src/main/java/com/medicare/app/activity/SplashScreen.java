@@ -20,15 +20,20 @@ import com.medicare.launch.app.R;
  */
 
 public class SplashScreen extends Activity {
-    FirebaseAuth firebaseAuth;
-    SharedPreferences prefs = null;
+    private FirebaseAuth firebaseAuth;
+    private SharedPreferences prefs = null;
+
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
         Window window = getWindow();
         window.setFormat(PixelFormat.RGBA_8888);
     }
-    /** Called when the activity is first created. */
+
+    /**
+     * Called when the activity is first created.
+     */
     Thread splashTread;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,10 +42,11 @@ public class SplashScreen extends Activity {
         checkFirstRun();
 
     }
+
     private void StartAnimations() {
         Animation anim = AnimationUtils.loadAnimation(this, R.anim.alpha);
         anim.reset();
-        LinearLayout l=(LinearLayout) findViewById(R.id.lin_lay);
+        LinearLayout l = (LinearLayout) findViewById(R.id.lin_lay);
         l.clearAnimation();
         l.startAnimation(anim);
 
@@ -76,6 +82,7 @@ public class SplashScreen extends Activity {
         splashTread.start();
 
     }
+
     private void checkFirstRun() {
 
         final String PREFS_NAME = "MyPrefsFile";

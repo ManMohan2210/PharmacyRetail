@@ -22,7 +22,7 @@ public class ViewDatabase extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference myRef;
-    private  String userID;
+    private String userID;
     private DatabaseReference mDatabase;
     private ListView mListView;
 
@@ -42,53 +42,45 @@ public class ViewDatabase extends AppCompatActivity {
         userID = user.getUid();
 
 
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
 
+                } else {
 
-    mAuthListener = new FirebaseAuth.AuthStateListener() {
-        @Override
-        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-            FirebaseUser user = firebaseAuth.getCurrentUser();
-            if (user != null) {
-                // User is signed in
-                //Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-               // toastMessage("Successfully signed in with: " + user.getEmail());
-            } else {
-                // User is signed out
-                //Log.d(TAG, "onAuthStateChanged:signed_out");
-               // toastMessage("Successfully signed out.");
+                }
+
             }
-            // ...
-        }
-    };
+        };
 
-  myRef.addValueEventListener(new ValueEventListener() {
-        @Override
-        public void onDataChange(DataSnapshot dataSnapshot) {
-            // This method is called once with the initial value and again
-            // whenever data at this location is updated.
-            showData(dataSnapshot);
-        }
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                showData(dataSnapshot);
+            }
 
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
-        @Override
-        public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+    }
 
-        }
-    });}
     private void showData(DataSnapshot dataSnapshot) {
-        for(DataSnapshot ds : dataSnapshot.getChildren()){
+        for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
             MedicineTypeModel medicineType = new MedicineTypeModel();
             medicineType.setMedicineID(ds.child(userID).getValue(MedicineTypeModel.class).getMedicineID()); //set the name
-            ArrayList<String> array  = new ArrayList<>();
+            ArrayList<String> array = new ArrayList<>();
 
             array.add(medicineType.getMedicineID());
-            ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,array);
+            ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, array);
             mListView.setAdapter(adapter);
-        /*  byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
-                  Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                  mImgMed.setImageBitmap(decodedByte);*/
 
 
         }

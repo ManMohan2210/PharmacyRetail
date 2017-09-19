@@ -11,23 +11,22 @@ import java.util.Map;
 
 public class UserTypeModel {
 
-private     String userId;
-   private  String userName;
+    private String userId;
+    private String userName;
     private String userType;
-   private  String mobileNumber;
+    private String mobileNumber;
     private String email;
     private String password;
 
-    private     Double geocordinates;
-    private  String address;
-    private double latitude ;
-    private double longitude ;
+    private Double geocordinates;
+    private String address;
+    private double latitude;
+    private double longitude;
     private String accessToken;
-    //private String uniqueUId;
-    //private Timestamp signUpTime;
-    private Map<String, String> signUpTime=new HashMap<String, String>();
+
+    private Map<String, String> signUpTime = new HashMap<String, String>();
     private String photoUrl;
-   // private String instanceId;
+
 
     private static UserTypeModel userTypeModel = new UserTypeModel();
 
@@ -37,11 +36,11 @@ private     String userId;
         this.latitude = latitude;
     }
 
-    public static UserTypeModel getInastnce(){
-        return  userTypeModel;
+    public static UserTypeModel getInastnce() {
+        return userTypeModel;
     }
 
-    public static void createUser(String userId, String userName, String userType, String mobileNumber,String email,String password,String accessToken) {
+    public static void createUser(String userId, String userName, String userType, String mobileNumber, String email, String password, String accessToken) {
         userTypeModel.userId = userId;
         userTypeModel.userName = userName;
         userTypeModel.userType = userType;
@@ -52,7 +51,7 @@ private     String userId;
 
     }
 
-    public UserTypeModel(String userId, String userName, String userType, String mobileNumber,String email,String password,String accessToken) {
+    public UserTypeModel(String userId, String userName, String userType, String mobileNumber, String email, String password, String accessToken) {
         this.userId = userId;
         this.userName = userName;
         this.userType = userType;
@@ -64,19 +63,16 @@ private     String userId;
     }
 
 
-
-
-
-
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("latitude", latitude);
-        result.put("longitude ", longitude );
+        result.put("longitude ", longitude);
         result.put("address", address);
 
         return result;
     }
+
     public double getlatitude() {
         return latitude;
     }
@@ -85,12 +81,12 @@ private     String userId;
         this.latitude = latitude;
     }
 
-    public double getlongitude () {
-        return longitude ;
+    public double getlongitude() {
+        return longitude;
     }
 
-    public void setlongitude (double longitude ) {
-        this.longitude  = longitude ;
+    public void setlongitude(double longitude) {
+        this.longitude = longitude;
     }
 
     public Double getGeocordinates() {
@@ -108,6 +104,7 @@ private     String userId;
     public void setAddress(String address) {
         this.address = address;
     }
+
     public Map<String, String> getSignUpTime() {
         return signUpTime;
     }
@@ -149,31 +146,11 @@ private     String userId;
     }
 
 
-    private UserTypeModel(){
+    private UserTypeModel() {
 
 
-}
-
-   /* public String getuniqueUId() {
-        return uniqueUId;
     }
 
-    public void setuniqueUId(String uniqueUId) {
-        this.uniqueUId = uniqueUId;
-    }
-*/
-/*    public UserTypeModel(String userId, String userName, String userType, String mobileNumber, String email, String password)
-    {
-        //, String uniqueUId) {
-        this.userId = userId;
-        this.userName = userName;
-        this.userType = userType;
-        this.mobileNumber = mobileNumber;
-        this.email = email;
-        this.password = password;
-
-        //this.uniqueUId = uniqueUId;
-    }*/
     private UserTypeModel(String userId, String userName, String userType, String mobileNumber) {
         this.userId = userId;
         this.userName = userName;
@@ -182,6 +159,7 @@ private     String userId;
 
 
     }
+
     public String getUserId() {
         return userId;
     }
@@ -218,20 +196,16 @@ private     String userId;
     }
 
     public static class Builder {
-//opional
+        //opional
         private String userId;
-        private  String userName;
-        private  String mobileNumber;
+        private String userName;
+        private String mobileNumber;
         //requried
-        private    String userType;
+        private String userType;
         private String uniqueUId;
+
         public Builder() {
 
-            this.userId = userId;
-            this.userName = userName;
-            this.mobileNumber = mobileNumber;
-            this.userType = userType;
-            this.uniqueUId=uniqueUId;
 
         }
 
@@ -239,7 +213,6 @@ private     String userId;
             this.uniqueUId = uniqueUId;
             return this;
         }
-
 
 
         public Builder userId(String userId) {
@@ -252,73 +225,27 @@ private     String userId;
             return this;
         }
 
-        public Builder userType(String userType ) {
+        public Builder userType(String userType) {
             this.userType = userType;
             return this;
         }
 
         public Builder mobileNumber(String mobileNumber) {
             this.mobileNumber = mobileNumber;
-            return this ;
+            return this;
         }
+
         public UserTypeModel build() {
 
-            return new UserTypeModel(this) ;
+            return new UserTypeModel(this);
         }
     }
+
     private UserTypeModel(Builder builder) {
         userId = builder.userId;
         mobileNumber = builder.mobileNumber;
         userName = builder.userName;
         userType = builder.userType;
-       // uniqueUId=builder.uniqueUId;
+
     }
 }
-
-/*
-public class Pizza {
-    private int size;
-    private boolean cheese;
-    private boolean pepperoni;
-    private boolean bacon;
-
-    public static class Builder {
-        //required
-        private final int size;
-
-        //optional
-        private boolean cheese = false;
-        private boolean pepperoni = false;
-        private boolean bacon = false;
-
-        public Builder(int size) {
-            this.size = size;
-        }
-
-        public Builder cheese(boolean value) {
-            cheese = value;
-            return this;
-        }
-
-        public Builder pepperoni(boolean value) {
-            pepperoni = value;
-            return this;
-        }
-
-        public Builder bacon(boolean value) {
-            bacon = value;
-            return this;
-        }
-
-        public Pizza build() {
-            return new Pizza(this);
-        }
-    }
-
-    private Pizza(Builder builder) {
-        size = builder.size;
-        cheese = builder.cheese;
-        pepperoni = builder.pepperoni;
-        bacon = builder.bacon;
-    }
-}*/

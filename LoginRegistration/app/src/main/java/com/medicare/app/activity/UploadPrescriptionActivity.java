@@ -21,11 +21,10 @@ public class UploadPrescriptionActivity extends BaseActivty implements View.OnCl
 
     private static final int CAMERA_REQUEST = 1111;
     private static final int RESULT_LOAD_IMAGE = 2222;
-    ImageView ivSelectedImage;
-    RelativeLayout rlCameraUpload;
-    RelativeLayout rlGallaryUpload;
+    private ImageView ivSelectedImage;
+    private RelativeLayout rlCameraUpload;
+    private RelativeLayout rlGallaryUpload;
     private List precData;
-
 
 
     @Override
@@ -34,8 +33,8 @@ public class UploadPrescriptionActivity extends BaseActivty implements View.OnCl
         setContentView(R.layout.activity_upload_periscription);
 
         ivSelectedImage = (ImageView) findViewById(R.id.iv_selected_image);
-        rlCameraUpload = (RelativeLayout) findViewById(R.id.layoutCamera);
-        rlGallaryUpload = (RelativeLayout) findViewById(R.id.layoutGallery);
+        rlCameraUpload = (RelativeLayout) findViewById(R.id.layout_camera);
+        rlGallaryUpload = (RelativeLayout) findViewById(R.id.layout_gallery);
         Intent intent = getIntent();
         rlCameraUpload.setOnClickListener(this);
         rlGallaryUpload.setOnClickListener(this);
@@ -48,14 +47,14 @@ public class UploadPrescriptionActivity extends BaseActivty implements View.OnCl
         int id = view.getId();
 
         switch (id) {
-            case R.id.layoutCamera:
+            case R.id.layout_camera:
                 Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(cameraIntent, CAMERA_REQUEST);
                 break;
             case R.id.layoutExisting:
 
                 break;
-            case R.id.layoutGallery:
+            case R.id.layout_gallery:
                 Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 intent.setType("image/*");
                 startActivityForResult(intent, RESULT_LOAD_IMAGE);
@@ -79,21 +78,13 @@ public class UploadPrescriptionActivity extends BaseActivty implements View.OnCl
         int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
         String picturePath = cursor.getString(columnIndex);
         cursor.close();
-       Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
+        Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
         ivSelectedImage.setImageBitmap(bitmap);
-//        PrescriptionDataModel presData = new PrescriptionDataModel();
-//        presData.setPhotoBitmap(bitmap);
-//        presData.setDateTimeStamp(System.currentTimeMillis());
-//        precData.add(presData);
     }
 
     private void handleCameraResult(Intent data) {
         Bitmap photo = (Bitmap) data.getExtras().get("data");
         ivSelectedImage.setImageBitmap(photo);
 
-//        PrescriptionDataModel presData = new PrescriptionDataModel();
-//        presData.setPhotoBitmap(photo);
-//        presData.setDateTimeStamp(System.currentTimeMillis());
-//        precData.add(presData);
     }
 }

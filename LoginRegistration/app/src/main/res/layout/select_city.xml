@@ -14,7 +14,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/location"
-        android:id="@+id/imageView2"
+        android:id="@+id/imageview_location_pointer"
         android:layout_alignBottom="@+id/txtForgotPwd"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="19dp"
         android:layout_marginTop="55dp"
-        android:id="@+id/textView2"
+        android:id="@+id/textview_autodetect"
         android:textColor="@color/cyan"
         android:layout_marginStart="19dp"
         android:layout_below="@+id/txtForgotPwd"
@@ -39,8 +39,8 @@
         android:layout_height="50dp"
         android:src="@drawable/direction"
         android:layout_below="@+id/tv_forgot_pwd"
-        android:layout_toRightOf="@+id/textView2"
-        android:layout_toEndOf="@+id/textView2"
+        android:layout_toRightOf="@+id/textview_autodetect"
+        android:layout_toEndOf="@+id/textview_autodetect"
         />
 
     <TextView
