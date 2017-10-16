@@ -72,6 +72,7 @@ public class MyLocation {
         public void onLocationChanged(Location location) {
             timer1.cancel();
             locationResult.gotLocation(location);
+            lm.removeUpdates(locationListenerGps);
 //            lm.removeUpdates(this);
 //            lm.removeUpdates(locationListenerNetwork);
         }

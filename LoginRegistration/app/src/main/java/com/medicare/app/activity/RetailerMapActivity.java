@@ -272,18 +272,6 @@ public class RetailerMapActivity extends BaseActivty implements
         mGoogleApiClient.connect();
     }
 
-    /*    @Override
-        public void onLocationChanged(Location location) {
-            try {
-                if (location != null)
-                    changeMap(location);
-                LocationServices.FusedLocationApi.removeLocationUpdates(
-                        mGoogleApiClient, this);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }*/
     @Override
     public void onLocationChanged(Location location) {
 
@@ -345,14 +333,7 @@ public class RetailerMapActivity extends BaseActivty implements
     protected void onStop() {
         super.onStop();
         try {
-            // un comment if needed TODO
-//            // start of code for geofire
-//            String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-//            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("retialerAvailable");
-//            GeoFire geoFire = new GeoFire(ref);
-//            geoFire.removeLocation(user_id);
-//
-//            //end of code for geofire
+
         } catch (RuntimeException e) {
             e.printStackTrace();
         }
@@ -391,9 +372,6 @@ public class RetailerMapActivity extends BaseActivty implements
             return;
         }
 
-        //LatLngBounds INDIA = new LatLngBounds(
-        // new LatLng(20, 78 ), new LatLng( 20.5937, 78.9629));
-        // mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(INDIA, 0));
         // check if map is created successfully or not
         if (mMap != null) {
             mMap.getUiSettings().setZoomControlsEnabled(true);
@@ -574,13 +552,6 @@ public class RetailerMapActivity extends BaseActivty implements
 
 
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
                     return;
                 }
                 mMap.setMyLocationEnabled(true);
@@ -637,26 +608,6 @@ public class RetailerMapActivity extends BaseActivty implements
 
     }
 
-       /* GPSTrackerService gps = new GPSTrackerService(this);
-        Location myLocation = null;
-
-        if (gps.canGetLocation()) { // gps enabled} // return boolean true/false
-
-            gps.getLatitude(); // returns latitude
-            gps.getLongitude(); // returns longitude
-            double dLatitude = myLocation.getLatitude();
-            double dLongitude = myLocation.getLongitude();
-            Log.i("APPLICATION", " : " + dLatitude);
-            Log.i("APPLICATION", " : " + dLongitude);
-            // mMap.addMarker(new MarkerOptions().position(
-            //new LatLng(dLatitude, dLongitude)).title("My Location").icon(BitmapDescriptorFactory.fromBitmap(Utils.getBitmap("pointer_icon.png"))));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(dLatitude, dLongitude), 8));
-
-
-        } else {
-            Toast.makeText(this, "Unable to fetch the current location", Toast.LENGTH_SHORT).show();
-        }*/
-    //}
 
     void getLocation() {
         try {
@@ -667,24 +618,5 @@ public class RetailerMapActivity extends BaseActivty implements
             e.printStackTrace();
         }
     }}
-       /* Location myLocation  = mMap.getMyLocation();
-        if(myLocation!=null)
-        {
-            double dLatitude = myLocation.getLatitude();
-            double dLongitude = myLocation.getLongitude();
-            Log.i("APPLICATION"," : "+dLatitude);
-            Log.i("APPLICATION"," : "+dLongitude);
-            // mMap.addMarker(new MarkerOptions().position(
-            //new LatLng(dLatitude, dLongitude)).title("My Location").icon(BitmapDescriptorFactory.fromBitmap(Utils.getBitmap("pointer_icon.png"))));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(dLatitude, dLongitude), 8));
 
-
-        }
-        else
-        {
-            Toast.makeText(this, "Unable to fetch the current location", Toast.LENGTH_SHORT).show();
-        }
-
-    }
-*/
 
