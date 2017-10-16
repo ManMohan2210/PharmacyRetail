@@ -73,8 +73,8 @@ public class MyLocation {
             timer1.cancel();
             locationResult.gotLocation(location);
             lm.removeUpdates(locationListenerGps);
-//            lm.removeUpdates(this);
-//            lm.removeUpdates(locationListenerNetwork);
+            lm.removeUpdates(this);
+            lm.removeUpdates(locationListenerNetwork);
         }
 
         public void onProviderDisabled(String provider) {
@@ -91,8 +91,9 @@ public class MyLocation {
         public void onLocationChanged(Location location) {
             timer1.cancel();
             locationResult.gotLocation(location);
-//            lm.removeUpdates(this);
-//            lm.removeUpdates(locationListenerGps);
+            lm.removeUpdates(this);
+            lm.removeUpdates(locationListenerGps);
+            lm.removeUpdates(locationListenerNetwork);
         }
 
         public void onProviderDisabled(String provider) {

@@ -42,6 +42,7 @@ public class ShapeRibbleActivity extends BaseActivty implements MyLocation.Locat
     private String userID;
     private Handler handler;
     private GeoLocation geoLocation;
+    final Set<String> runnersNearby = new HashSet<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,15 +90,16 @@ public class ShapeRibbleActivity extends BaseActivty implements MyLocation.Locat
  private void searchRetailer(){
 
      double radius = 1000; // in km
-     final Set<String> runnersNearby = new HashSet<String>();
+
 //     databaseMediCare = FirebaseDatabase.getInstance().getReference();
      mAuth = FirebaseAuth.getInstance();
 //     databaseMediCare.child("available").child(mAuth.getCurrentUser().getUid()).child("latitude").setValue(latitude);
 //     databaseMediCare.child("available").child(mAuth.getCurrentUser().getUid()).child("longitude").setValue(longitude);
 //     databaseMediCare.child("available").child(mAuth.getCurrentUser().getUid()).child("availability").setValue(true);
-     DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("userLocation");
+     DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("userLocation"); //"https://medicare-b5a7b.firebaseio.com/userLocation/"
      GeoFire geoFire = new GeoFire(ref);
-     geoFire.setLocation(mAuth.getCurrentUser().getUid(), geoLocation);//new GeoLocation(latitude, longitude));
+
+//     geoFire.setLocation(mAuth.getCurrentUser().getUid(), geoLocation);//new GeoLocation(latitude, longitude));
      GeoQuery geoQuery = geoFire.queryAtLocation(geoLocation, radius);// new GeoLocation(latitude, longitude), radius);
      geoQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
          @Override
